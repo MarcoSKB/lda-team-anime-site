@@ -1,5 +1,12 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './(root)/globals.css'
+
+const inter = Inter({
+  subsets: ['cyrillic'],
+  weight: ['800', '700', '600', '500', '400', '300'],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: 'LDA Voice | Смотри аниме онлайн с озвучкой',
@@ -15,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased ${inter.variable}`}>{children}</body>
     </html>
   )
 }
