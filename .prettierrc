@@ -12,5 +12,17 @@
   "tabWidth": 2,
   "trailingComma": "all",
   "useTabs": false,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "importOrder": [
+    "^(react|next)",
+    "<THIRD_PARTY_MODULES>",
+    "^(@/components/module|@/components/ui)",
+    "^(@/utils/|@/hooks/|@/data/)",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "@trivago/prettier-plugin-sort-imports"
+  ]
 }
