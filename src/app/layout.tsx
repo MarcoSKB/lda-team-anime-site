@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Roboto_Flex } from 'next/font/google'
-import './(root)/globals.css'
+import './globals.css'
 
 const inter = Inter({
   subsets: ['cyrillic'],
