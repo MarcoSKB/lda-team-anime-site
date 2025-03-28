@@ -6,11 +6,14 @@
   --text: #00020d;
   --text-secondary: #191b25;
   --border: #6f7787;
+  --accent: #4f6cfd;
 }
 
 @theme inline {
   --color-background: var(--bg);
+  --color-secondary: var(--bg-secondary);
   --color-foreground: var(--text);
+  --color-accent: var(--accent);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,6 +23,7 @@
     --text: #ffffff;
     --text-secondary: #6f7787;
     --border: #6f7787;
+    --accent: #4f6cfd;
   }
 }
 
