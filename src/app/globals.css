@@ -6,7 +6,7 @@
   --text: #00020d;
   --text-secondary: #191b25;
   --border: #6f7787;
-  --accent: #4f6cfd;
+  --accent: #e67575;
 }
 
 @theme inline {
@@ -23,7 +23,7 @@
     --text: #ffffff;
     --text-secondary: #6f7787;
     --border: #6f7787;
-    --accent: #4f6cfd;
+    --accent: #e67575;
   }
 }
 
