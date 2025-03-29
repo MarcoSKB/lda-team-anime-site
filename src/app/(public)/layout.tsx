@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Roboto_Flex } from 'next/font/google'
+
+import { Header } from '@/components/module'
+
 import './globals.css'
 
 const inter = Inter({
@@ -29,7 +32,8 @@ export default function RootLayout({
   return (
     <html lang='ru'>
       <body className={`antialiased ${inter.variable} ${robotoFlex.variable}`}>
-        {children}
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   )
