@@ -22,7 +22,7 @@ const navLinks: {
   },
   {
     title: 'Заказать озвучку',
-    href: '/voiceover',
+    href: '/order',
     alt: 'Страница с заказом озвучки — выберите аниме',
     icon: <AudioLines className='h-[32px] w-[32px] md:h-[18px] md:w-[18px]' />,
   },
@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
             title={link.alt}
             intent='secondary'
             size='small'
-            className={`text-foreground flex flex-col items-center gap-1 text-center text-[12px] leading-3 md:text-sm ${link.href == '/voiceover' ? 'hidden max-w-[100px] md:flex md:max-w-none' : 'flex'}`}
+            className={`text-foreground flex flex-col items-center gap-1 px-2 text-center text-[12px] leading-3 md:text-sm ${link.href == '/order' ? 'hidden max-w-[100px] md:flex md:max-w-none' : 'flex'}`}
           >
             <span className='flex md:hidden'>{link.icon}</span>
             {link.title}
