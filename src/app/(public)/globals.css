@@ -2,10 +2,9 @@
 
 :root {
   --bg: #ffffff;
-  --bg-secondary: #b2b3b6;
+  --bg-secondary: #f0f0f1;
   --text: #00020d;
   --text-secondary: #191b25;
-  --border: #6f7787;
   --accent: #e67575;
 }
 
@@ -19,6 +18,8 @@
   --color-secondary: var(--bg-secondary);
   --color-foreground: var(--text);
   --color-accent: var(--accent);
+
+  --shadow-top: 0px -3px 6px 0px rgba(0, 0, 0, 10%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,7 +28,6 @@
     --bg-secondary: #191b25;
     --text: #ffffff;
     --text-secondary: #6f7787;
-    --border: #6f7787;
     --accent: #e67575;
   }
 }
