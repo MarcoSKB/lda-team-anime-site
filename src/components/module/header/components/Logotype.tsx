@@ -9,11 +9,11 @@ const Logotype: React.FC = () => {
       className='order-3 flex items-center gap-2 md:order-none'
     >
       <Image
-        src='/images/logotype.png'
+        src='/images/logotype.jpg'
         width={40}
         height={40}
         alt='Иконка логотипа LDA Team'
-        className='min-w-[40px]'
+        className='min-w-[40px] rounded-full'
       />
       <span className='hidden font-["Roboto_flex"] text-sm font-bold uppercase md:inline'>
         LDA Team
