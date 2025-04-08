@@ -20,6 +20,19 @@
   --color-accent: var(--accent);
 
   --shadow-top: 0px -3px 6px 0px rgba(0, 0, 0, 10%);
+
+  --animate-progress: progress 4.9s;
+
+  @keyframes progress {
+    0% {
+      width: 0;
+      background: #191b25;
+    }
+    100% {
+      width: 100%;
+      background: #191b25;
+    }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
