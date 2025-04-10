@@ -1,11 +1,6 @@
-export const carouselData: {
-  id: number
-  slug: string
-  title: string
-  subtitle: string
-  description: string
-  img: string
-}[] = [
+import { HeroTitle } from '@/types/anime.types'
+
+export const carouselData: HeroTitle[] = [
   {
     id: 0,
     slug: 'chainsaw-man',
