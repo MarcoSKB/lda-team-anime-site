@@ -14,7 +14,7 @@ const buttonStyle = cva(
         default:
           'rounded-md bg-transparent px-2 py-2 transition-colors hover:bg-secondary',
         primary:
-          'hover:bg-accent rounded-md bg-secondary text-foreground transition-all',
+          'hover:bg-accent rounded-md bg-secondary text-foreground transition-all disabled:pointer-events-none disabled:hover:bg-secondary',
         secondary:
           'hover:bg-foreground hover:text-background rounded-md bg-secondary text-foreground transition-all',
         outline:
