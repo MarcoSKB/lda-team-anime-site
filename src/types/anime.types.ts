@@ -6,3 +6,13 @@ export interface HeroTitle {
   description: string
   img: string
 }
+
+export interface OngoingTitle {
+  id: number
+  slug: string
+  title: string
+  img: string
+  tags: string[]
+  rating: number
+  description: string
+}
