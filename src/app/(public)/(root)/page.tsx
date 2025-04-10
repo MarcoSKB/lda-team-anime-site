@@ -1,4 +1,4 @@
-import { HeroSlider } from './_components'
+import { HeroSlider, OngoingSection } from './_components'
 
 const page: React.FC = () => {
   return (
@@ -7,6 +7,7 @@ const page: React.FC = () => {
         Смотрите аниме онлайн с качественной русской озвучкой от LDA Team
       </h1>
       <HeroSlider />
+      <OngoingSection />
     </>
   )
 }
