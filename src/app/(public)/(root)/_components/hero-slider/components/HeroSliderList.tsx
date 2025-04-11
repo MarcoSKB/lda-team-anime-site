@@ -1,15 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { getPopularAnime } from '@/actions/anime'
+
 import { Container } from '@/components/ui'
 
-import { carouselData } from '@/data/carouselData'
 import { truncateText } from '@/utils/string'
 
-const HeroSliderList: React.FC = () => {
+const HeroSliderList: React.FC = async () => {
+  const popularAnimeList = await getPopularAnime()
+
   return (
     <ul className='flex h-[45vh] min-h-[618px] md:h-screen'>
-      {carouselData.map((slider) => (
+      {popularAnimeList.map((slider) => (
         <li
           key={slider.id}
           className='relative z-0 min-w-0 flex-[0_0_100%] pb-[25svh] md:pt-[14%]'
