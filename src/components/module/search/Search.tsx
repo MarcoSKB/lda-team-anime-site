@@ -1,8 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { createPortal } from 'react-dom'
-
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
 import { Search as SearchIcon } from 'lucide-react'
 

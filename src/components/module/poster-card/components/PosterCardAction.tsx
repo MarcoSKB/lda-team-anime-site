@@ -9,7 +9,7 @@ interface Props {
   slug: string
 }
 
-const PosterCardAction: React.FC<Props> = ({ id, slug }) => {
+const PosterCardAction: React.FC<Props> = ({ slug }) => {
   return (
     <div className='absolute bottom-4 flex w-full max-w-[256px] justify-between gap-1.5'>
       <Link

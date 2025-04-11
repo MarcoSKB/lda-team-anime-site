@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/dom'
 import { render, screen } from '@testing-library/react'
 
 import PosterCard from './PosterCard'

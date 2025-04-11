@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useState } from 'react'
 
 import {
@@ -30,7 +31,7 @@ const menuList: {
 ]
 
 const Menu: React.FC = () => {
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
@@ -96,9 +97,11 @@ const Menu: React.FC = () => {
               </LinkButton>
               <hr className='mt-2 mb-4 opacity-30' />
               <div className='flex items-center gap-2'>
-                <img
+                <Image
+                  width={40}
+                  height={40}
                   src='/images/placeholder-image.jpg'
-                  className='h-[40px] w-[40px] rounded-full'
+                  className='rounded-full'
                   alt='Profile image'
                 />
                 <span>Пользователь</span>

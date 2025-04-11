@@ -1,5 +1,3 @@
-import { cva } from 'class-variance-authority'
-
 import { cn } from '@/utils/cn'
 
 interface Props extends React.ComponentProps<'div'> {
