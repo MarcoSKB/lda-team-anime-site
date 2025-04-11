@@ -27,7 +27,7 @@ const PosterCardInfo: React.FC<Props> = (props) => {
           <Tag key={tag}>{tag}</Tag>
         ))}
       </div>
-      <div className='w-full text-sm leading-[23px] text-pretty text-white opacity-80'>
+      <div className='w-full cursor-default text-sm leading-[23px] text-pretty text-white opacity-80'>
         {truncateText(description, 150)}
       </div>
       <PosterCardAction id={id} slug={slug} />
