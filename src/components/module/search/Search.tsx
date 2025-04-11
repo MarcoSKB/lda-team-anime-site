@@ -12,7 +12,7 @@ const Search: React.FC = () => {
         as={Button}
         size='small'
         title='Поиск аниме тайтлов'
-        className='md:hover:bg-secondary hover:bg-transparent md:bg-[rgba(255,255,255,10%)]'
+        className='md:hover:bg-secondary text-white hover:bg-transparent md:bg-[rgba(255,255,255,10%)]'
         onClick={() => console.log('Clicked')}
       >
         <div className='hover:text-accent md:hover:text-foreground flex flex-col items-center px-1 transition-colors ease-out md:flex-row'>

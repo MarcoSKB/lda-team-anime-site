@@ -15,7 +15,7 @@ const Logotype: React.FC = () => {
         alt='Иконка логотипа LDA Team'
         className='min-w-[40px] rounded-full'
       />
-      <span className='hidden font-["Roboto_flex"] text-sm font-bold uppercase md:inline'>
+      <span className='hidden font-["Roboto_flex"] text-sm font-bold text-white uppercase md:inline'>
         LDA Team
       </span>
     </Link>

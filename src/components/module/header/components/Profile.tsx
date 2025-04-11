@@ -20,7 +20,7 @@ const Profile: React.FC = () => {
       <MenuItems
         transition
         anchor='bottom end'
-        className='bg-secondary mt-2 flex origin-top flex-col rounded-md px-0.5 py-1.5 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
+        className='bg-secondary z-[55] mt-2 flex origin-top flex-col rounded-md px-0.5 py-1.5 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
       >
         <MenuItem as='div'>
           <span className='block px-3 py-1 text-sm'>Пользователь</span>
