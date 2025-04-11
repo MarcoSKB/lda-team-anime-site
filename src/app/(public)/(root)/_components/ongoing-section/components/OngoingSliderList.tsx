@@ -1,8 +1,9 @@
+import { getOngoingTitles } from '@/actions/anime'
+
 import { PosterCard } from '@/components/module'
 
-import { ongoingData } from '@/data/ongoingData'
-
-const OngoingSliderList: React.FC = () => {
+const OngoingSliderList: React.FC = async () => {
+  const ongoingData = await getOngoingTitles()
   return (
     <ul className='flex gap-4'>
       {ongoingData.map((ongoingSlide) => (

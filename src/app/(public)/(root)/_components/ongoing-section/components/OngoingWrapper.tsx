@@ -1,9 +1,10 @@
 'use client'
 
-import { useCallback } from 'react'
+import { Suspense, useCallback } from 'react'
 
 import useEmblaCarousel from 'embla-carousel-react'
 
+import OngoinSkeleton from './OngoinSkeleton'
 import OngoingSliderAction from './OngoingSliderAction'
 
 interface Props {
@@ -24,10 +25,12 @@ const OngoingWrapper: React.FC<Props> = ({ children }) => {
   }, [emblaApi])
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div ref={emblaRef}>{children}</div>
-      <OngoingSliderAction scrollPrev={scrollPrev} scrollNext={scrollNext} />
-    </div>
+    <Suspense fallback={<OngoinSkeleton />}>
+      <div className='flex flex-col gap-4'>
+        <div ref={emblaRef}>{children}</div>
+        <OngoingSliderAction scrollPrev={scrollPrev} scrollNext={scrollNext} />
+      </div>
+    </Suspense>
   )
 }
 export default OngoingWrapper
