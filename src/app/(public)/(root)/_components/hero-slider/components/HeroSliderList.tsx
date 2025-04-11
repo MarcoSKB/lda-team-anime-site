@@ -28,7 +28,10 @@ const HeroSliderList: React.FC = async () => {
             <span className='mb-4 text-[12px] leading-6 text-[#DEE1E6] uppercase md:text-sm'>
               {slider.subtitle}
             </span>
-            <span className='min-h-[60px] max-w-[720px] text-sm font-light text-pretty text-white md:text-base md:leading-6'>
+            <span
+              className='min-h-[60px] max-w-[720px] text-sm font-light text-pretty text-white md:text-base md:leading-6'
+              style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.8)' }}
+            >
               {truncateText(slider.description, 245)}
             </span>
           </Container>
