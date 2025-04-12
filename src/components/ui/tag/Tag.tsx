@@ -7,7 +7,8 @@ const tagStyle = cva('flex cursor-default', {
     intent: {
       default: 'border-[#6F7787] text-[#9095A1] border-solid border-1',
       primary: 'bg-white text-[#323743]',
-      secondary: 'bg-[#1E2128] text-[#9095A1]',
+      secondary:
+        'dark:bg-[#1E2128] border-1 border-solid border-[#b2b9c8] dark:border-none dark:text-[#9095A1]',
     },
     size: {
       default: 'text-[12px] py-[3px] px-2 rounded-md',
