@@ -2,7 +2,7 @@ import { VariantProps, cva } from 'class-variance-authority'
 
 import { cn } from '@/utils/cn'
 
-const tagStyle = cva('flex', {
+const tagStyle = cva('flex cursor-default', {
   variants: {
     intent: {
       default: 'border-[#6F7787] text-[#9095A1] border-solid border-1',
