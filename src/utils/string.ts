@@ -4,6 +4,6 @@ export const truncateText = (
   withEllipsis: boolean = true,
 ) => {
   if (withEllipsis && !(text.length <= maxLength))
-    return text.substring(-1, maxLength) + '...'
+    return text.substring(-1, maxLength).trimEnd() + '...'
   else return text.substring(-1, maxLength)
 }
