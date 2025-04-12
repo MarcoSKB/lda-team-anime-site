@@ -1,3 +1,5 @@
+type Tags = string[]
+
 export interface HeroTitle {
   id: number
   slug: string
@@ -12,7 +14,18 @@ export interface OngoingTitle {
   slug: string
   title: string
   img: string
-  tags: string[]
+  tags: Tags
   rating: number
   description: string
+}
+
+export interface RecentVoiceover {
+  id: number
+  slug: string
+  title: string
+  description: string
+  img: string
+  createdAt: string
+  episode: number
+  tags: Tags
 }
