@@ -1,4 +1,6 @@
-import { HeroSlider, OngoingSection } from './_module'
+import { Container } from '@/components/ui'
+
+import { HeroSlider, OngoingSection, RecentVoiceovers } from './_module'
 
 const page: React.FC = () => {
   return (
@@ -8,6 +10,9 @@ const page: React.FC = () => {
       </h1>
       <HeroSlider />
       <OngoingSection />
+      <Container className='px-0 md:px-4'>
+        <RecentVoiceovers />
+      </Container>
     </>
   )
 }
