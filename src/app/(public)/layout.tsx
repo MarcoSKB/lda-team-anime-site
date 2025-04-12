@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Roboto_Flex } from 'next/font/google'
 
+import Providers from '@/providers/Providers'
+
 import { Header } from '@/components/module'
 
 import './globals.css'
@@ -32,9 +34,11 @@ export default function RootLayout({
   return (
     <html lang='ru'>
       <body className={`antialiased ${inter.variable} ${robotoFlex.variable}`}>
-        <Header />
-        <main className='min-h-[300dvh]'>{children}</main>
-        <div id='headlessui-portal-root' />
+        <Providers>
+          <Header />
+          <main className='min-h-[300dvh]'>{children}</main>
+          <div id='headlessui-portal-root' />
+        </Providers>
       </body>
     </html>
   )

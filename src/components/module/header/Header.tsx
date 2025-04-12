@@ -21,7 +21,7 @@ const Header: React.FC = () => {
           <Search />
           <Link
             href='/donate'
-            className='hover:bg-accent hidden rounded-md bg-[rgba(255,255,255,10%)] px-3 py-2 text-[12px] text-white transition-all ease-out hover:text-white md:flex'
+            className='hover:bg-accent text-foreground hidden rounded-md bg-[rgba(255,255,255,10%)] px-3 py-2 text-[12px] transition-all ease-out hover:text-white md:flex md:text-white'
           >
             Поддержать проект
           </Link>

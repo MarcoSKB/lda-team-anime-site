@@ -13,11 +13,23 @@ import { ArrowLeft, Menu as MenuIcon, Settings, SunMoon } from 'lucide-react'
 
 import { Button, LinkButton } from '@/components/ui'
 
+import useTheme from '@/hooks/useTheme'
+
 const menuList: {
   title: string
   href: string
   alt: string
 }[] = [
+  {
+    title: 'Каталог аниме',
+    href: '/catalog',
+    alt: 'Страница с каталогом аниме',
+  },
+  {
+    title: 'Расписание озвучки',
+    href: '/schedule',
+    alt: 'Страница с расписанием озвучек аниме',
+  },
   {
     title: 'Поддержать проект',
     href: '/donate',
@@ -32,6 +44,7 @@ const menuList: {
 
 const Menu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { theme, changeTheme } = useTheme()
 
   return (
     <>
@@ -84,8 +97,12 @@ const Menu: React.FC = () => {
               <Button
                 icon={<SunMoon width={24} height={24} />}
                 className='text-md gap-2 px-0 active:hover:scale-100'
+                onClick={(e) => {
+                  e.preventDefault()
+                  changeTheme()
+                }}
               >
-                Тема
+                {theme == 'dark' ? 'Темная тема' : 'Светлая тема'}
               </Button>
               <LinkButton
                 intent='primary'

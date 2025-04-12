@@ -1,11 +1,16 @@
+'use client'
+
 import Image from 'next/image'
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { LogOut, Settings, SunMoon } from 'lucide-react'
 
-import { LinkButton } from '@/components/ui'
+import { Button, LinkButton } from '@/components/ui'
+
+import useTheme from '@/hooks/useTheme'
 
 const Profile: React.FC = () => {
+  const { theme, changeTheme } = useTheme()
   return (
     <Menu>
       <MenuButton className='hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out md:flex'>
@@ -20,7 +25,7 @@ const Profile: React.FC = () => {
       <MenuItems
         transition
         anchor='bottom end'
-        className='bg-secondary z-[55] mt-2 flex origin-top flex-col rounded-md px-0.5 py-1.5 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
+        className='bg-secondary z-[55] mt-2 flex w-[152px] min-w-[152px] origin-top flex-col rounded-md px-0.5 py-1.5 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
       >
         <MenuItem as='div'>
           <span className='block px-3 py-1 text-sm'>Пользователь</span>
@@ -39,15 +44,19 @@ const Profile: React.FC = () => {
         </MenuItem>
         <MenuItem>
           <MenuItem>
-            <LinkButton
-              href='/profile/settings'
-              intent='secondary'
-              size='small'
+            <Button
+              intent='default'
+              size='default'
               title='Поменять тему на сайте'
-              icon={<SunMoon width={18} height={18} />}
+              className='hover:text-accent px-2 active:hover:scale-100'
+              icon={<SunMoon width={19} height={19} />}
+              onClick={(e) => {
+                e.preventDefault()
+                changeTheme()
+              }}
             >
-              Тема
-            </LinkButton>
+              {theme == 'dark' ? 'Темная тема' : 'Светлая тема'}
+            </Button>
           </MenuItem>
         </MenuItem>
         <MenuItem>
