@@ -16,10 +16,18 @@ const SliderActions: React.FC<Props> = memo((props) => {
 
   return (
     <div className='flex gap-4 self-end'>
-      <Button intent='primary' onClick={() => scrollPrev()} className='p-2.5'>
+      <Button
+        intent='primary'
+        onClick={() => scrollPrev()}
+        className='hover:border-accent border-1 border-solid border-[rgba(0,0,0,0.3)] p-2.5 hover:text-white dark:border-none'
+      >
         <ArrowLeft />
       </Button>
-      <Button intent='primary' onClick={() => scrollNext()} className='p-2.5'>
+      <Button
+        intent='primary'
+        onClick={() => scrollNext()}
+        className='hover:border-accent border-1 border-solid border-[rgba(0,0,0,0.3)] p-2.5 hover:text-white dark:border-none'
+      >
         <ArrowRight />
       </Button>
     </div>
