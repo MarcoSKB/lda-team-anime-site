@@ -1,4 +1,4 @@
-import { HeroSlider, OngoingSection } from './_components'
+import { HeroSlider, OngoingSection } from './_module'
 
 const page: React.FC = () => {
   return (
