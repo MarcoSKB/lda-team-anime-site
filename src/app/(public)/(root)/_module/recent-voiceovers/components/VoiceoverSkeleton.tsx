@@ -1,10 +1,10 @@
 const VoiceoverSkeleton: React.FC = () => {
   return (
-    <div className='flex flex-col gap-2 md:w-1/2 md:gap-4'>
+    <ul className='flex min-w-[80%] snap-x snap-mandatory gap-2 overflow-x-scroll px-2 md:snap-none md:flex-col md:gap-4 md:overflow-auto md:px-0'>
       {[...Array(5)].map((_, idx) => (
         <li
           key={idx}
-          className='bg-secondary flex h-[174px] gap-3 rounded-md border-1 border-solid border-[#e2e7f1] p-2.5 md:gap-6 md:p-3 md:pb-2 dark:border-none'
+          className='bg-secondary flex h-[174px] min-w-full gap-3 rounded-md border-1 border-solid border-[#e2e7f1] p-2.5 md:gap-6 md:p-3 md:pb-2 dark:border-none'
         >
           <div className='h-full min-w-[112px] rounded-md bg-gray-500 dark:bg-gray-700' />
           <div className='flex w-full flex-col py-1'>
@@ -14,7 +14,7 @@ const VoiceoverSkeleton: React.FC = () => {
           </div>
         </li>
       ))}
-    </div>
+    </ul>
   )
 }
 

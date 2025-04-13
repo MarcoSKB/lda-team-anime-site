@@ -18,7 +18,7 @@ const VoiceoverCard: React.FC<RecentVoiceover> = (props) => {
   })
 
   return (
-    <li className='bg-secondary relative z-0 flex gap-3 overflow-hidden rounded-md border-1 border-solid border-[#e2e7f1] p-2.5 pb-9 drop-shadow-xl md:gap-6 md:p-3 md:pb-2 dark:border-none dark:drop-shadow-none'>
+    <li className='bg-secondary relative z-0 flex w-[70%] min-w-[330px] shrink-0 snap-start gap-3 overflow-hidden rounded-md border-1 border-solid border-[#e2e7f1] p-2.5 pb-9 drop-shadow-xl md:w-auto md:min-w-auto md:shrink md:gap-6 md:p-3 md:pb-2 dark:border-none dark:drop-shadow-none'>
       <Link
         href={`/catalog/${slug}`}
         title='Перейти к странице с аниме'
