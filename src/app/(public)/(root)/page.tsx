@@ -1,6 +1,11 @@
 import { Container } from '@/components/ui'
 
-import { HeroSlider, OngoingSection, RecentVoiceovers } from './_module'
+import {
+  HeroSlider,
+  OngoingSection,
+  PostSection,
+  RecentVoiceovers,
+} from './_module'
 
 const page: React.FC = () => {
   return (
@@ -10,8 +15,9 @@ const page: React.FC = () => {
       </h1>
       <HeroSlider />
       <OngoingSection />
-      <Container className='px-0 md:px-4'>
+      <Container className='flex flex-col gap-4 px-0 md:flex-row md:px-4 lg:gap-6'>
         <RecentVoiceovers />
+        <PostSection />
       </Container>
     </>
   )
