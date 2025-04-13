@@ -36,7 +36,7 @@ export default function RootLayout({
       <body className={`antialiased ${inter.variable} ${robotoFlex.variable}`}>
         <Providers>
           <Header />
-          <main>{children}</main>
+          <main className='pb-[72px] md:pb-0'>{children}</main>
           <div id='headlessui-portal-root' />
         </Providers>
       </body>
