@@ -8,10 +8,10 @@ const SupportSection: React.FC = () => {
   return (
     <Container>
       <section className='relative z-0 flex flex-col overflow-hidden rounded-2xl px-[16px] py-[24px] md:px-[42px] md:py-[40px]'>
-        <h2 className='mb-3.5 font-[Roboto_Flex] text-[32px] leading-[80%] md:text-5xl md:leading-[100%]'>
+        <h2 className='mb-3.5 font-[Roboto_Flex] text-[32px] leading-[80%] text-white md:text-5xl md:leading-[100%]'>
           Поддержка команды
         </h2>
-        <span className='mb-8 max-w-[800px] text-sm leading-[150%] font-light text-pretty sm:text-base'>
+        <span className='mb-8 max-w-[800px] text-sm leading-[150%] font-light text-pretty text-white sm:text-base'>
           Наша команда работает над тем, чтобы вы могли наслаждаться
           качественной озвучкой любимых аниме. Поддержка зрителей помогает нам
           развиваться, улучшать звук и выпускать серии быстрее. Присоединяйтесь
@@ -26,7 +26,7 @@ const SupportSection: React.FC = () => {
           <Heart width={24} height={24} />
           Поддержать
         </a>
-        <div className='absolute top-0 left-0 z-[-1] h-full w-full bg-[rgba(0,0,0,1)]'>
+        <div className='absolute top-0 left-0 z-[-1] h-full w-full before:absolute before:z-10 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[""]'>
           <Image
             fill
             src='/images/support-banner.jpg'
