@@ -3,7 +3,7 @@ import { Inter, Roboto_Flex } from 'next/font/google'
 
 import Providers from '@/providers/Providers'
 
-import { Header } from '@/components/module'
+import { Footer, Header } from '@/components/module'
 
 import './globals.css'
 
@@ -40,6 +40,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <div id='headlessui-portal-root' />
+          <Footer />
         </Providers>
       </body>
     </html>
