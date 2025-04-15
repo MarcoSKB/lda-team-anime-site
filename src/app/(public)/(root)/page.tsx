@@ -5,6 +5,7 @@ import {
   OngoingSection,
   PostSection,
   RecentVoiceovers,
+  SupportSection,
 } from './_module'
 
 const page: React.FC = () => {
@@ -15,10 +16,11 @@ const page: React.FC = () => {
       </h1>
       <HeroSlider />
       <OngoingSection />
-      <Container className='flex flex-col gap-4 px-0 md:flex-row md:px-4 lg:gap-6'>
+      <Container className='mb-8 flex flex-col gap-4 px-0 md:flex-row md:px-4 lg:gap-6'>
         <RecentVoiceovers />
         <PostSection />
       </Container>
+      <SupportSection />
     </>
   )
 }
