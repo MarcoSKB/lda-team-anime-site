@@ -5,17 +5,17 @@ import { lastDubbingData } from '@/data/lastDubbingData'
 import { ongoingData } from '@/data/ongoingData'
 import { sleep } from '@/utils/system'
 
-export async function getPopularAnime() {
+export const getPopularAnime = async () => {
   return carouselData
 }
 
-export async function getOngoingTitles() {
+export const getOngoingTitles = async () => {
   await sleep(3000)
 
   return ongoingData
 }
 
-export async function getRecentVoiceover() {
+export const getRecentVoiceover = async () => {
   await sleep(3000)
 
   return lastDubbingData
