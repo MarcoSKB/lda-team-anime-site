@@ -34,11 +34,11 @@ export default function RootLayout({
   return (
     <html lang='ru'>
       <body
-        className={`antialiased ${inter.variable} ${robotoFlex.variable} pb-[72px] md:pb-0`}
+        className={`antialiased ${inter.variable} ${robotoFlex.variable} flex min-h-lvh flex-col pb-[72px] md:pb-0`}
       >
         <Providers>
           <Header />
-          <main>{children}</main>
+          <main className='flex-1'>{children}</main>
           <div id='headlessui-portal-root' />
           <Footer />
         </Providers>
