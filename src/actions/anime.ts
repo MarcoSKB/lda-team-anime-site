@@ -1,5 +1,7 @@
 'use server'
 
+import { redirect } from 'next/navigation'
+
 import { carouselData } from '@/data/carouselData'
 import { catalogData } from '@/data/catalogData'
 import { lastDubbingData } from '@/data/lastDubbingData'
@@ -30,4 +32,12 @@ export const getCatalogList = async () => {
 
   //Revalidate by tag
   return catalogData
+}
+
+export const getAnimeTitle = async (slug: string) => {
+  await sleep(3000)
+  const animeTitle = ongoingData.find((title) => title.slug == slug)
+
+  if (!animeTitle) redirect('/catalog')
+  return animeTitle
 }
