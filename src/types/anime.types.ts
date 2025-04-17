@@ -1,6 +1,10 @@
 type Tags = string[]
 
-export interface AnimeBaseModel {
+type AnimeFormatType = 'TV-Сериал' | 'Полнометражка' | 'Короткометражка' | 'OVA'
+
+type AnimeVoiceoverType = 'Дубляж' | 'Закадровая' | 'Субтитры'
+
+interface AnimeBaseModel {
   id: number
   slug: string
   title: string
@@ -24,5 +28,12 @@ export interface RecentVoiceover extends AnimeBaseModel {
   img: string
   createdAt: string
   episode: number
+  tags: Tags
+}
+
+export interface CatalogTitle extends AnimeBaseModel {
+  img: string
+  voiceoverType: AnimeVoiceoverType
+  format: AnimeFormatType
   tags: Tags
 }
