@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       'react/display-name': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
+      'func-style': ['error', 'expression', { allowArrowFunctions: true }],
     },
   }),
 ]
