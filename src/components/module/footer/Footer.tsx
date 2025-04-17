@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
       <ul className='mb-4 flex items-center gap-6 md:gap-3'>
         <li>
           <a
-            href='https://vk.com'
+            href='https://vk.com/ldatm'
             target='_blank'
             rel='noopener noreferrer'
             className='group'
@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
         </li>
         <li>
           <a
-            href='https://telegram.com'
+            href='https://t.me/Ldateam'
             target='_blank'
             rel='noopener noreferrer'
             className='group'
