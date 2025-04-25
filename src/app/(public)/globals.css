@@ -7,6 +7,7 @@
   --bg-secondary: #fafafa;
   --text: #00020d;
   --text-secondary: #191b25;
+--text-link: #637dff;
   --accent: #e67575;
 }
 
@@ -20,6 +21,7 @@
   --color-secondary: var(--bg-secondary);
   --color-foreground: var(--text);
   --color-accent: var(--accent);
+--color-link: var(--text-link);
 
   --shadow-top: 0px -3px 6px 0px rgba(0, 0, 0, 10%);
 
