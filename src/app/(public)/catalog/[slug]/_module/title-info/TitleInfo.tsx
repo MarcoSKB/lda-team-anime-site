@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getAnimeTitle } from '@/actions/anime'
 import { Bookmark } from 'lucide-react'
 
-import { Button, Container, Tag } from '@/components/ui'
+import { Button, Container, ReadMore, Tag } from '@/components/ui'
 
 interface Props {
   slug: string
@@ -48,9 +48,12 @@ const TitleInfo: React.FC<Props> = async ({ slug }) => {
               ))}
             </div>
           </div>
-          <span className='text-foreground max-w-[700px] text-base leading-[26px] font-light text-pretty'>
+          <ReadMore
+            maxLength={300}
+className='text-foreground max-w-[700px] text-sm leading-[22px] font-light text-balance md:text-base md:leading-[26px] dark:opacity-90'
+>
             {animeData.description}
-          </span>
+          </ReadMore>
         </div>
       </Container>
     </>
