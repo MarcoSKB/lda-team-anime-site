@@ -22,8 +22,8 @@ const TitleInfo: React.FC<Props> = async ({ slug }) => {
           <Image
             src={animeData.img}
             width={190}
-            height={297}
-            className='h-auto w-auto min-w-[190px] rounded-md'
+            height={263}
+            className='h-auto w-auto min-w-[190px] rounded-md object-cover'
             alt={`Постер аниме ${animeData.title}`}
           />
           <div className='flex items-start gap-2'>
