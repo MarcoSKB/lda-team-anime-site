@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@config "../../../tailwind.config.mjs";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -7,8 +8,11 @@
   --bg-secondary: #fafafa;
   --text: #00020d;
   --text-secondary: #191b25;
---text-link: #637dff;
+  --text-link: #637dff;
   --accent: #e67575;
+
+  --media-brand: 245 245 245;
+  --media-focus: 78 156 246;
 }
 
 @theme inline {
@@ -21,7 +25,7 @@
   --color-secondary: var(--bg-secondary);
   --color-foreground: var(--text);
   --color-accent: var(--accent);
---color-link: var(--text-link);
+  --color-link: var(--text-link);
 
   --shadow-top: 0px -3px 6px 0px rgba(0, 0, 0, 10%);
 
