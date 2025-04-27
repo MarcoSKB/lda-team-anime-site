@@ -36,7 +36,7 @@ export const getCatalogList = async () => {
 
 export const getAnimeTitle = async (slug: string) => {
   await sleep(3000)
-  const animeTitle = ongoingData.find((title) => title.slug == slug)
+  const animeTitle = ongoingData.find((anime) => anime.slug == slug)
 
   if (!animeTitle) redirect('/catalog')
   return animeTitle
