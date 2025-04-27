@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 
+import { AnimeEpisodesData } from '@/data/animeEpisodesData'
 import { carouselData } from '@/data/carouselData'
 import { catalogData } from '@/data/catalogData'
 import { lastDubbingData } from '@/data/lastDubbingData'
@@ -40,4 +41,12 @@ export const getAnimeTitle = async (slug: string) => {
 
   if (!animeTitle) redirect('/catalog')
   return animeTitle
+}
+
+export const getAnimeEpisodes = async (slug: string) => {
+  await sleep(3000)
+  const animeEpisodes = AnimeEpisodesData.find((anime) => anime.slug == slug)
+
+  if (!animeEpisodes) redirect('/catalog')
+  return animeEpisodes
 }

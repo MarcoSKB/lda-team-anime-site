@@ -1,3 +1,5 @@
+import { TrackProps } from '@vidstack/react'
+
 type Tags = string[]
 
 type AnimeFormatType = 'TV-Сериал' | 'Полнометражка' | 'Короткометражка' | 'OVA'
@@ -36,4 +38,21 @@ export interface CatalogTitle extends AnimeBaseModel {
   voiceoverType: AnimeVoiceoverType
   format: AnimeFormatType
   tags: Tags
+}
+
+export interface AnimeEpisodes {
+  id: number
+  slug: string
+  episodeList: AnimeEpisode[]
+}
+
+export interface AnimeEpisode {
+  id: number
+  title: string
+  episodeNumber: number
+  src: string
+  poster: string
+  posterAlt: string
+  trackList: TrackProps[]
+  thumbnails: string
 }
