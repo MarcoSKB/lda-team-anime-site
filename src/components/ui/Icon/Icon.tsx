@@ -1,6 +1,6 @@
 import { SVGProps } from 'react'
 
-const Telegram = (props: SVGProps<SVGSVGElement>) => (
+const Telegram: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' {...props}>
     <title />
     <g id='Telegram'>
@@ -9,7 +9,7 @@ const Telegram = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-const VK = (props: SVGProps<SVGSVGElement>) => (
+const VK: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     id='Layer_1'
     version='1.1'
@@ -21,7 +21,7 @@ const VK = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-const Boosty = (props: SVGProps<SVGSVGElement>) => (
+const Boosty: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width='426'
     height='424'
@@ -34,7 +34,7 @@ const Boosty = (props: SVGProps<SVGSVGElement>) => (
   </svg>
 )
 
-const Subtitle = (props: SVGProps<SVGSVGElement>) => {
+const Subtitle: React.FC<SVGProps<SVGSVGElement>> = (props) => {
   return (
     <svg
       width='32'
@@ -61,21 +61,42 @@ const Subtitle = (props: SVGProps<SVGSVGElement>) => {
   )
 }
 
+const Tv: React.FC<SVGProps<SVGSVGElement>> = (props) => {
+  return (
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='-4 -4 28 28'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      {...props}
+    >
+      <path d='M7 21h10' />
+      <rect width='20' height='14' x='2' y='3' rx='2' />
+    </svg>
+  )
+}
+
 const icons = {
   telegram: Telegram,
   vk: VK,
   boosty: Boosty,
   subtitle: Subtitle,
+  tv: Tv,
 }
 
-type IconName = keyof typeof icons
+export type IconName = keyof typeof icons
 
 type Props = {
   name: IconName
   className?: string
 }
 
-const Icon = ({ name, className }: Props) => {
+const Icon: React.FC<Props> = ({ name, className }) => {
   const IconComponent = icons[name]
   return <IconComponent className={className} />
 }
