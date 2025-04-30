@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import { Search } from '@/components/module'
 import { Container } from '@/components/ui'
 
@@ -19,12 +17,14 @@ const Header: React.FC = () => {
         <Navigation />
         <div className='order-3 flex flex-1 items-center md:order-none md:flex-none md:gap-2'>
           <Search />
-          <Link
-            href='/donate'
+          {/* <a
+            type='_blank'
+            href='https://boosty.to/ldateam'
+            title='Поддержать проект'
             className='hover:bg-accent text-foreground hidden rounded-md bg-[rgba(255,255,255,10%)] px-3 py-2 text-[12px] transition-all ease-out hover:text-white md:flex md:text-white'
           >
             Поддержать проект
-          </Link>
+          </a> */}
           <Profile />
           <Menu />
         </div>

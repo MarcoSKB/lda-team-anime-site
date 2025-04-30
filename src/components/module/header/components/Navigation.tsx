@@ -15,17 +15,17 @@ const navLinks: {
     icon: <Library className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
   },
   {
-    title: 'График',
+    title: 'Расписание',
     href: '/schedule',
     alt: 'Страница с расписанием выхода серий',
     icon: <Calendar className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
   },
-  {
-    title: 'Заказать озвучку',
-    href: '/order',
-    alt: 'Страница с заказом озвучки — выберите аниме',
-    icon: <AudioLines className='h-[32px] w-[32px] md:h-[18px] md:w-[18px]' />,
-  },
+  // {
+  //   title: 'Заказать озвучку',
+  //   href: '/order',
+  //   alt: 'Страница с заказом озвучки — выберите аниме',
+  //   icon: <AudioLines className='h-[32px] w-[32px] md:h-[18px] md:w-[18px]' />,
+  // },
 ]
 
 const Navigation: React.FC = () => {
@@ -42,9 +42,33 @@ const Navigation: React.FC = () => {
             className={`text-foreground flex flex-col items-center gap-1 px-2 text-center text-[12px] leading-3 md:text-sm md:text-white ${link.href == '/order' ? 'hidden max-w-[100px] md:flex md:max-w-none' : 'flex'}`}
           >
             <span className='flex md:hidden'>{link.icon}</span>
-            {link.title}
+            <span
+              className={
+                link.title == 'Расписание' ? 'hidden md:inline' : 'inline'
+              }
+            >
+              {link.title}
+            </span>
+            <span
+              className={
+                link.title == 'Расписание' ? 'inline md:hidden' : 'hidden'
+              }
+            >
+              График
+            </span>
           </LinkButton>
         ))}
+        <a
+          type='_blank'
+          href='https://boosty.to/ldateam'
+          title='Поддержать проект'
+          className='hover:text-accent text-foreground hidden max-w-[100px] flex-col items-center gap-1 rounded-sm bg-transparent px-2 py-2 text-center text-sm text-[12px] leading-3 transition-colors md:flex md:max-w-none md:text-sm md:text-white'
+        >
+          <span className='flex md:hidden'>
+            <AudioLines className='h-[32px] w-[32px] md:h-[18px] md:w-[18px]' />
+          </span>
+          Поддержать проект
+        </a>
       </ul>
     </nav>
   )
