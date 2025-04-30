@@ -11,6 +11,7 @@ const HeaderWrapper: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50)
+    onScroll()
     window.addEventListener('scroll', onScroll)
 
     return () => window.removeEventListener('scroll', onScroll)
