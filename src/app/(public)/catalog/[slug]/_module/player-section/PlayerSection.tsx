@@ -8,20 +8,25 @@ import { VideoPlayer } from '@/components/module'
 import { Container } from '@/components/ui'
 
 import EpisodeList from './EpisodeList'
+import { usePlayerNavigation } from './hooks/usePlayerNavigation'
 
 interface Props {
   fetchAnimeEpisodes: Promise<AnimeEpisodes>
 }
 
 const PlayerSection: React.FC<Props> = ({ fetchAnimeEpisodes }) => {
-  const animeTitle = use(fetchAnimeEpisodes)
-  const [episode, setEpisode] = useState<AnimeEpisode>(
-    animeTitle.episodeList[0],
-  )
-
+  const { episodeList } = use(fetchAnimeEpisodes)
+  const [episode, setEpisode] = useState<AnimeEpisode>(episodeList[0])
   const changeEpisode = (episodeData: AnimeEpisode) => {
     setEpisode(episodeData)
   }
+
+  const {
+    isNextEpAvailable,
+    isPrevEpAvailable,
+    onNextButtonClick,
+    onPrevButtonClick,
+  } = usePlayerNavigation(episodeList, episode, changeEpisode)
 
   return (
     <section>
@@ -31,11 +36,13 @@ const PlayerSection: React.FC<Props> = ({ fetchAnimeEpisodes }) => {
         </div>
         <VideoPlayer
           {...episode}
-          nextButtonDisabled={false}
-          prevButtonDisabled={false}
+          onNextButtonClick={onNextButtonClick}
+          onPrevButtonClick={onPrevButtonClick}
+          nextButtonDisabled={isNextEpAvailable}
+          prevButtonDisabled={isPrevEpAvailable}
         />
         <EpisodeList
-          episodeList={animeTitle.episodeList}
+          episodeList={episodeList}
           currentEpisode={episode.episodeNumber}
           changeEpisode={changeEpisode}
         />

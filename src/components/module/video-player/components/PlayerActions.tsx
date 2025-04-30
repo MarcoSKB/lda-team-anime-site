@@ -30,6 +30,7 @@ interface MediaButtonProps {
 }
 
 interface NavButtonProps {
+  onClick: () => void
   disabled?: boolean
 }
 
@@ -39,7 +40,7 @@ interface SeekButtonProps extends MediaButtonProps {
 }
 
 export const buttonClass =
-  'group ring-media-focus relative inline-flex h-8 w-8 md:h-10 md:w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset hover:bg-white/20 data-[focus]:ring-4'
+  'group ring-media-focus relative inline-flex h-8 w-8 md:h-10 md:w-10 cursor-pointer items-center justify-center rounded-md outline-none ring-inset disabled:hover:bg-transparent disabled:cursor-default disabled:opacity-70 hover:bg-white/20 data-[focus]:ring-4'
 
 export const tooltipClass =
   'animate-out fade-out slide-out-to-bottom-2 data-[visible]:animate-in data-[visible]:fade-in data-[visible]:slide-in-from-bottom-4 z-10 rounded-sm bg-[rgba(0,0,0,0.5)] px-2 py-0.5 text-sm font-medium text-white parent-data-[open]:hidden'
@@ -64,11 +65,11 @@ export const Play: React.FC<MediaButtonProps> = ({ tooltipPlacement }) => {
   )
 }
 
-export const PrevButton: React.FC<NavButtonProps> = ({ disabled }) => {
+export const PrevButton: React.FC<NavButtonProps> = ({ onClick, disabled }) => {
   return (
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
-        <button className={buttonClass} disabled={disabled}>
+        <button className={buttonClass} onClick={onClick} disabled={disabled}>
           <ChevronFirst className='group-hover:text-accent h-7 w-7 transition ease-in-out group-disabled:text-white' />
         </button>
       </Tooltip.Trigger>
@@ -79,11 +80,11 @@ export const PrevButton: React.FC<NavButtonProps> = ({ disabled }) => {
   )
 }
 
-export const NextButton: React.FC<NavButtonProps> = ({ disabled }) => {
+export const NextButton: React.FC<NavButtonProps> = ({ onClick, disabled }) => {
   return (
     <Tooltip.Root>
       <Tooltip.Trigger asChild>
-        <button className={buttonClass} disabled={disabled}>
+        <button className={buttonClass} onClick={onClick} disabled={disabled}>
           <ChevronLast className='group-hover:text-accent h-7 w-7 transition ease-in-out group-disabled:text-white' />
         </button>
       </Tooltip.Trigger>

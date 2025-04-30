@@ -38,6 +38,8 @@ interface Props {
   posterAlt: string
   trackList: TrackProps[]
   thumbnails: string
+  onPrevButtonClick: () => void
+  onNextButtonClick: () => void
   prevButtonDisabled?: boolean
   nextButtonDisabled?: boolean
 }
@@ -50,6 +52,8 @@ const VideoPlayer: React.FC<Props> = (props) => {
     posterAlt,
     trackList,
     thumbnails,
+    onPrevButtonClick,
+    onNextButtonClick,
     prevButtonDisabled,
     nextButtonDisabled,
   } = props
@@ -99,9 +103,15 @@ const VideoPlayer: React.FC<Props> = (props) => {
               <Volume />
             </div>
             <div className='flex flex-1 items-center justify-center md:gap-1'>
-              <PrevButton disabled={prevButtonDisabled} />
+              <PrevButton
+                onClick={onPrevButtonClick}
+                disabled={prevButtonDisabled}
+              />
               <Play tooltipPlacement='top center' />
-              <NextButton disabled={nextButtonDisabled} />
+              <NextButton
+                onClick={onNextButtonClick}
+                disabled={nextButtonDisabled}
+              />
             </div>
             <div className='flex flex-1 items-center justify-end md:gap-0.5'>
               <Caption tooltipPlacement='top' />
