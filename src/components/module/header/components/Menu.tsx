@@ -21,6 +21,11 @@ const menuList: {
   alt: string
 }[] = [
   {
+    title: 'Главная страница',
+    href: '/',
+    alt: 'Главная страница',
+  },
+  {
     title: 'Каталог аниме',
     href: '/catalog',
     alt: 'Страница с каталогом аниме',
@@ -35,11 +40,11 @@ const menuList: {
     href: '/donate',
     alt: 'Страница с донатом',
   },
-  {
-    title: 'Заказать озвучку',
-    href: '/order',
-    alt: 'Страница с заказом озвучки — выберите аниме',
-  },
+  // {
+  //   title: 'Заказать озвучку',
+  //   href: '/order',
+  //   alt: 'Страница с заказом озвучки — выберите аниме',
+  // },
 ]
 
 const Menu: React.FC = () => {
@@ -80,7 +85,7 @@ const Menu: React.FC = () => {
             </Button>
             <DialogTitle className='text-xl'>Навигация</DialogTitle>
             <hr className='my-2 opacity-30' />
-            <div className='flex flex-col'>
+            <div className='flex flex-col' onClick={() => setIsOpen(false)}>
               {menuList.map((link) => (
                 <LinkButton
                   key={link.href}
