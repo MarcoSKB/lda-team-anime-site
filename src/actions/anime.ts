@@ -7,6 +7,7 @@ import { carouselData } from '@/data/carouselData'
 import { catalogData } from '@/data/catalogData'
 import { lastDubbingData } from '@/data/lastDubbingData'
 import { ongoingData } from '@/data/ongoingData'
+import { scheduleData } from '@/data/scheduleData'
 import { sleep } from '@/utils/system'
 
 export const getPopularAnime = async () => {
@@ -39,6 +40,7 @@ export const getAnimeTitle = async (slug: string) => {
   await sleep(3000)
   const animeTitle = ongoingData.find((anime) => anime.slug == slug)
 
+  //Revalidate 3 hour
   if (!animeTitle) redirect('/catalog')
   return animeTitle
 }
@@ -49,4 +51,11 @@ export const getAnimeEpisodes = async (slug: string) => {
 
   if (!animeEpisodes) redirect('/catalog')
   return animeEpisodes
+}
+
+export const getScheduleList = async () => {
+  await sleep(3000)
+
+  //Revalidate 1 hour
+  return scheduleData
 }

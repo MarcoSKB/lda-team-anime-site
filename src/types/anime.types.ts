@@ -56,3 +56,23 @@ export interface AnimeEpisode {
   trackList: TrackProps[]
   thumbnails: string
 }
+
+interface AnimeScheduleItem {
+  id: number
+  title: string
+  slug: string
+  img: string
+  season: number
+  episode: number
+}
+
+type Weekday =
+  | 'monday'
+  | 'tuesday'
+  | 'wednesday'
+  | 'thursday'
+  | 'friday'
+  | 'saturday'
+  | 'sunday'
+
+export type AnimeScheduleList = Record<Weekday, AnimeScheduleItem[]>
