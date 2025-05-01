@@ -29,6 +29,7 @@ const SupportSection: React.FC = () => {
         <div className='absolute top-0 left-0 z-[-1] h-full w-full before:absolute before:z-10 before:h-full before:w-full before:bg-[rgba(0,0,0,0.6)] before:content-[""]'>
           <Image
             fill
+            sizes='(max-width: 768px) 20vw, (max-width: 1200px) 40vw, 65vw'
             src='/images/support-banner.jpg'
             className='h-full w-full object-cover'
             alt='Фон для секций'
