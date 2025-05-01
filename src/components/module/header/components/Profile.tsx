@@ -13,7 +13,7 @@ const Profile: React.FC = () => {
   const { theme, changeTheme } = useTheme()
   return (
     <Menu>
-      <MenuButton className='hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out md:flex'>
+      <MenuButton className='hover:bg-foreground dark:hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out md:flex'>
         <Image
           src='/images/placeholder-image.jpg'
           alt='Аватар пользователя'
