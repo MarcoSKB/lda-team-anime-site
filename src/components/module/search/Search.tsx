@@ -12,8 +12,7 @@ const Search: React.FC = () => {
         as={Button}
         size='small'
         title='Поиск аниме тайтлов'
-        className='md:hover:bg-secondary text-foreground hover:bg-transparent md:bg-[rgba(255,255,255,10%)] md:text-white'
-        onClick={() => console.log('Clicked')}
+        className='dark:md:hover:bg-secondary md:hover:border-foreground border border-transparent text-inherit hover:bg-transparent md:bg-[rgba(255,255,255,10%)] md:hover:border-solid dark:md:hover:border-transparent'
       >
         <div className='hover:text-accent md:hover:text-foreground flex flex-col items-center px-1 transition-colors ease-out md:flex-row'>
           <SearchIcon className='mx-auto h-[29px] w-[29px] md:h-[18px] md:w-[18px]' />

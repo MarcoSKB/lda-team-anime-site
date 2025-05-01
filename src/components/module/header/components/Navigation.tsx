@@ -39,7 +39,7 @@ const Navigation: React.FC = () => {
             title={link.alt}
             intent='secondary'
             size='small'
-            className={`text-foreground flex flex-col items-center gap-1 px-2 text-center text-[12px] leading-3 md:text-sm md:text-white ${link.href == '/order' ? 'hidden max-w-[100px] md:flex md:max-w-none' : 'flex'}`}
+            className={`flex flex-col items-center gap-1 px-2 text-center text-[12px] leading-3 text-inherit md:text-sm ${link.href == '/order' ? 'hidden max-w-[100px] md:flex md:max-w-none' : 'flex'}`}
           >
             <span className='flex md:hidden'>{link.icon}</span>
             <span
@@ -62,7 +62,7 @@ const Navigation: React.FC = () => {
           type='_blank'
           href='https://boosty.to/ldateam'
           title='Поддержать проект'
-          className='hover:text-accent text-foreground hidden max-w-[100px] flex-col items-center gap-1 rounded-sm bg-transparent px-2 py-2 text-center text-sm text-[12px] leading-3 transition-colors md:flex md:max-w-none md:text-sm md:text-white'
+          className='hover:text-accent hidden max-w-[100px] flex-col items-center gap-1 rounded-sm bg-transparent px-2 py-2 text-center text-sm text-[12px] leading-3 text-inherit transition-colors md:flex md:max-w-none md:text-sm'
         >
           <span className='flex md:hidden'>
             <AudioLines className='h-[32px] w-[32px] md:h-[18px] md:w-[18px]' />
