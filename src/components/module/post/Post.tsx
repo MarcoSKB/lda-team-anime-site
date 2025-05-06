@@ -7,7 +7,7 @@ import { ArrowRight } from 'lucide-react'
 
 import { LinkButton, Tag } from '@/components/ui'
 
-const PostItem: React.FC<PostPreview> = (props) => {
+const Post: React.FC<PostPreview> = (props) => {
   const { slug, type, title, description, createdAt } = props
 
   const date = formatDistanceToNowStrict(new Date(createdAt), {
@@ -51,4 +51,4 @@ const PostItem: React.FC<PostPreview> = (props) => {
   )
 }
 
-export default PostItem
+export default Post
