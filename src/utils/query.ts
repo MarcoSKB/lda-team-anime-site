@@ -9,3 +9,5 @@ export const updateQuery = (
   urlSearchParams.set(name, value)
   window.history.pushState(null, '', `?${urlSearchParams.toString()}`)
 }
+export const formatSlug = (slug: string): string =>
+  slug.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
