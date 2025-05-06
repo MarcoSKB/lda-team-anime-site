@@ -8,3 +8,14 @@ export interface PostPreview {
   description: string
   createdAt: string
 }
+
+export interface Post {
+  id: number
+  slug: string
+  title: string
+  type: PostTypes
+  description: string
+  author: string
+  createdAt: string
+  content: string
+}

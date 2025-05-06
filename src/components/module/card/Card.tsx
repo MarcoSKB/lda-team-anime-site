@@ -7,7 +7,9 @@ import { Tag } from '@/components/ui'
 
 import { truncateText } from '@/utils/string'
 
-const Card: React.FC<CatalogTitle> = (props) => {
+interface Props extends Omit<CatalogTitle, 'id'> {}
+
+const Card: React.FC<Props> = (props) => {
   const { slug, title, img, voiceoverType, format, tags } = props
 
   return (
