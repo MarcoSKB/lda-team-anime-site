@@ -59,7 +59,7 @@ const Navigation: React.FC = () => {
           </LinkButton>
         ))}
         <a
-          type='_blank'
+          target='_blank'
           href='https://boosty.to/ldateam'
           title='Поддержать проект'
           className='hover:text-accent hidden max-w-[100px] flex-col items-center gap-1 rounded-sm bg-transparent px-2 py-2 text-center text-sm text-[12px] leading-3 text-inherit transition-colors md:flex md:max-w-none md:text-sm'
