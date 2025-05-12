@@ -16,7 +16,7 @@ const Card: React.FC<Props> = (props) => {
     <div className='dark:border-secondary flex h-full w-full flex-col overflow-hidden rounded-lg border-1 border-solid border-[#d5d9e2] drop-shadow-xl dark:drop-shadow-none'>
       <Link
         href={`/catalog/${slug}`}
-        className='group relative z-0 h-full min-h-[189px] w-full min-w-[132px] md:min-h-[264px] md:min-w-[198px]'
+        className='group relative z-0 h-full min-h-[189px] w-full min-w-[132px] scroll-mt-10 md:min-h-[264px] md:min-w-[198px]'
         title='Перейти к просмотру тайтла'
       >
         <Image
@@ -36,7 +36,7 @@ const Card: React.FC<Props> = (props) => {
       <div className='bg-secondary flex h-full flex-col gap-1 px-2 py-2 md:gap-2.5'>
         <Link
           href={`/catalog/${slug}`}
-          className='hover:text-accent text-foreground mb-auto text-sm leading-5 text-balance transition-colors ease-in-out md:mb-0 md:text-base'
+          className='hover:text-accent text-foreground mb-auto scroll-mt-10 text-sm leading-5 text-balance transition-colors ease-in-out md:mb-0 md:text-base'
           title='Перейти к просмотру тайтла'
         >
           {truncateText(title, 45)}

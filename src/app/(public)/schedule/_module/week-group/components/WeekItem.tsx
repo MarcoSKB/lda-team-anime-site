@@ -19,7 +19,7 @@ const WeekItem: React.FC<Props> = (props) => {
       <Link
         href={`/catalog/${slug}`}
         title={`Перейти к аниме ${title}`}
-        className='group flex w-full flex-col items-center justify-center gap-1 px-3 py-2'
+        className='group flex w-full scroll-mt-10 flex-col items-center justify-center gap-1 px-3 py-2'
       >
         <span className='group-hover:text-accent w-full text-center leading-[20px] font-semibold text-balance text-white transition ease-in-out'>
           {truncateText(title, 46)}

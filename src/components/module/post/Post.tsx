@@ -25,7 +25,7 @@ const Post: React.FC<PostPreview> = (props) => {
       </div>
       <Link
         href={`/posts/${slug}`}
-        className='text-md hover:text-accent mb-1 w-full leading-[140%] text-balance opacity-85 transition-colors ease-in-out'
+        className='text-md hover:text-accent mb-1 w-full scroll-mt-10 leading-[140%] text-balance opacity-85 transition-colors ease-in-out'
       >
         {title}
       </Link>
@@ -36,7 +36,7 @@ const Post: React.FC<PostPreview> = (props) => {
         href={`/posts/${slug}`}
         size='small'
         intent='secondary'
-        className='hover:text-accent group ml-[-8px] flex-row-reverse self-start opacity-70 transition ease-in-out hover:opacity-100'
+        className='hover:text-accent group ml-[-8px] scroll-mt-10 flex-row-reverse self-start opacity-70 transition ease-in-out hover:opacity-100'
         icon={
           <ArrowRight
             width={24}

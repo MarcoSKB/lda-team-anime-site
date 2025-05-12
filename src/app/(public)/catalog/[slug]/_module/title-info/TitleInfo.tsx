@@ -27,7 +27,7 @@ const TitleInfo: React.FC<Props> = async ({ slug }) => {
             alt={`Постер аниме ${animeData.title}`}
           />
           <div className='flex items-start gap-2'>
-            <Button intent='primary' className='px-2 py-2'>
+            <Button intent='primary' className='scroll-mt-10 px-2 py-2'>
               <Bookmark width={24} height={24} />
             </Button>
             <div className='bg-secondary flex h-full w-full items-center justify-center rounded-md px-2.5 py-2 text-center text-sm leading-[18px]'>
@@ -50,7 +50,7 @@ const TitleInfo: React.FC<Props> = async ({ slug }) => {
           </div>
           <ReadMore
             maxLength={300}
-            className='text-foreground max-w-[700px] text-sm leading-[22px] font-light text-balance md:text-base md:leading-[26px] dark:opacity-90'
+            className='text-foreground max-w-[700px] scroll-mt-10 text-sm leading-[22px] font-light text-balance md:text-base md:leading-[26px] dark:opacity-90'
           >
             {animeData.description}
           </ReadMore>

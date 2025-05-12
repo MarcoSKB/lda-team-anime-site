@@ -14,10 +14,10 @@ const PosterCardInfo: React.FC<Props> = (props) => {
   const { id, slug, title, description, rating, tags } = props
 
   return (
-    <div className='absolute top-0 left-0 z-10 h-full w-full bg-[rgba(0,2,13,0.8)] px-4 pt-2 pb-4 opacity-0 transition duration-200 ease-in-out group-hover:opacity-100'>
+    <div className='absolute top-0 left-0 z-10 h-full w-full bg-[rgba(0,2,13,0.8)] px-4 pt-2 pb-4 opacity-0 transition duration-200 ease-in-out group-focus-within:opacity-100 group-hover:opacity-100'>
       <Link
         href={`/catalog/${slug}`}
-        className='hover:text-accent inline-flex w-full py-2 text-xl leading-[26px] font-semibold text-white transition ease-in-out'
+        className='hover:text-accent inline-flex w-full scroll-mt-10 py-2 text-xl leading-[26px] font-semibold text-white transition ease-in-out'
       >
         {truncateText(title, 43)}
       </Link>

@@ -21,7 +21,7 @@ const HeroSliderList: React.FC = async () => {
             <Link
               href={`/catalog/${slider.slug}`}
               title='Перейти на страницу с аниме'
-              className='hover:text-accent mb-3 max-w-[550px] font-["Roboto_Flex"] text-2xl leading-[24px] font-extrabold text-balance text-white transition md:text-[40px] md:leading-[36px] lg:text-[52px] lg:leading-[48px]'
+              className='hover:text-accent mb-3 max-w-[550px] scroll-mt-10 font-["Roboto_Flex"] text-2xl leading-[24px] font-extrabold text-balance text-white transition md:text-[40px] md:leading-[36px] lg:text-[52px] lg:leading-[48px]'
             >
               {slider.title}
             </Link>

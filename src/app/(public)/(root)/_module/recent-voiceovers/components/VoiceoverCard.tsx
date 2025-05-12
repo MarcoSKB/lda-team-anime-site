@@ -22,7 +22,7 @@ const VoiceoverCard: React.FC<RecentVoiceover> = (props) => {
       <Link
         href={`/catalog/${slug}`}
         title='Перейти к странице с аниме'
-        className='relative z-0 h-[154px] min-w-[100px] overflow-hidden rounded-md md:min-w-[112px]'
+        className='relative z-0 h-[154px] min-w-[100px] scroll-mt-10 overflow-hidden rounded-md md:min-w-[112px]'
       >
         <Image
           src={img}
@@ -43,7 +43,7 @@ const VoiceoverCard: React.FC<RecentVoiceover> = (props) => {
           <Link
             href={`/catalog/${slug}`}
             title='Перейти к странице с аниме'
-            className='text-foreground hover:text-accent text-base leading-6 text-balance transition ease-in-out md:text-lg'
+            className='text-foreground hover:text-accent scroll-mt-10 text-base leading-6 text-balance transition ease-in-out md:text-lg'
           >
             {truncateText(title, 60)}
           </Link>

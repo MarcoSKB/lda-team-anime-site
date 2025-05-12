@@ -39,7 +39,7 @@ const WeekGroup: React.FC<Props> = ({ fetchSceduleList }) => {
         {weekList.map((week) => (
           <Tab
             key={week}
-            className='data-hover:text-accent text-foreground dark:data-selected:text-foreground dark:data-selected:data-hover:text-foreground data-selected:bg-accent cursor-pointer rounded-lg px-3 py-1 text-sm leading-6 transition-colors ease-in-out outline-none data-focus:outline-black data-focus:outline-solid data-selected:cursor-default data-selected:text-white data-selected:data-hover:text-white md:text-base dark:data-focus:outline-white'
+            className='data-hover:text-accent text-foreground dark:data-selected:text-foreground dark:data-selected:data-hover:text-foreground data-selected:bg-accent cursor-pointer scroll-mt-10 rounded-lg px-3 py-1 text-sm leading-6 transition-colors ease-in-out outline-none data-focus:outline-black data-focus:outline-solid data-selected:cursor-default data-selected:text-white data-selected:data-hover:text-white md:text-base dark:data-focus:outline-white'
           >
             {week}
           </Tab>
