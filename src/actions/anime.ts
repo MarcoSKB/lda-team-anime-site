@@ -59,3 +59,17 @@ export const getScheduleList = async () => {
   //Revalidate 1 hour
   return scheduleData
 }
+
+export const searchAnime = async (search: string | null) => {
+  if (!search || search == '') {
+    return []
+  }
+
+  await sleep(3000)
+  // Limit 5 items
+  const results = ongoingData.filter(
+    (anime) =>
+      anime.title.includes(search) || anime.description.includes(search),
+  )
+  return results
+}
