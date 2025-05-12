@@ -5,7 +5,7 @@ import Providers from '@/providers/Providers'
 
 import { Footer, Header } from '@/components/module'
 
-import './globals.css'
+import '../globals.css'
 
 const inter = Inter({
   subsets: ['cyrillic'],
