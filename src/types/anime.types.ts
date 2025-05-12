@@ -40,6 +40,12 @@ export interface CatalogTitle extends AnimeBaseModel {
   tags: Tags
 }
 
+export interface AnimeSearch extends AnimeBaseModel {
+  img: string
+  rating: number
+  description: string
+}
+
 export interface AnimeEpisodes {
   id: number
   slug: string
