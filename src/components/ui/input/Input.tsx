@@ -11,9 +11,13 @@ const inputStyle = cva(
     variants: {
       intent: {
         default:
-          'rounded-md px-2.5 py-1.5 w-full transition-colors bg-secondary text-sm placeholder:text-sm text-foreground placeholder:font-thin',
+          'rounded-md w-full transition-colors bg-secondary text-foreground placeholder:font-thin',
         secondary:
-          'rounded-md px-2.5 py-1.5 w-full transition-colors bg-background border-[#d7dbe2] dark:border-none border text-sm placeholder:text-sm text-foreground placeholder:font-thin',
+          'rounded-md w-full transition-colors bg-background border-[#d7dbe2] dark:border-none border text-sm placeholder:text-sm text-foreground placeholder:font-thin',
+      },
+      size: {
+        default: 'text-sm px-2.5 py-1.5 placeholder:text-sm',
+        large: 'text-base px-3 py-2 placeholder:text-base',
       },
       withIcon: {
         true: 'pl-[40px]',
@@ -22,19 +26,20 @@ const inputStyle = cva(
     },
     defaultVariants: {
       intent: 'default',
+      size: 'default',
       withIcon: false,
     },
   },
 )
 
 interface Props
-  extends React.ComponentProps<'input'>,
+  extends Omit<React.ComponentProps<'input'>, 'size'>,
     VariantProps<typeof inputStyle> {
   icon?: React.ReactNode
 }
 
 const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
-  const { intent, icon, className, type = 'text', ...otherProps } = props
+  const { intent, size, icon, className, type = 'text', ...otherProps } = props
 
   if (icon) {
     return (
@@ -46,6 +51,7 @@ const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
           className={cn(
             inputStyle({
               intent,
+              size,
               withIcon: Boolean(icon),
             }),
             className,
@@ -63,6 +69,7 @@ const Input = forwardRef<HTMLInputElement, Props>((props, ref) => {
       className={cn(
         inputStyle({
           intent,
+          size,
         }),
         className,
       )}
