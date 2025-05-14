@@ -43,9 +43,7 @@ const page: React.FC = () => {
             </Link>
           </span>
         </div>
-        <span className='mt-auto text-sm leading-[150%]'>
-          © 2025 LDA Voice Team
-        </span>
+        <span className='text-sm leading-[150%]'>© 2025 LDA Voice Team</span>
       </div>
       <div className='relative z-0 hidden h-full min-h-screen w-full max-w-1/2 flex-1 object-cover md:flex'>
         <Image
