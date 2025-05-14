@@ -7,3 +7,13 @@ export const ERROR_MESSAGES = {
   min: (n: number) => `Минимум ${n} символов`,
   oneOf: 'Значения не совпадают',
 }
+
+export const BREADCRUMB_LABELS: Record<string, string> = {
+  products: 'Каталог',
+  posts: 'Посты',
+  schedule: 'Расписание',
+  catalog: 'Каталог',
+  profile: 'Профиль',
+  payments: 'Платежи',
+  others: 'Прочее',
+}
