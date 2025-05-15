@@ -35,7 +35,7 @@ const Profile: React.FC = () => {
         </MenuItem>
         <MenuItem
           as={LinkButton}
-          href='/profile/settings'
+          href='/profile'
           intent='secondary'
           size='small'
           title='Настройки аккаунта'
