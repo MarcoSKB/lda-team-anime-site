@@ -28,7 +28,7 @@ const page: React.FC<Props> = async ({ params }) => {
   return (
     <section className='overflow-hidden pt-[24px] md:pt-[72px]'>
       <Container className='flex flex-col'>
-        <Breadcrumbs />
+        <Breadcrumbs hideLastLink />
         <Tag
           intent='default'
           className='text-foreground mb-2 self-start text-sm leading-[150%]'
