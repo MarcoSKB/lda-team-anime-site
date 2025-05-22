@@ -1,2 +1,5 @@
 export { default as Navigation } from './navigation/Navigation'
 export { default as ProfileHeader } from './profile-header/ProfileHeader'
+export { default as BirthdayPicker } from './birthday-picker/BirthdayPicker'
+export { default as ProfileForm } from './profile-form/ProfileForm'
+export { default as ProfilePasswordForm } from './profile-password-form/ProfilePasswordForm'

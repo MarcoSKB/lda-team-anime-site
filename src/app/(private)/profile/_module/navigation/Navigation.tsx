@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { CircleUserRound, CreditCard, Settings } from 'lucide-react'
+import { CircleUserRound } from 'lucide-react'
 
 import { cn } from '@/utils/cn'
 
@@ -17,16 +17,16 @@ const profileNavigation: {
     title: 'Личные данные',
     icon: <CircleUserRound width={22} height={22} />,
   },
-  {
-    href: '/profile/payments',
-    title: 'Платежи',
-    icon: <CreditCard width={22} height={22} />,
-  },
-  {
-    href: '/profile/others',
-    title: 'Прочее',
-    icon: <Settings width={22} height={22} />,
-  },
+  // {
+  //   href: '/profile/payments',
+  //   title: 'Платежи',
+  //   icon: <CreditCard width={22} height={22} />,
+  // },
+  // {
+  //   href: '/profile/others',
+  //   title: 'Прочее',
+  //   icon: <Settings width={22} height={22} />,
+  // },
 ]
 
 const Navigation: React.FC = () => {
