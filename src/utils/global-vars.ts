@@ -6,6 +6,7 @@ export const ERROR_MESSAGES = {
   email: 'Введите корректный email-адрес',
   min: (n: number) => `Минимум ${n} символов`,
   oneOf: 'Значения не совпадают',
+  date: 'Заполните дату',
 }
 
 export const BREADCRUMB_LABELS: Record<string, string> = {
