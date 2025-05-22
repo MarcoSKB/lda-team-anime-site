@@ -25,7 +25,7 @@ const Profile: React.FC = () => {
       <MenuItems
         transition
         anchor='bottom end'
-        className='bg-secondary z-[55] mt-2 flex w-[152px] min-w-[152px] origin-top flex-col rounded-md px-0.5 py-1.5 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
+        className='dark:bg-secondary z-[55] mt-2 flex w-[152px] min-w-[152px] origin-top flex-col rounded-md bg-white px-0.5 py-1.5 shadow-lg transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
       >
         <MenuItem as='div'>
           <span className='block cursor-default px-3 py-1 text-sm'>
@@ -43,25 +43,23 @@ const Profile: React.FC = () => {
         >
           Настройки
         </MenuItem>
-        <MenuItem>
-          <MenuItem
-            as={Button}
-            intent='default'
-            size='default'
-            title='Поменять тему на сайте'
-            className='hover:text-accent px-2 active:hover:scale-100'
-            icon={<SunMoon width={19} height={19} />}
-            onClick={(e) => {
-              e.preventDefault()
-              changeTheme()
-            }}
-          >
-            {theme == 'dark' ? 'Темная тема' : 'Светлая тема'}
-          </MenuItem>
+        <MenuItem
+          as={Button}
+          intent='default'
+          size='default'
+          title='Поменять тему на сайте'
+          className='hover:text-accent px-2 active:hover:scale-100'
+          icon={<SunMoon width={19} height={19} />}
+          onClick={(e) => {
+            changeTheme()
+            e.preventDefault()
+          }}
+        >
+          {theme == 'dark' ? 'Темная тема' : 'Светлая тема'}
         </MenuItem>
         <MenuItem
           as={LinkButton}
-          href='/profile/logout'
+          href='/logout'
           intent='secondary'
           size='small'
           title='Выйти с аккаунта'
