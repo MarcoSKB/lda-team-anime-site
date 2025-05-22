@@ -37,6 +37,13 @@ const ThemeProvider: React.FC<Props> = ({ children }) => {
       localStorage.setItem('theme', 'dark')
       return
     }
+    if (theme === 'system') {
+      const media = window.matchMedia('(prefers-color-scheme: dark)')
+      const systemTheme = !media.matches ? 'dark' : 'light'
+      setThemeState(systemTheme)
+      localStorage.setItem('theme', 'system')
+      return
+    }
   }
 
   useEffect(() => {
