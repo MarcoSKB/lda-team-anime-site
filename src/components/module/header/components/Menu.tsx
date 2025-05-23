@@ -1,5 +1,6 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -12,8 +13,6 @@ import {
 import { ArrowLeft, Menu as MenuIcon, Settings, SunMoon } from 'lucide-react'
 
 import { Button, LinkButton } from '@/components/ui'
-
-import useTheme from '@/hooks/useTheme'
 
 const menuList: {
   title: string
@@ -49,7 +48,7 @@ const menuList: {
 
 const Menu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const { theme, changeTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   return (
     <>
@@ -104,7 +103,7 @@ const Menu: React.FC = () => {
                 className='text-md gap-2 px-0 active:hover:scale-100'
                 onClick={(e) => {
                   e.preventDefault()
-                  changeTheme()
+                  setTheme(theme == 'dark' ? 'light' : 'dark')
                 }}
               >
                 {theme == 'dark' ? 'Темная тема' : 'Светлая тема'}

@@ -1,5 +1,6 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
 
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
@@ -7,10 +8,8 @@ import { LogOut, Settings, SunMoon } from 'lucide-react'
 
 import { Button, LinkButton } from '@/components/ui'
 
-import useTheme from '@/hooks/useTheme'
-
 const Profile: React.FC = () => {
-  const { theme, changeTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
   return (
     <Menu>
       <MenuButton className='hover:bg-foreground dark:hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out md:flex'>
@@ -51,7 +50,7 @@ const Profile: React.FC = () => {
           className='hover:text-accent px-2 active:hover:scale-100'
           icon={<SunMoon width={19} height={19} />}
           onClick={(e) => {
-            changeTheme()
+            setTheme(theme == 'dark' ? 'light' : 'dark')
             e.preventDefault()
           }}
         >
