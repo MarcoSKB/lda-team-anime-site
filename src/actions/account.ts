@@ -6,7 +6,7 @@ import {
   ChangePasswordType,
   ChangeProfileInfoType,
   GetUserInfo,
-  GetUserType,
+  UserType,
 } from '@/types/account.types'
 import { Result } from '@/types/fetch.types'
 import { ValidationError } from 'yup'
@@ -14,7 +14,7 @@ import { ValidationError } from 'yup'
 import { profileInfoSchema } from '@/schemas/account.schema'
 import { sleep } from '@/utils/system'
 
-export const getUser = async (): Promise<Result<GetUserType>> => {
+export const getUser = async (): Promise<Result<UserType>> => {
   try {
     await sleep(3000)
     // Fetch
@@ -23,7 +23,7 @@ export const getUser = async (): Promise<Result<GetUserType>> => {
       data: {
         username: 'Marco',
         email: 'Marco@marco.com',
-        permission: 'user',
+        permission: 'admin',
       },
     }
   } catch (err) {

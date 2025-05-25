@@ -1,9 +1,9 @@
-export type GetUserType = {
+export type UserType = {
   email: string
-  username: string
+  username?: string
   userAvatar?: string
   permission: 'user' | 'moderator' | 'admin'
-} | null
+}
 
 export type GetUserInfo = {
   username?: string
