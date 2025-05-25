@@ -1,13 +1,7 @@
-import { Search } from '@/components/module'
+import { ProfileButton, Search } from '@/components/module'
 import { Container } from '@/components/ui'
 
-import {
-  HeaderWrapper,
-  Logotype,
-  Menu,
-  Navigation,
-  Profile,
-} from './components'
+import { HeaderWrapper, Logotype, Menu, Navigation } from './components'
 
 const Header: React.FC = () => {
   return (
@@ -25,7 +19,7 @@ const Header: React.FC = () => {
           >
             Поддержать проект
           </a> */}
-          <Profile />
+          <ProfileButton />
           <Menu />
         </div>
       </Container>
