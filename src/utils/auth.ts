@@ -1,11 +1,11 @@
-import NextAuth from 'next-auth'
+import NextAuth, { User } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import Discord from 'next-auth/providers/discord'
 import Google from 'next-auth/providers/google'
 
 import { CredentialsSignin } from '@auth/core/errors'
 
-import { signInSchema } from '@/schemas/auth.schema'
+import { registerSchema, signInSchema } from '@/schemas/auth.schema'
 
 import { formatSlug } from './query'
 
@@ -27,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           ...profile,
           id: profile.sub,
           username: profile.name || profile.email.split('@')[0],
-          avatar: profile.picture,
+          userAvatar: profile.picture,
           permission: profile.permission ?? 'user',
         }
       },
@@ -41,12 +41,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           id: profile.id,
           username: profile.username,
           email: profile.email,
-          avatar: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`,
+          userAvatar: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.jpeg`,
           permission: profile.permission ?? 'user',
         }
       },
     }),
     Credentials({
+      id: 'login',
+      name: 'Login',
       authorize: async (credentials) => {
         try {
           await signInSchema.validate(credentials)
@@ -62,6 +64,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           // const user = await res.json()
           return {
+            id: 'ID',
             username: 'Marco',
             email: 'Marco@marco.com',
             permission: 'admin',
@@ -75,8 +78,72 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       },
     }),
+    Credentials({
+      id: 'register',
+      name: 'Register',
+      authorize: async (credentials) => {
+        try {
+          await registerSchema.validate(credentials)
+          // const res = await fetch(
+          //   `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/register`,
+          //   {
+          //     method: 'POST',
+          //     headers: { 'Content-Type': 'application/json' },
+          //     body: JSON.stringify(credentials),
+          //   },
+          // )
+          // if (!res.ok) throw new Error("Произошла какая-то ошибка во время регистрации")
+
+          // const user = await res.json()
+          return {
+            id: 'ID',
+            username: 'Marco',
+            email: 'Marco@marco.com',
+            permission: 'user',
+            accessToken: 'fwefwe',
+          }
+        } catch (err) {
+          if (err instanceof Error) {
+            throw new AuthError(err.message)
+          }
+          throw new AuthError('Произошла какая-то ошибка во время регистрации')
+        }
+      },
+    }),
   ],
   callbacks: {
+    // async signIn({ user, account, profile }) {
+    //   if (
+    //     account?.provider !== 'credentials' &&
+    //     account?.provider !== 'login' &&
+    //     account?.provider !== 'register'
+    //   ) {
+    //     const userData = {
+    //       provider: account?.provider,
+    //       providerId: account?.providerAccountId,
+    //       username: profile?.name,
+    //       email: profile?.email ?? user.email,
+    //       permission: user.permission ?? 'user',
+    //       userAvatar: user.userAvatar ?? profile?.picture,
+    //     }
+
+    //     const res = await fetch(
+    //       `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/oauth`,
+    //       {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(userData),
+    //       },
+    //     )
+
+    //     if (!res.ok) {
+    //       console.error('Ошибка создания пользователя на бэкенде')
+    //       return false
+    //     }
+    //   }
+
+    //   return true
+    // },
     async jwt({ token, user }) {
       if (user) {
         token.accessToken = user.accessToken

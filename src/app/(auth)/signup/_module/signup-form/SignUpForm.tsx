@@ -28,7 +28,7 @@ const SignUpForm: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<typeof registerSchema> = async (data) => {
-    await signIn('credentials', { ...data, redirectTo: '/' })
+    await signIn('register', { ...data, redirectTo: '/' })
     reset(initialValue)
   }
 

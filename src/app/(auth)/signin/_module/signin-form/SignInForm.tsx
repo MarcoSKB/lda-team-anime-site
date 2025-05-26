@@ -27,7 +27,7 @@ const SignInForm: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<typeof signInSchema> = async (data) => {
-    await signIn('credentials', { ...data, redirectTo: '/' })
+    await signIn('login', { ...data, redirectTo: '/' })
     reset(initialValue)
   }
 
