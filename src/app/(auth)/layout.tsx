@@ -30,7 +30,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='ru'>
+    <html lang='ru' suppressHydrationWarning>
       <body
         className={`antialiased ${inter.variable} ${robotoFlex.variable} flex min-h-lvh flex-col`}
       >
