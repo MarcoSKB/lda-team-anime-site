@@ -1,3 +1,5 @@
+import { SessionProvider } from 'next-auth/react'
+
 import { ThemeProvider } from './ThemeProvider'
 
 interface Props {
@@ -7,7 +9,7 @@ interface Props {
 const Providers: React.FC<Props> = ({ children }) => {
   return (
     <ThemeProvider defaultTheme='system' enableSystem disableTransitionOnChange>
-      {children}
+      <SessionProvider>{children}</SessionProvider>
     </ThemeProvider>
   )
 }

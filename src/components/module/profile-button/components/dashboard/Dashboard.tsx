@@ -1,15 +1,15 @@
 'use client'
 
-import { useUserSession } from '@/stores/userStore'
+import { useSession } from 'next-auth/react'
+
 import { MenuItem } from '@headlessui/react'
 import { LayoutDashboard } from 'lucide-react'
 
 import { LinkButton } from '@/components/ui'
 
 const Dashboard: React.FC = () => {
-  const { user } = useUserSession((state) => state)
-
-  if (!user || user.permission !== 'admin') {
+  const { data: session } = useSession()
+  if (!session || !session.user || session.user.permission !== 'admin') {
     return null
   }
 

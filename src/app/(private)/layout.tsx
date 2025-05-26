@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { Inter, Roboto_Flex } from 'next/font/google'
 import { redirect } from 'next/navigation'
 
-import { getUser } from '@/actions/account'
 import Providers from '@/providers/Providers'
+
+import { auth } from '@/utils/auth'
 
 import '../globals.css'
 
@@ -31,8 +32,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const user = await getUser()
-  if (!user) redirect('/')
+  const session = await auth()
+  if (!session) redirect('/')
 
   return (
     <html lang='ru' suppressHydrationWarning>

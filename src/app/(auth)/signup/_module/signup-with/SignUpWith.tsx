@@ -1,3 +1,7 @@
+'use client'
+
+import { signIn } from 'next-auth/react'
+
 import { Icon } from '@/components/ui'
 
 const SignUpWith: React.FC = () => {
@@ -10,6 +14,7 @@ const SignUpWith: React.FC = () => {
         <button
           type='button'
           title='Google авторизация'
+          onClick={() => signIn('google', { redirectTo: '/' })}
           className='bg-secondary border-secondary group cursor-pointer rounded-lg border-2 border-solid p-3 transition ease-in-out hover:bg-transparent'
         >
           <Icon
@@ -20,6 +25,7 @@ const SignUpWith: React.FC = () => {
         <button
           type='button'
           title='Discord авторизация'
+          onClick={() => signIn('discord', { redirectTo: '/' })}
           className='bg-secondary border-secondary group cursor-pointer rounded-lg border-2 border-solid p-3 transition ease-in-out hover:bg-transparent'
         >
           <Icon
@@ -27,7 +33,7 @@ const SignUpWith: React.FC = () => {
             className='group-hover:fill-accent fill-foreground h-[24px] w-[24px] transition ease-in-out'
           />
         </button>
-        <button
+        {/* <button
           type='button'
           title='Mailru авторизация'
           className='bg-secondary border-secondary group cursor-pointer rounded-lg border-2 border-solid p-3 transition ease-in-out hover:bg-transparent'
@@ -36,7 +42,7 @@ const SignUpWith: React.FC = () => {
             name='mailru'
             className='group-hover:fill-accent fill-foreground h-[24px] w-[24px] transition ease-in-out'
           />
-        </button>
+        </button> */}
       </div>
     </div>
   )

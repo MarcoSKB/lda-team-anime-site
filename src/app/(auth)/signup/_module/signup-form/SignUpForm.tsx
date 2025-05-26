@@ -1,5 +1,6 @@
 'use client'
 
+import { signIn } from 'next-auth/react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,7 +9,6 @@ import { LoaderCircle } from 'lucide-react'
 import { Button, Input } from '@/components/ui'
 
 import { registerSchema } from '@/schemas/auth.schema'
-import { sleep } from '@/utils/system'
 
 const initialValue = {
   email: '',
@@ -28,8 +28,7 @@ const SignUpForm: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<typeof registerSchema> = async (data) => {
-    await sleep(3000)
-    console.log(data)
+    await signIn('credentials', { ...data, redirectTo: '/' })
     reset(initialValue)
   }
 
