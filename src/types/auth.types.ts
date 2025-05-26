@@ -1,0 +1,21 @@
+import { DefaultSession, User as NextAuthUser } from 'next-auth'
+import 'next-auth/jwt'
+
+import { UserType } from './account.types'
+
+declare module 'next-auth' {
+  interface Session extends DefaultSession {
+    accessToken: string
+    user: UserType
+  }
+
+  interface User extends NextAuthUser, UserType {
+    accessToken: string
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT extends UserType {
+    accessToken: string
+  }
+}
