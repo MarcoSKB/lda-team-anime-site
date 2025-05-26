@@ -1,4 +1,4 @@
-import NextAuth, { User } from 'next-auth'
+import NextAuth from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import Discord from 'next-auth/providers/discord'
 import Google from 'next-auth/providers/google'
