@@ -2,6 +2,7 @@ export type UserType = {
   email: string
   username?: string
   userAvatar?: string
+  birthday?: string
   permission: 'user' | 'moderator' | 'admin'
 }
 

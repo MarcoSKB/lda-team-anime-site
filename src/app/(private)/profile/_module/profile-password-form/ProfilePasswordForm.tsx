@@ -20,7 +20,7 @@ const ProfilePasswordForm: React.FC = () => {
     reset,
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors, isDirty },
   } = useForm({
     defaultValues: initialValue,
     resolver: yupResolver(profilePassSchema),
@@ -64,7 +64,7 @@ const ProfilePasswordForm: React.FC = () => {
         type='submit'
         size='large'
         intent='primary'
-        disabled={isSubmitting}
+        disabled={isSubmitting || !isDirty}
         icon={
           isSubmitting && (
             <LoaderCircle width={22} height={22} className='animate-spin' />

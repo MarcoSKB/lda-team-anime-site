@@ -2,13 +2,17 @@ import Image from 'next/image'
 
 import { Breadcrumbs } from '@/components/module'
 
-const ProfileHeader: React.FC = () => {
+import { auth } from '@/utils/auth'
+
+const ProfileHeader: React.FC = async () => {
+  const session = await auth()
+
   return (
     <div className='flex gap-4 border-b-1 border-solid border-[rgba(255,255,255,0.2)] pt-3 pb-6 md:col-span-2 md:items-end md:gap-6 md:pt-0 md:pl-6'>
       <Image
         width={160}
         height={160}
-        src='/images/placeholder-image.jpg'
+        src={session?.user.userAvatar ?? '/images/avatar-blank.jpg'}
         alt='Аватар профиля'
         className='h-[80px] w-[80px] rounded-full outline-4 outline-offset-[-1px] outline-white sm:h-[100px] sm:w-[100px] md:h-[160px] md:w-[160px]'
       />

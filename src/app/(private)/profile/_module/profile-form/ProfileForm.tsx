@@ -8,6 +8,7 @@ import { GetUserInfo } from '@/types/account.types'
 import { Result } from '@/types/fetch.types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CircleUserRound, LoaderCircle, Mail } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
@@ -30,13 +31,12 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
       return {
         username,
         email,
-        birthday: birthday ? new Date(birthday) : undefined,
+        birthday,
       }
     }
     return {
       username: '',
       email: '',
-      birthday: undefined,
     }
   }, [res])
 
@@ -45,24 +45,29 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
     control,
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    watch,
+    formState: { isSubmitting, errors, isDirty },
   } = useForm({
     defaultValues,
+    mode: 'onChange',
     resolver: yupResolver(profileInfoSchema),
   })
+  const birthday = watch('birthday')
 
   const onSubmit: SubmitHandler<typeof profileInfoSchema> = async (data) => {
     const typedData = data as unknown as ProfileInfoFormData
     const res = await changeProfileInfo({
       username: typedData.username,
       email: typedData.email,
-      birthday: JSON.stringify(typedData.birthday),
+      birthday,
     })
-    // WARN: Make toastify
     if (res.type == 'error') {
+      toast.error('Что-то произошло не так')
       reset(defaultValues)
     }
     if (res.type == 'ok') {
+      toast.success('Данные обновлены')
+      reset({ ...typedData, birthday })
     }
   }
 
@@ -121,13 +126,16 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
             </span>
           )}
           <Controller
-            control={control}
             name='birthday'
+            control={control}
             disabled={isSubmitting}
             render={({ field }) => (
               <BirthdayPicker
                 disabled={isSubmitting}
-                onChange={(date) => field.onChange(date)}
+                onChange={(date) => {
+                  field.onChange(date.toString())
+                  field.onBlur()
+                }}
                 selected={field.value}
               />
             )}
@@ -135,20 +143,22 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
         </label>
       </div>
       <div className='flex justify-end gap-2'>
-        <Button
-          size='large'
-          intent='outline'
-          disabled={isSubmitting}
-          onClick={() => reset(defaultValues)}
-          className='hover:bg-background border-secondary hover:border-secondary disabled:border-secondary group hover:text-foreground items-center justify-center gap-2 border-2 border-solid disabled:pointer-events-none'
-        >
-          <span className='group-disabled:opacity-70'>Сбросить</span>
-        </Button>
+        {isDirty && (
+          <Button
+            size='large'
+            intent='outline'
+            disabled={isSubmitting}
+            onClick={() => reset(defaultValues)}
+            className='hover:bg-background border-secondary hover:border-secondary disabled:border-secondary group hover:text-foreground items-center justify-center gap-2 border-2 border-solid disabled:pointer-events-none'
+          >
+            <span className='group-disabled:opacity-70'>Сбросить</span>
+          </Button>
+        )}
         <Button
           type='submit'
           size='large'
           intent='primary'
-          disabled={isSubmitting}
+          disabled={isSubmitting || !isDirty}
           icon={
             isSubmitting && (
               <LoaderCircle width={22} height={22} className='animate-spin' />

@@ -11,7 +11,7 @@ export const profileInfoSchema = yup.object({
     .string()
     .min(4, ERROR_MESSAGES.min(4))
     .required(ERROR_MESSAGES.required),
-  birthday: yup.date().optional(),
+  birthday: yup.string().optional(),
 })
 
 export type ProfileInfoFormData = yup.InferType<typeof profileInfoSchema>

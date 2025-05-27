@@ -1,6 +1,6 @@
 'use client'
 
-import { DayPicker, OnSelectHandler } from 'react-day-picker'
+import { DayPicker } from 'react-day-picker'
 import { ru } from 'react-day-picker/locale'
 
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react'
@@ -24,19 +24,21 @@ const dayPickerStyles = {
 }
 
 interface Props {
-  selected: Date | undefined
-  onChange: OnSelectHandler<Date> | undefined
+  selected: string | undefined
+  onChange: (date: string) => void
   disabled: boolean
 }
 
 const BirthdayPicker: React.FC<Props> = ({ selected, onChange, disabled }) => {
+  const dateValue = selected
+    ? `${new Date(selected).getDate()}/${new Date(selected).getMonth() + 1}/${new Date(selected).getFullYear()}`
+    : 'Введите дату'
+
   return (
     <Popover className='relative z-20'>
       <PopoverButton className='bg-secondary data-focus:outline-accent focus:outline-accent relative z-0 flex w-fit cursor-pointer self-start rounded-md px-3 py-2 pl-[40px] font-[Inter] outline-transparent transition-colors data-focus:outline-2'>
         <span className='text-foreground text-base opacity-50'>
-          {selected
-            ? `${selected.getDate()}/${selected.getMonth() + 1}/${selected.getFullYear()}`
-            : 'Введите дату'}
+          {dateValue}
         </span>
         <Cake
           width={22}
@@ -50,8 +52,8 @@ const BirthdayPicker: React.FC<Props> = ({ selected, onChange, disabled }) => {
       >
         <DayPicker
           locale={ru}
-          selected={selected}
-          onSelect={onChange}
+          selected={selected ? new Date(selected) : undefined}
+          onSelect={(date) => onChange(date.toISOString())}
           disabled={disabled}
           classNames={dayPickerStyles}
           captionLayout='dropdown'
