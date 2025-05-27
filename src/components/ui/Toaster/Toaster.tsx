@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes'
 
 import { Toaster as Sonner, ToasterProps } from 'sonner'
 
-const Toaster = ({ ...props }: ToasterProps) => {
+export const Toaster = ({ ...props }: ToasterProps) => {
   const { resolvedTheme } = useTheme()
 
   return (
@@ -16,5 +16,3 @@ const Toaster = ({ ...props }: ToasterProps) => {
     />
   )
 }
-
-export default Toaster
