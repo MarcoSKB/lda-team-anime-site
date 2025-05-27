@@ -8,7 +8,7 @@ export { default as ReadMore } from './read-more/ReadMore'
 export { default as EpisodeCard } from './episode-card/EpisodeCard'
 export { default as Input } from './input/Input'
 export { default as Switch } from './switch/Switch'
-export { Toaster } from './toaster/toaster'
+export { Toaster } from './toaster/Toaster'
 export { Avatar, AvatarImage, AvatarFallback } from './avatar/Avatar'
 export { Badge, badgeVariants } from './badge/Badge'
 export {
