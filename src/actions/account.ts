@@ -34,12 +34,6 @@ export const getUserInfo = async (): Promise<Result<GetUserInfo>> => {
         message: err.message,
       }
     }
-    if (err instanceof ValidationError) {
-      return {
-        type: 'error',
-        message: err.message,
-      }
-    }
     return {
       type: 'error',
       message: 'Что-то пошло не так',
