@@ -1,4 +1,4 @@
-import { DefaultSession, User as NextAuthUser } from 'next-auth'
+import { DefaultSession } from 'next-auth'
 import 'next-auth/jwt'
 
 import { UserType } from './account.types'
@@ -9,7 +9,7 @@ declare module 'next-auth' {
     user: UserType
   }
 
-  interface User extends NextAuthUser, UserType {
+  interface User extends UserType {
     accessToken: string
   }
 }
