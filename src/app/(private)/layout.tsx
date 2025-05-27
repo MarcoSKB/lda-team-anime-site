@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation'
 
 import Providers from '@/providers/Providers'
 
+import { Toaster } from '@/components/ui'
+
 import { auth } from '@/utils/auth'
 
 import '../globals.css'
@@ -42,6 +44,7 @@ export default async function RootLayout({
       >
         <Providers>
           <main className='flex-1'>{children}</main>
+          <Toaster />
           <div id='headlessui-portal-root' />
         </Providers>
       </body>

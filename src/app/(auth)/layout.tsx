@@ -3,6 +3,8 @@ import { Inter, Roboto_Flex } from 'next/font/google'
 
 import Providers from '@/providers/Providers'
 
+import { Toaster } from '@/components/ui'
+
 import '../globals.css'
 
 const inter = Inter({
@@ -36,6 +38,7 @@ export default async function RootLayout({
       >
         <Providers>
           <main className='flex-1'>{children}</main>
+          <Toaster />
         </Providers>
       </body>
     </html>
