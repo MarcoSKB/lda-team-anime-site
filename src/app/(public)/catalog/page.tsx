@@ -14,7 +14,9 @@ const page: React.FC = () => {
             Каталог
           </h2>
           <div className='flex gap-3'>
-            <Order />
+            <Suspense fallback={<div>Загрузка</div>}>
+              <Order />
+            </Suspense>
             {/* <Filter /> */}
           </div>
         </div>

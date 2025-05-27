@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useRef } from 'react'
+import { Fragment, Suspense, useEffect, useRef } from 'react'
 
 import {
   Dialog,
@@ -63,7 +63,9 @@ const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
           >
             <DialogPanel className='bg-secondary absolute top-0 left-1/2 flex w-full max-w-[768px] origin-top -translate-x-1/2 flex-col gap-2 px-1.5 py-2 transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0 md:top-[68px] md:rounded-md md:px-2'>
               <div className='flex gap-2 md:gap-2.5'>
-                <SearchInput ref={inputRef} />
+                <Suspense>
+                  <SearchInput ref={inputRef} />
+                </Suspense>
                 <Button
                   intent='secondary'
                   onClick={() => handleSearchState(false)}
@@ -73,7 +75,9 @@ const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
                   <span className='sr-only md:not-sr-only'>Закрыть</span>
                 </Button>
               </div>
-              <SearchList />
+              <Suspense>
+                <SearchList />
+              </Suspense>
             </DialogPanel>
           </TransitionChild>
         </div>
