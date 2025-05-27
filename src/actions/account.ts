@@ -6,56 +6,25 @@ import {
   ChangePasswordType,
   ChangeProfileInfoType,
   GetUserInfo,
-  UserType,
 } from '@/types/account.types'
 import { Result } from '@/types/fetch.types'
 import { ValidationError } from 'yup'
 
 import { profileInfoSchema } from '@/schemas/account.schema'
+import { auth } from '@/utils/auth'
 import { sleep } from '@/utils/system'
-
-export const getUser = async (): Promise<Result<UserType>> => {
-  try {
-    await sleep(3000)
-    // Fetch
-    return {
-      type: 'ok',
-      data: {
-        username: 'Marco',
-        email: 'Marco@marco.com',
-        permission: 'admin',
-      },
-    }
-  } catch (err) {
-    if (err instanceof Error) {
-      return {
-        type: 'error',
-        message: err.message,
-      }
-    }
-    if (err instanceof ValidationError) {
-      return {
-        type: 'error',
-        message: err.message,
-      }
-    }
-    return {
-      type: 'error',
-      message: 'Что-то пошло не так',
-    }
-  }
-}
 
 export const getUserInfo = async (): Promise<Result<GetUserInfo>> => {
   try {
-    await sleep(3000)
-    // Fetch
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+
     return {
       type: 'ok',
       data: {
-        username: 'User name',
-        email: 'somemail@mail.ru',
-        birthday: undefined,
+        username: session.user.username,
+        email: session.user.email,
+        birthday: session.user.birthday,
       },
     }
   } catch (err) {
@@ -82,9 +51,9 @@ export const changeProfileInfo = async (
   profileInfo: ChangeProfileInfoType,
 ): Promise<Result> => {
   try {
-    await sleep(3000)
     await profileInfoSchema.validate(profileInfo)
-    // Check is Auth
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
     // Fetch
   } catch (err) {
     if (err instanceof Error) {
@@ -117,7 +86,8 @@ export const changePassword = async (
   try {
     await sleep(3000)
     await profileInfoSchema.validate(profilePassword)
-    // Check is Auth
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
     // Fetch
   } catch (err) {
     if (err instanceof Error) {
