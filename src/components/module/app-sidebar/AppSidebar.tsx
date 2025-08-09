@@ -36,8 +36,8 @@ const data = {
       icon: IconChartBar,
     },
     {
-      title: 'Команда',
-      url: '/dashboard/team',
+      title: 'Пользователи',
+      url: '/dashboard/users',
       icon: IconUsers,
     },
   ],
@@ -47,13 +47,14 @@ export const AppSidebar = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar collapsible='offcanvas' {...props}>
+    <Sidebar collapsible='icon' {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className='text-accent hover:text-foreground data-[slot=sidebar-menu-button]:!p-2'
+              tooltip='На главную страницу'
+              className='text-accent hover:text-foreground data-[slot=sidebar-menu-button]:py-5'
             >
               <Link href='/' title='На главную страницу'>
                 <Image
@@ -61,7 +62,7 @@ export const AppSidebar = ({
                   width={30}
                   height={30}
                   alt='Иконка логотипа LDA Team'
-                  className='min-w-[30px] rounded-full'
+                  className='rounded-full object-cover'
                 />
                 <span className='font-[Roboto_Flex] text-base font-semibold'>
                   LDA Team

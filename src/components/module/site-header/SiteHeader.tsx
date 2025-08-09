@@ -10,7 +10,7 @@ import { SidebarTrigger } from '@/components/ui'
 const dashboardTitle: Record<string, string> = {
   '/dashboard': 'Админ панель',
   '/dashboard/analytics': 'Аналитика',
-  '/dashboard/team': 'Команда',
+  '/dashboard/users': 'Пользователи',
 }
 
 export const SiteHeader = () => {

@@ -21,7 +21,7 @@ const layout: React.FC<Props> = async ({ children }) => {
         } as React.CSSProperties
       }
     >
-      <AppSidebar variant='inset' />
+      <AppSidebar variant='floating' />
       <SidebarInset>
         <SiteHeader />
         <div className='flex flex-1 flex-col'>
