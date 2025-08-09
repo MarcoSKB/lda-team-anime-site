@@ -1,5 +1,5 @@
 const page: React.FC = () => {
-  return <div>page</div>
+  return <div>В разработке</div>
 }
 
 export default page
