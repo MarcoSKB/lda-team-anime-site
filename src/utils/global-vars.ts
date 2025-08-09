@@ -4,6 +4,9 @@ export const HERO_SLIDER_DURATION = 5000
 export const ERROR_MESSAGES = {
   required: 'Это поле обязательно для заполнения',
   email: 'Введите корректный email-адрес',
+  lowerCase: 'Должна содержать хотя бы одну строчную букву',
+  upperCase: 'Должна содержать хотя бы одну заглавную букву',
+  requireDigit: 'Пароль должен содержать хотя бы одну цифру',
   min: (n: number) => `Минимум ${n} символов`,
   oneOf: 'Значения не совпадают',
   date: 'Заполните дату',

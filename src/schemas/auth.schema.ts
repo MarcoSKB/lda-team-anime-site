@@ -9,7 +9,7 @@ export const signInSchema = yup.object({
     .required(ERROR_MESSAGES.required),
   password: yup
     .string()
-    .min(6, ERROR_MESSAGES.min(6))
+    .min(8, ERROR_MESSAGES.min(8))
     .required(ERROR_MESSAGES.required),
 })
 
@@ -20,7 +20,10 @@ export const registerSchema = yup.object({
     .required(ERROR_MESSAGES.required),
   password: yup
     .string()
-    .min(6, ERROR_MESSAGES.min(6))
+    .min(8, ERROR_MESSAGES.min(8))
+    .matches(/[a-z]/, ERROR_MESSAGES.lowerCase)
+    .matches(/[A-Z]/, ERROR_MESSAGES.upperCase)
+    .matches(/\d/, ERROR_MESSAGES.requireDigit)
     .required(ERROR_MESSAGES.required),
   confirmPassword: yup
     .string()
