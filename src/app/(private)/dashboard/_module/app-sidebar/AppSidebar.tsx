@@ -6,8 +6,6 @@ import * as React from 'react'
 
 import { IconChartBar, IconDashboard, IconUsers } from '@tabler/icons-react'
 
-import { NavMain } from '@/components/module'
-import { NavUser } from '@/components/module'
 import {
   Sidebar,
   SidebarContent,
@@ -17,6 +15,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui'
+
+import { NavMain, NavUser } from '..'
 
 const data = {
   user: {

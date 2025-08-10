@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation'
 
-import { AppSidebar, SiteHeader } from '@/components/module'
 import { SidebarInset, SidebarProvider } from '@/components/ui'
 
 import { auth } from '@/utils/auth'
+
+import { AppSidebar, SiteHeader } from './_module'
 
 interface Props {
   children: React.ReactNode

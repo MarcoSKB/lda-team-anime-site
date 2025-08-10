@@ -1,4 +1,4 @@
-import { ChartAreaInteractive, SectionCards } from '@/components/module'
+import { ChartAreaInteractive, SectionCards } from './_module'
 
 const Page = () => {
   return (
