@@ -29,7 +29,7 @@ export const NavMain = ({
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton
                 asChild
-                className='text-sm'
+                className='text-[15px]'
                 tooltip={item.title}
               >
                 <Link href={item.url}>
