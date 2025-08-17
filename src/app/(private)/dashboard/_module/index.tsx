@@ -1,7 +1,6 @@
 export { AppSidebar } from './app-sidebar/AppSidebar'
 export { SiteHeader } from './site-header/SiteHeader'
 export { NavMain } from './nav-main/NavMain'
-export { NavSecondary } from './nav-secondary/NavSecondary'
 export { NavUser } from './nav-user/NavUser'
 export { SectionCards } from './section-cards/SectionCards'
 export { ChartAreaInteractive } from './chart-area-interactive/ChartAreaInteractive'
