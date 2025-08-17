@@ -41,7 +41,7 @@ export const getAnimeTitle = async (slug: string) => {
   const animeTitle = ongoingData.find((anime) => anime.slug == slug)
 
   //Revalidate 3 hour
-  if (!animeTitle) redirect('/catalog')
+  if (!animeTitle) redirect('/404')
   return animeTitle
 }
 
@@ -49,7 +49,7 @@ export const getAnimeEpisodes = async (slug: string) => {
   await sleep(3000)
   const animeEpisodes = AnimeEpisodesData.find((anime) => anime.slug == slug)
 
-  if (!animeEpisodes) redirect('/catalog')
+  if (!animeEpisodes) redirect('/404')
   return animeEpisodes
 }
 
