@@ -178,9 +178,24 @@ export const ChartAreaInteractive = () => {
             variant='outline'
             className='hidden *:data-[slot=toggle-group-item]:!px-4 @[767px]/card:flex'
           >
-            <ToggleGroupItem value='90d'>Последние 3 месяца</ToggleGroupItem>
-            <ToggleGroupItem value='30d'>Последние 30 дней</ToggleGroupItem>
-            <ToggleGroupItem value='7d'>Последние 7 дней</ToggleGroupItem>
+            <ToggleGroupItem
+              value='90d'
+              className='dark:border-foreground/10 border-black/20'
+            >
+              3 месяца
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value='30d'
+              className='dark:border-foreground/10 border-black/20'
+            >
+              30 дней
+            </ToggleGroupItem>
+            <ToggleGroupItem
+              value='7d'
+              className='dark:border-foreground/10 border-black/20'
+            >
+              7 дней
+            </ToggleGroupItem>
           </ToggleGroup>
           <Select value={timeRange} onValueChange={setTimeRange}>
             <SelectTrigger

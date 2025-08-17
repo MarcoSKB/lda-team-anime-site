@@ -11,6 +11,7 @@ const dashboardTitle: Record<string, string> = {
   '/dashboard': 'Админ панель',
   '/dashboard/analytics': 'Аналитика',
   '/dashboard/users': 'Пользователи',
+  '/dashboard/anime': 'Аниме',
 }
 
 export const SiteHeader = () => {

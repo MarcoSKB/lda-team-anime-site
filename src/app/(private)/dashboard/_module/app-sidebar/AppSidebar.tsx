@@ -1,10 +1,16 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
 
-import { IconChartBar, IconDashboard, IconUsers } from '@tabler/icons-react'
+import {
+  IconChartBar,
+  IconDashboard,
+  IconEdit,
+  IconUsers,
+} from '@tabler/icons-react'
 
 import {
   Sidebar,
@@ -19,11 +25,6 @@ import {
 import { NavMain, NavUser } from '..'
 
 const data = {
-  user: {
-    name: 'Админ',
-    email: 'marcoexmaple@example.com',
-    avatar: '/images/avatar-blank.jpg',
-  },
   navMain: [
     {
       title: 'Админ панель',
@@ -40,12 +41,19 @@ const data = {
       url: '/dashboard/users',
       icon: IconUsers,
     },
+    {
+      title: 'Проекты',
+      url: '/dashboard/projects',
+      icon: IconEdit,
+    },
   ],
 }
 
 export const AppSidebar = ({
   ...props
 }: React.ComponentProps<typeof Sidebar>) => {
+  const { data: session, status } = useSession()
+
   return (
     <Sidebar collapsible='icon' {...props}>
       <SidebarHeader>
@@ -76,7 +84,7 @@ export const AppSidebar = ({
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {status === 'authenticated' && <NavUser user={session.user} />}
       </SidebarFooter>
     </Sidebar>
   )
