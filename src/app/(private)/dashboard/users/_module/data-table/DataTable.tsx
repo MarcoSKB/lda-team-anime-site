@@ -2,13 +2,6 @@
 
 import * as React from 'react'
 
-import { type UniqueIdentifier } from '@dnd-kit/core'
-import {
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
 import {
   IconChevronDown,
   IconChevronLeft,
@@ -23,7 +16,6 @@ import {
 import {
   ColumnDef,
   ColumnFiltersState,
-  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -36,7 +28,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { toast } from 'sonner'
-import { z } from 'zod'
 
 import { Badge, Input } from '@/components/ui'
 import { Button } from '@/components/ui'
@@ -64,15 +55,15 @@ import {
   TableRow,
 } from '@/components/ui'
 
-export const schema = z.object({
-  id: z.number(),
-  user: z.string(),
-  email: z.string(),
-  status: z.string(),
-  role: z.string(),
-})
+type User = {
+  id: number
+  user: string
+  email: string
+  status: string
+  role: string
+}
 
-const columns: ColumnDef<z.infer<typeof schema>>[] = [
+const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'Пользователь',
     header: 'Пользователь',
@@ -160,36 +151,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
   },
 ]
 
-const DraggableRow = ({ row }: { row: Row<z.infer<typeof schema>> }) => {
-  const { transform, transition, setNodeRef, isDragging } = useSortable({
-    id: row.original.id,
-  })
-
-  return (
-    <TableRow
-      data-state={row.getIsSelected() && 'selected'}
-      data-dragging={isDragging}
-      ref={setNodeRef}
-      className='relative z-0 data-[dragging=true]:z-10 data-[dragging=true]:opacity-80'
-      style={{
-        transform: CSS.Transform.toString(transform),
-        transition: transition,
-      }}
-    >
-      {row.getVisibleCells().map((cell) => (
-        <TableCell key={cell.id}>
-          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-        </TableCell>
-      ))}
-    </TableRow>
-  )
-}
-
-export const DataTable = ({
-  data: initialData,
-}: {
-  data: z.infer<typeof schema>[]
-}) => {
+export const DataTable = ({ data: initialData }: { data: User[] }) => {
   const [data] = React.useState(() => initialData)
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
@@ -201,11 +163,6 @@ export const DataTable = ({
     pageIndex: 0,
     pageSize: 10,
   })
-
-  const dataIds = React.useMemo<UniqueIdentifier[]>(
-    () => data?.map(({ id }) => id) || [],
-    [data],
-  )
 
   const table = useReactTable({
     data,
@@ -245,21 +202,6 @@ export const DataTable = ({
             />
           }
         />
-        <Select defaultValue='users'>
-          <SelectTrigger
-            className='flex w-fit @4xl/main:hidden'
-            size='sm'
-            id='view-selector'
-          >
-            <SelectValue placeholder='Выберите' />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value='users'>Пользователи</SelectItem>
-            <SelectItem value='admins'>Админы</SelectItem>
-            <SelectItem value='moders'>Модераторы</SelectItem>
-            <SelectItem value='banneds'>Забаненые</SelectItem>
-          </SelectContent>
-        </Select>
         <div className='flex items-center gap-2'>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -321,14 +263,24 @@ export const DataTable = ({
             </TableHeader>
             <TableBody className='**:data-[slot=table-cell]:first:w-8'>
               {table.getRowModel().rows?.length ? (
-                <SortableContext
-                  items={dataIds}
-                  strategy={verticalListSortingStrategy}
-                >
+                <>
                   {table.getRowModel().rows.map((row) => (
-                    <DraggableRow key={row.id} row={row} />
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && 'selected'}
+                      className='relative z-0'
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
                   ))}
-                </SortableContext>
+                </>
               ) : (
                 <TableRow>
                   <TableCell
