@@ -14,9 +14,13 @@ const buttonStyle = cva('flex cursor-pointer active:hover:scale-90 ease-out', {
       primary:
         'hover:bg-accent rounded-md bg-secondary text-white dark:text-foreground transition-all disabled:pointer-events-none hover:text-foreground disabled:hover:bg-secondary disabled:bg-background',
       secondary:
-        'hover:bg-foreground hover:text-background rounded-md bg-secondary text-foreground transition-all',
+        'hover:bg-foreground hover:text-background rounded-md bg-secondary text-foreground transition-all disabled:hover:bg-secondary disabled:bg-background disabled:pointer-events-none',
       outline:
-        'hover:bg-foreground hover:text-background border-foreground border-1 border-solid rounded-md bg-secondary text-foreground transition-all',
+        'hover:bg-foreground hover:text-background border-foreground/20 border-1 border-solid rounded-md bg-secondary text-foreground transition-all',
+      destructive:
+        'bg-destructive text-white shadow-xs hover:bg-destructive/90 rounded-md focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
+      ghost:
+        'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md',
     },
     size: {
       small: 'text-[12px] px-2 py-2',
@@ -72,4 +76,4 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   )
 })
 
-export default Button
+export { Button, buttonStyle }
