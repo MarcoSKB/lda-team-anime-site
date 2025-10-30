@@ -136,7 +136,7 @@ const CreateTitleForm: React.FC<Props> = ({
           }
 
           const bannerRes = await createAnimeBanner({
-            image: data.image,
+            image: data.banner,
             description: data.bannerDescription,
             titleId: res.data.id,
           })
