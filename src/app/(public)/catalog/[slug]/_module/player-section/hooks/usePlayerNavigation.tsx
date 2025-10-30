@@ -7,22 +7,21 @@ export const usePlayerNavigation = (
 ) => {
   const onNextButtonClick = () => {
     let currentEpisodeIndex = episodeList.findIndex(
-      (el) => el.episodeNumber == currentEpisode.episodeNumber,
+      (el) => el.number == currentEpisode.number,
     )
     changeEpisode(episodeList[++currentEpisodeIndex])
   }
   const onPrevButtonClick = () => {
     let currentEpisodeIndex = episodeList.findIndex(
-      (el) => el.episodeNumber == currentEpisode.episodeNumber,
+      (el) => el.number == currentEpisode.number,
     )
-    if (currentEpisode.episodeNumber !== 1)
+    if (currentEpisode.number !== 1)
       changeEpisode(episodeList[--currentEpisodeIndex])
   }
 
   const isNextEpAvailable =
-    currentEpisode.episodeNumber ==
-    episodeList[episodeList.length - 1].episodeNumber
-  const isPrevEpAvailable = currentEpisode.episodeNumber == 1
+    currentEpisode.number == episodeList[episodeList.length - 1].number
+  const isPrevEpAvailable = currentEpisode.number == 1
 
   return {
     onNextButtonClick,

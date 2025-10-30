@@ -1,6 +1,8 @@
 'use client'
 
+import { useRouter, useSearchParams } from 'next/navigation'
 import * as React from 'react'
+import { useMemo } from 'react'
 
 import {
   IconChevronDown,
@@ -9,13 +11,13 @@ import {
   IconChevronsLeft,
   IconChevronsRight,
   IconCircleCheckFilled,
-  IconDotsVertical,
   IconLoader,
   IconUser,
 } from '@tabler/icons-react'
 import {
   ColumnDef,
   ColumnFiltersState,
+  Row,
   SortingState,
   VisibilityState,
   flexRender,
@@ -27,26 +29,21 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { toast } from 'sonner'
 
-import { Badge, Input } from '@/components/ui'
-import { Button } from '@/components/ui'
 import {
+  Badge,
+  Button,
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui'
-import { Label } from '@/components/ui'
-import {
+  Input,
+  Label,
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui'
-import {
   Table,
   TableBody,
   TableCell,
@@ -55,129 +52,112 @@ import {
   TableRow,
 } from '@/components/ui'
 
-type User = {
-  id: number
-  user: string
-  email: string
-  status: string
-  role: string
+import { DashboardUser } from '@/types/dashboard.types'
+
+import { MenuActions, SelectRole } from '..'
+
+interface Props {
+  data: DashboardUser[]
+  totalCount: number
+  refetch: () => Promise<void>
 }
 
-const columns: ColumnDef<User>[] = [
-  {
-    accessorKey: 'Пользователь',
-    header: 'Пользователь',
-    cell: ({ row }) => (
-      <div className='text-foreground/80 min-w-32 font-thin'>
-        {row.original.user}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'почта',
-    header: 'Почта',
-    cell: ({ row }) => (
-      <div className='text-muted-foreground w-32 px-1.5'>
-        {row.original.email}
-      </div>
-    ),
-  },
-  {
-    accessorKey: 'Статус',
-    header: 'Статус почты',
-    cell: ({ row }) => (
-      <Badge variant='outline' className='text-muted-foreground px-1.5'>
-        {row.original.status === 'Подтвержден' ? (
-          <IconCircleCheckFilled className='fill-green-500 dark:fill-green-400' />
-        ) : (
-          <IconLoader />
-        )}
-        {row.original.status}
-      </Badge>
-    ),
-  },
-  {
-    accessorKey: 'Роль',
-    header: () => <div className='w-full'>Роль</div>,
-    cell: ({ row }) => (
-      <Select
-        defaultValue={'user'}
-        // Get initial role from user data
-        onValueChange={(role) => {
-          toast.promise(new Promise((resolve) => setTimeout(resolve, 1000)), {
-            loading: `Смена роли на ${role}`,
-            success: 'Успешно',
-            error: 'Ошибка',
-          })
-        }}
-        // Change role
-      >
-        <SelectTrigger
-          className='w-36 **:data-[slot=select-value]:block **:data-[slot=select-value]:truncate'
-          size='sm'
-          id={`${row.original.id}-reviewer`}
-        >
-          <SelectValue placeholder='Роль пользователя' />
-        </SelectTrigger>
-        <SelectContent align='center'>
-          <SelectItem value='admin'>Админ</SelectItem>
-          <SelectItem value='user'>Пользователь</SelectItem>
-        </SelectContent>
-      </Select>
-    ),
-  },
-  {
-    id: 'actions',
-    header: 'Методы',
-    cell: () => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button
-            intent='default'
-            className='data-[state=open]:bg-muted text-muted-foreground flex size-8 items-center justify-center'
-            size='small'
-          >
-            <IconDotsVertical />
-            <span className='sr-only'>Открыть меню</span>
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align='end' className='w-32'>
-          <DropdownMenuItem variant='destructive'>
-            Заблокировать
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-]
+const RoleCell: React.FC<{ row: Row<DashboardUser> }> = ({ row }) => {
+  const userId = row.original.id
+  const roles = React.useMemo(() => row.original.roles, [row.original.roles])
 
-export const DataTable = ({ data: initialData }: { data: User[] }) => {
-  const [data] = React.useState(() => initialData)
+  return <SelectRole userId={userId} roles={roles} />
+}
+
+export const DataTable: React.FC<Props> = ({ data, totalCount, refetch }) => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [pagination, setPagination] = React.useState({
-    pageIndex: 0,
-    pageSize: 10,
-  })
+  const pageIndex = Number(searchParams.get('page') ?? 0)
+  const pageSize = Number(searchParams.get('count') ?? 10)
+
+  const columns = useMemo<ColumnDef<DashboardUser>[]>(
+    () => [
+      {
+        accessorKey: 'Пользователь',
+        header: 'Пользователь',
+        cell: ({ row }) => (
+          <div className='text-foreground/80 min-w-32 font-thin'>
+            {row.original.nickname}
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'почта',
+        header: 'Почта',
+        cell: ({ row }) => (
+          <div className='text-muted-foreground w-32 px-1.5'>
+            {row.original.email}
+          </div>
+        ),
+      },
+      {
+        accessorKey: 'Статус',
+        header: 'Статус почты',
+        cell: ({ row }) => (
+          <Badge variant='outline' className='text-muted-foreground px-1.5'>
+            {row.original.emailConfirmed ? (
+              <IconCircleCheckFilled className='fill-green-500 dark:fill-green-400' />
+            ) : (
+              <IconLoader />
+            )}
+            {row.original.emailConfirmed ? 'Потвержден' : 'Не потвержден'}
+          </Badge>
+        ),
+      },
+      {
+        accessorKey: 'Роль',
+        header: () => <div className='w-full'>Роль</div>,
+        cell: ({ row }) => <RoleCell row={row} />,
+      },
+      {
+        id: 'actions',
+        header: 'Методы',
+        cell: ({ row }) => (
+          <MenuActions user={row.original} refetch={refetch} />
+        ),
+      },
+    ],
+    [data],
+  )
 
   const table = useReactTable({
     data,
     columns,
+    pageCount: Math.ceil(totalCount / pageSize),
     state: {
       sorting,
       columnVisibility,
       columnFilters,
-      pagination,
+      pagination: { pageIndex, pageSize },
     },
+    manualPagination: true,
     getRowId: (row) => row.id.toString(),
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    onPaginationChange: setPagination,
+    onPaginationChange: async (updater) => {
+      const newPagination =
+        typeof updater === 'function'
+          ? updater({ pageIndex, pageSize })
+          : updater
+
+      const params = new URLSearchParams(searchParams.toString())
+      params.set('page', String(newPagination.pageIndex))
+      params.set('count', String(newPagination.pageSize))
+      router.replace(`?${params.toString()}`, { scroll: false })
+      router.refresh()
+    },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

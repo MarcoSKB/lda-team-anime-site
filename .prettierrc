@@ -15,8 +15,8 @@
   "importOrder": [
     "^(react|next)",
     "<THIRD_PARTY_MODULES>",
-    "^(@/components/module|@/components/ui)",
-    "^(@/utils/|@/hooks/|@/data/|@/schemas)",
+    "^(@/components|@/components/module|@/components/ui)",
+    "^(@/actions/|@/types|@/utils/|@/hooks/|@/data/|@/schemas)",
     "^[./]"
   ],
   "importOrderSeparation": true,

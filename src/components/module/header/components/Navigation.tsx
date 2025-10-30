@@ -1,4 +1,4 @@
-import { AudioLines, Calendar, Library } from 'lucide-react'
+import { AudioLines, Library, Newspaper } from 'lucide-react'
 
 import { LinkButton } from '@/components/ui'
 
@@ -15,11 +15,17 @@ const navLinks: {
     icon: <Library className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
   },
   {
-    title: 'Расписание',
-    href: '/schedule',
-    alt: 'Страница с расписанием выхода серий',
-    icon: <Calendar className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
+    title: 'Посты',
+    href: '/posts',
+    alt: 'Страница со списком постов',
+    icon: <Newspaper className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
   },
+  // {
+  //   title: 'Расписание',
+  //   href: '/schedule',
+  //   alt: 'Страница с расписанием выхода серий',
+  //   icon: <Calendar className='h-[28px] w-[28px] md:h-[18px] md:w-[18px]' />,
+  // },
   // {
   //   title: 'Заказать озвучку',
   //   href: '/order',

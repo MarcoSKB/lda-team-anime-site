@@ -1,21 +1,22 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { use, useMemo } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { Controller, Resolver, SubmitHandler, useForm } from 'react-hook-form'
 
-import { changeProfileInfo } from '@/actions/account'
-import { GetUserInfo } from '@/types/account.types'
-import { Result } from '@/types/fetch.types'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { CircleUserRound, LoaderCircle, Mail } from 'lucide-react'
+import { CircleUserRound, LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
+import { changeProfileInfo } from '@/actions/account'
 import {
   ProfileInfoFormData,
   profileInfoSchema,
 } from '@/schemas/account.schema'
+import { GetUserInfo } from '@/types/account.types'
+import { Result } from '@/types/fetch.types'
 
 import { BirthdayPicker } from '../'
 
@@ -25,6 +26,7 @@ interface Props {
 
 const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
   const res = use(fetchInitialValue)
+  const { update } = useSession()
   const defaultValues = useMemo(() => {
     if (res.type === 'ok') {
       const { username = '', email, birthday } = res.data
@@ -47,18 +49,18 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
     handleSubmit,
     watch,
     formState: { isSubmitting, errors, isDirty },
-  } = useForm({
+  } = useForm<ProfileInfoFormData>({
     defaultValues,
     mode: 'onChange',
-    resolver: yupResolver(profileInfoSchema),
+    resolver: yupResolver(
+      profileInfoSchema,
+    ) as unknown as Resolver<ProfileInfoFormData>,
   })
   const birthday = watch('birthday')
 
-  const onSubmit: SubmitHandler<typeof profileInfoSchema> = async (data) => {
-    const typedData = data as unknown as ProfileInfoFormData
+  const onSubmit: SubmitHandler<ProfileInfoFormData> = async (data) => {
     const res = await changeProfileInfo({
-      username: typedData.username,
-      email: typedData.email,
+      username: data.username,
       birthday,
     })
     if (res.type == 'error') {
@@ -66,8 +68,9 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
       reset(defaultValues)
     }
     if (res.type == 'ok') {
+      update({})
       toast.success('Данные обновлены')
-      reset({ ...typedData, birthday })
+      reset({ ...data, birthday })
     }
   }
 
@@ -92,25 +95,6 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
             {...register('username')}
             icon={
               <CircleUserRound
-                width={22}
-                height={22}
-                className='absolute top-1/2 left-[10px] -translate-y-1/2'
-              />
-            }
-          />
-        </label>
-        <label className='flex flex-col gap-1.5'>
-          <span className='text-lg leading-[150%]'>E-mail адрес</span>
-          {errors.email && (
-            <span className='text-accent text-sm'>{errors.email.message}</span>
-          )}
-          <Input
-            size='large'
-            placeholder='example@gmail.com'
-            disabled={isSubmitting}
-            {...register('email')}
-            icon={
-              <Mail
                 width={22}
                 height={22}
                 className='absolute top-1/2 left-[10px] -translate-y-1/2'

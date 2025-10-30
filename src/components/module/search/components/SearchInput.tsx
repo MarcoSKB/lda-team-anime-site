@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 import { Search } from 'lucide-react'
 
@@ -12,20 +12,16 @@ import { updateQuery } from '@/utils/query'
 
 interface Props {
   ref: React.RefObject<HTMLInputElement | null>
+  setSearchValue: (value: string) => void
+  searchValue: string
 }
 
-const SearchInput: React.FC<Props> = ({ ref }) => {
+const SearchInput: React.FC<Props> = ({ ref, setSearchValue, searchValue }) => {
   const searchParams = useSearchParams()
-  const initialSearchValue =
-    searchParams.get('search') == null
-      ? ''
-      : (searchParams.get('search') as string)
-  const [searchValue, setSearchValue] = useState(initialSearchValue)
   const debouncedValue = useDebounce(searchValue, 700)
 
   useEffect(() => {
     updateQuery('search', debouncedValue, searchParams)
-    // eslint-disable-next-line
   }, [debouncedValue])
 
   return (

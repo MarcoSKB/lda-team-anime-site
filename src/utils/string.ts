@@ -1,9 +1,5 @@
 import readingTime from 'reading-time'
 
-import { VALID_FILE_EXTENSIONS } from './global-vars'
-
-type fileTypes = keyof typeof VALID_FILE_EXTENSIONS
-
 export const truncateText = (
   text: string,
   maxLength: number = 10,
@@ -18,13 +14,23 @@ export const readingTimesWithLocale = (text: string) => {
   return Math.ceil(readingTime(text).minutes) + ' минут чтения'
 }
 
-export const isValidFileType = (
-  fileName: string,
-  fileType: fileTypes,
-): boolean => {
-  return !!(
-    fileName &&
-    VALID_FILE_EXTENSIONS[fileType].indexOf(fileName.split('.').pop() || '') >
-      -1
-  )
+export const isValidUrl = (url: string) => {
+  return /^https?:\/\/\S+$/.test(url)
+}
+
+export const getUrlFromString = (str: string) => {
+  if (isValidUrl(str)) {
+    return str
+  }
+  try {
+    if (str.includes('.') && !str.includes(' ')) {
+      return new URL(`https://${str}`).toString()
+    }
+  } catch {
+    return null
+  }
+}
+
+export const absoluteUrl = (path: string) => {
+  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import { signOut } from 'next-auth/react'
 
 import { MenuItem } from '@headlessui/react'
@@ -14,10 +16,7 @@ const Logout: React.FC = () => {
       size='default'
       className='hover:text-accent px-2 active:hover:scale-100'
       icon={<LogOut width={18} height={18} />}
-      onClick={(e) => {
-        signOut()
-        e.preventDefault()
-      }}
+      onClick={() => signOut({ callbackUrl: '/' })}
     >
       Выйти
     </MenuItem>

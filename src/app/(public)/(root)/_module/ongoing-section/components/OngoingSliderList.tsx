@@ -1,9 +1,18 @@
-import { getOngoingTitles } from '@/actions/anime'
-
 import { PosterCard } from '@/components/module'
 
+import { getOngoingTitles } from '@/actions/anime'
+
 const OngoingSliderList: React.FC = async () => {
-  const ongoingData = await getOngoingTitles()
+  const res = await getOngoingTitles()
+
+  if (res.type == 'error') {
+    return (
+      <ul className='flex gap-4'>Произошла ошибка. Повторите попытку позже!</ul>
+    )
+  }
+
+  const ongoingData = res.data.results
+
   return (
     <ul className='flex gap-4'>
       {ongoingData.map((ongoingSlide) => (

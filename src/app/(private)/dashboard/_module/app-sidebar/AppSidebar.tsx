@@ -6,9 +6,9 @@ import Link from 'next/link'
 import * as React from 'react'
 
 import {
-  IconChartBar,
   IconDashboard,
   IconEdit,
+  IconNews,
   IconUsers,
 } from '@tabler/icons-react'
 
@@ -32,11 +32,6 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: 'Аналитика',
-      url: '/dashboard/analytics',
-      icon: IconChartBar,
-    },
-    {
       title: 'Пользователи',
       url: '/dashboard/users',
       icon: IconUsers,
@@ -45,6 +40,11 @@ const data = {
       title: 'Проекты',
       url: '/dashboard/projects',
       icon: IconEdit,
+    },
+    {
+      title: 'Посты',
+      url: '/dashboard/posts',
+      icon: IconNews,
     },
   ],
 }

@@ -1,11 +1,13 @@
 import Link from 'next/link'
 
-import { PostPreview } from '@/types/post.types'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ru } from 'date-fns/locale/ru'
 import { ArrowRight } from 'lucide-react'
 
 import { LinkButton, Tag } from '@/components/ui'
+
+import { PostPreview } from '@/types/post.types'
+import { POST_TYPES } from '@/utils/global-vars'
 
 const Post: React.FC<PostPreview> = (props) => {
   const { slug, type, title, description, createdAt } = props
@@ -16,16 +18,16 @@ const Post: React.FC<PostPreview> = (props) => {
   })
 
   return (
-    <li className='dark:border-secondary flex flex-col border-1 border-solid border-[#e2e7f1] bg-transparent px-4 pt-3.5 pb-1.5 md:rounded-md'>
+    <li className='dark:border-secondary bg-secondary flex flex-col border-1 border-solid border-[#e2e7f1] px-4 pt-3.5 pb-1.5 md:rounded-md dark:bg-transparent'>
       <div className='mb-2 flex items-start justify-between gap-2'>
-        <Tag className='text-foreground'>{type}</Tag>
+        <Tag className='text-foreground'>{POST_TYPES[type]}</Tag>
         <Tag intent='secondary' className='flex-nowrap text-nowrap'>
           {date}
         </Tag>
       </div>
       <Link
         href={`/posts/${slug}`}
-        className='text-md hover:text-accent mb-1 w-full scroll-mt-10 leading-[140%] text-balance opacity-85 transition-colors ease-in-out'
+        className='text-md hover:text-accent mb-1 line-clamp-2 w-full scroll-mt-10 leading-[140%] text-balance opacity-85 transition-colors ease-in-out'
       >
         {title}
       </Link>

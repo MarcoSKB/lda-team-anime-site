@@ -1,20 +1,18 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2048mb',
+    },
+  },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'files.vidstack.io',
-        port: '',
-        search: '',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cover.imglib.info',
-        port: '',
-        search: '',
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '5146',
+        pathname: '/api/files/image/**',
       },
       {
         protocol: 'https',

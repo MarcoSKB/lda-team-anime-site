@@ -61,20 +61,20 @@ const Footer: React.FC = () => {
             Каталог
           </Link>
         </li>
-        <li className='flex'>
+        {/* <li className='flex'>
           <Link
             className='hover:text-foreground w-full px-1 py-2 text-center text-sm leading-[22px] text-[#565D6D] transition-colors ease-in-out md:px-3 md:py-1 dark:hover:text-white'
             href='/schedule'
           >
             График
           </Link>
-        </li>
+        </li> */}
         <li className='flex'>
           <Link
             className='hover:text-foreground w-full px-1 py-2 text-center text-sm leading-[22px] text-[#565D6D] transition-colors ease-in-out md:px-3 md:py-1 dark:hover:text-white'
-            href='/order'
+            href='/posts'
           >
-            Заказать озвучку
+            Посты
           </Link>
         </li>
         <li className='flex'>

@@ -1,14 +1,16 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoaderCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
-import { signInSchema } from '@/schemas/auth.schema'
+import { SignInFormType, signInSchema } from '@/schemas/auth.schema'
 
 const initialValue = {
   email: '',
@@ -21,13 +23,19 @@ const SignInForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({
+  } = useForm<SignInFormType>({
     defaultValues: initialValue,
-    resolver: yupResolver(signInSchema),
+    resolver: yupResolver(signInSchema) as unknown as Resolver<SignInFormType>,
   })
+  const router = useRouter()
 
-  const onSubmit: SubmitHandler<typeof signInSchema> = async (data) => {
-    await signIn('login', { ...data, redirectTo: '/' })
+  const onSubmit: SubmitHandler<SignInFormType> = async (data) => {
+    await signIn('login', { ...data, redirect: false }).then(
+      ({ ok, error, code }) => {
+        if (!error && ok) router.replace('/')
+        else toast.error(code)
+      },
+    )
     reset(initialValue)
   }
 

@@ -1,18 +1,22 @@
 'use server'
 
-import { cookies } from 'next/headers'
+import { Session } from 'next-auth'
+import { revalidateTag } from 'next/cache'
 
+import { ValidationError } from 'yup'
+
+import { profileInfoSchema, profilePassSchema } from '@/schemas/account.schema'
 import {
   ChangePasswordType,
   ChangeProfileInfoType,
   GetUserInfo,
+  UserInfo,
 } from '@/types/account.types'
+import { ApiBaseModel, ShortAnimeTitle } from '@/types/anime.types'
 import { Result } from '@/types/fetch.types'
-import { ValidationError } from 'yup'
-
-import { profileInfoSchema } from '@/schemas/account.schema'
+import { ImageResponse } from '@/types/image.types'
 import { auth } from '@/utils/auth'
-import { sleep } from '@/utils/system'
+import { API_BASE } from '@/utils/global-vars'
 
 export const getUserInfo = async (): Promise<Result<GetUserInfo>> => {
   try {
@@ -24,7 +28,6 @@ export const getUserInfo = async (): Promise<Result<GetUserInfo>> => {
       data: {
         username: session.user.username,
         email: session.user.email,
-        birthday: session.user.birthday,
       },
     }
   } catch (err) {
@@ -48,7 +51,21 @@ export const changeProfileInfo = async (
     await profileInfoSchema.validate(profileInfo)
     const session = await auth()
     if (!session) throw new Error('Не авторизован')
-    // Fetch
+    const res = await fetch(`${API_BASE}/user/me`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: JSON.stringify({
+        nickname: profileInfo.username,
+        description: '',
+      }),
+    })
+
+    if (!res.ok) {
+      throw new Error('Не удалось изменить пароль')
+    }
   } catch (err) {
     if (err instanceof Error) {
       return {
@@ -71,6 +88,95 @@ export const changeProfileInfo = async (
   return {
     type: 'ok',
     data: undefined,
+  }
+}
+
+export const changeUserAvatar = async ({
+  image,
+  altText,
+}: {
+  image: File
+  altText: string
+}) => {
+  try {
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+    const formData = new FormData()
+    formData.append('file', image)
+    formData.append('altText', altText)
+
+    const res = await fetch(`${API_BASE}/me/avatar`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: formData,
+    })
+    if (!res.ok) {
+      throw new Error('Не удалось изменить аватарку')
+    }
+    revalidateTag('user-avatar')
+    return {
+      type: 'ok',
+      data: undefined,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    if (err instanceof ValidationError) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что-то пошло не так',
+    }
+  }
+}
+
+export const getUserAvatar = async (): Promise<Result<ImageResponse>> => {
+  try {
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+
+    const res = await fetch(`${API_BASE}/me/avatar`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      next: { tags: ['user-avatar'], revalidate: 3600 },
+    })
+    if (!res.ok) {
+      throw new Error('Не удалось получить аватарку')
+    }
+    const data = (await res.json()) as ImageResponse
+    return {
+      type: 'ok',
+      data,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    if (err instanceof ValidationError) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что-то пошло не так',
+    }
   }
 }
 
@@ -78,11 +184,25 @@ export const changePassword = async (
   profilePassword: ChangePasswordType,
 ): Promise<Result> => {
   try {
-    await sleep(3000)
-    await profileInfoSchema.validate(profilePassword)
+    await profilePassSchema.validate(profilePassword)
     const session = await auth()
     if (!session) throw new Error('Не авторизован')
-    // Fetch
+    const res = await fetch(`${API_BASE}/user/change-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      body: JSON.stringify({
+        currentPassword: profilePassword.password,
+        newPassword: profilePassword.newPassword,
+      }),
+    })
+
+    if (!res.ok) {
+      if (res.status == 400) throw new Error('Не верные данные')
+      throw new Error('Не удалось изменить пароль')
+    }
   } catch (err) {
     if (err instanceof Error) {
       return {
@@ -107,29 +227,33 @@ export const changePassword = async (
   }
 }
 
-export const changeAccountTheme = async (
-  theme: 'Dark' | 'Light',
-): Promise<Result> => {
+export const getUserFavoriteTitles = async (): Promise<
+  Result<ApiBaseModel<ShortAnimeTitle[]>>
+> => {
   try {
-    const cookieStore = await cookies()
-    const lastChange = cookieStore.get('theme_change')
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
 
-    const now = Date.now()
-    const cooldown = 5_000
-
-    if (lastChange && now - parseInt(lastChange.value) < cooldown) {
-      throw new Error('Подожди немного перед повторным изменением.')
-    }
-
-    cookieStore.set('theme_change', now.toString(), {
-      maxAge: 60,
-      path: '/',
+    const res = await fetch(`${API_BASE}/me/titles/favorites`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
     })
-
-    await sleep(3000)
-    // Check is Auth
-    // Fetch to change theme on db
-    console.log(theme)
+    if (!res.ok) {
+      const data = await res.json()
+      if (data.error === 'access_denied') {
+        throw new Error('access_denied')
+      }
+      throw new Error('Не удалось получить избранное')
+    }
+    const userFavoriteLists = (await res.json()) as ApiBaseModel<
+      ShortAnimeTitle[]
+    >
+    return {
+      type: 'ok',
+      data: userFavoriteLists,
+    }
   } catch (err) {
     if (err instanceof Error) {
       return {
@@ -142,8 +266,143 @@ export const changeAccountTheme = async (
       message: 'Что-то пошло не так',
     }
   }
+}
+
+export const checkUserFavoriteTitle = async (
+  titleId: string,
+): Promise<Result<boolean>> => {
+  try {
+    const favoritesRes = await getUserFavoriteTitles()
+    if (favoritesRes.type == 'error') {
+      throw new Error('Ошибка при получении избранных тайтлов')
+    }
+    const favoriteList = favoritesRes.data.results
+    return {
+      type: 'ok',
+      data: !!favoriteList.find((title) => title.id == titleId),
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      return {
+        type: 'error',
+        message: error.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Произошла какая та ошибка',
+    }
+  }
+}
+
+export const changeFavoriteTitle = async (
+  titleId: string,
+): Promise<Result<boolean>> => {
+  try {
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+
+    const res = await fetch(
+      `${API_BASE}/me/titles/favorites/${titleId}/toggle`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      },
+    )
+    if (!res.ok) {
+      throw new Error('Не удалось изменить избранное у пользователя')
+    }
+    const data = (await res.json()) as {
+      added: boolean
+    }
+
+    return {
+      type: 'ok',
+      data: data.added,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что-то пошло не так',
+    }
+  }
+}
+
+export const getUserFullInfo = async (
+  session: Session,
+): Promise<Result<UserInfo>> => {
+  try {
+    const res = await fetch(`${API_BASE}/user/me`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+    })
+    if (!res.ok) throw new Error('Произошла какая та ошибка')
+    const data = (await await res.json()) as UserInfo
+    return {
+      type: 'ok',
+      data,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    if (typeof err == 'string') {
+      return {
+        type: 'error',
+        message: err,
+      }
+    }
+  }
   return {
-    type: 'ok',
-    data: undefined,
+    type: 'error',
+    message: 'Что то пошло не так',
+  }
+}
+
+export const verifyAccount = async (
+  email: string,
+  token: string,
+): Promise<Result> => {
+  try {
+    const res = await fetch(`${API_BASE}/auth/activate-and-login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        token,
+      }),
+    })
+    if (!res.ok) throw new Error('Не удалось потвердить аккаунт')
+
+    return {
+      type: 'ok',
+      data: undefined,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что то пошло не так',
+    }
   }
 }

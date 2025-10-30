@@ -1,16 +1,19 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoaderCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
-import { registerSchema } from '@/schemas/auth.schema'
+import { RegisterFormType, registerSchema } from '@/schemas/auth.schema'
 
 const initialValue = {
+  nickname: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -22,13 +25,22 @@ const SignUpForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm({
+  } = useForm<RegisterFormType>({
     defaultValues: initialValue,
-    resolver: yupResolver(registerSchema),
+    resolver: yupResolver(
+      registerSchema,
+    ) as unknown as Resolver<RegisterFormType>,
   })
+  const router = useRouter()
 
-  const onSubmit: SubmitHandler<typeof registerSchema> = async (data) => {
-    await signIn('register', { ...data, redirectTo: '/' })
+  const onSubmit: SubmitHandler<RegisterFormType> = async (data) => {
+    await signIn('register', { ...data, redirect: false }).then(
+      ({ ok, error, code }) => {
+        if (!error && ok) router.push('/check-email')
+        else if (code == 'RedirectToCheckEmail') router.replace('/check-email')
+        else toast.error(code)
+      },
+    )
     reset(initialValue)
   }
 
@@ -39,12 +51,22 @@ const SignUpForm: React.FC = () => {
       className='mx-auto mb-4 flex w-full max-w-[480px] flex-col gap-4'
     >
       <label className='flex flex-col gap-1'>
+        {errors.nickname && (
+          <span className='text-accent text-sm'>{errors.nickname.message}</span>
+        )}
+        <Input
+          size='large'
+          placeholder='Логин'
+          {...register('nickname', { required: true })}
+        />
+      </label>
+      <label className='flex flex-col gap-1'>
         {errors.email && (
           <span className='text-accent text-sm'>{errors.email.message}</span>
         )}
         <Input
           size='large'
-          placeholder='Логин'
+          placeholder='Почта'
           {...register('email', { required: true })}
         />
       </label>

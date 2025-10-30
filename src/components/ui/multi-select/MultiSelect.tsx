@@ -551,13 +551,13 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
       if (process.env.NODE_ENV === 'development' && duplicates.length > 0) {
         const action = deduplicateOptions ? 'automatically removed' : 'detected'
         console.warn(
-          `MultiSelect: Duplicate option values ${action}: ${duplicates.join(
+          `MultiSelect: повторяющиеся значения параметров ${action}: ${duplicates.join(
             ', ',
           )}. ` +
             `${
               deduplicateOptions
-                ? 'Duplicates have been removed automatically.'
-                : "This may cause unexpected behavior. Consider setting 'deduplicateOptions={true}' or ensure all option values are unique."
+                ? 'Дубликаты были удалены автоматически.'
+                : "Это может привести к непредвиденному поведению. Рассмотрите возможность установки 'deduplicateOptions={true}' или убедитесь, что все значения параметров уникальны."
             }`,
         )
       }
@@ -569,7 +569,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
         const option = getAllOptions().find((option) => option.value === value)
         if (!option && process.env.NODE_ENV === 'development') {
           console.warn(
-            `MultiSelect: Option with value "${value}" not found in options list`,
+            `Множественный выбор: опция со значением "${value}" не найдена в списке опций`,
           )
         }
         return option
@@ -711,16 +711,16 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
 
           if (addedLabels.length === 1) {
             announce(
-              `${addedLabels[0]} selected. ${selectedCount} of ${totalOptions} options selected.`,
+              `${addedLabels[0]} выбрано. ${selectedCount} из ${totalOptions} опции выбраны.`,
             )
           } else {
             announce(
-              `${addedLabels.length} options selected. ${selectedCount} of ${totalOptions} total selected.`,
+              `${addedLabels.length} опции выбраны. ${selectedCount} из ${totalOptions} всего выбраны.`,
             )
           }
         } else if (diff < 0) {
           announce(
-            `Option removed. ${selectedCount} of ${totalOptions} options selected.`,
+            `Опция убрана. ${selectedCount} из ${totalOptions} опции выбраны.`,
           )
         }
         prevSelectedCount.current = selectedCount
@@ -729,10 +729,10 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
       if (isPopoverOpen !== prevIsOpen.current) {
         if (isPopoverOpen) {
           announce(
-            `Dropdown opened. ${totalOptions} options available. Use arrow keys to navigate.`,
+            `Окно открыта. ${totalOptions} опции доступны. Используйте стрелки для навигации.`,
           )
         } else {
-          announce('Dropdown closed.')
+          announce('Окно закрыта.')
         }
         prevIsOpen.current = isPopoverOpen
       }
@@ -749,9 +749,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
           ).length
 
           announce(
-            `${filteredCount} option${
+            `${filteredCount} опция${
               filteredCount === 1 ? '' : 's'
-            } found for "${searchValue}"`,
+            } найден из "${searchValue}"`,
           )
         }
         prevSearchValue.current = searchValue
@@ -803,9 +803,9 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
               aria-haspopup='listbox'
               aria-controls={isPopoverOpen ? listboxId : undefined}
               aria-describedby={`${triggerDescriptionId} ${selectedCountId}`}
-              aria-label={`Multi-select: ${selectedValues.length} of ${
+              aria-label={`Мульти-выбор: ${selectedValues.length} из ${
                 getAllOptions().length
-              } options selected. ${placeholder}`}
+              } выбрано. ${placeholder}`}
               className={cn(
                 'flex h-auto min-h-10 items-center justify-between rounded-md border bg-inherit p-1 hover:bg-inherit [&_svg]:pointer-events-auto',
                 autoSize ? 'w-auto' : 'w-full',
@@ -1015,7 +1015,7 @@ export const MultiSelect = React.forwardRef<MultiSelectRef, MultiSelectProps>(
             id={listboxId}
             role='listbox'
             aria-multiselectable='true'
-            aria-label='Available options'
+            aria-label='Доступные опции'
             className={cn(
               'w-auto p-0',
               getPopoverAnimationClass(),

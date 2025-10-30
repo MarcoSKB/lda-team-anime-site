@@ -16,6 +16,8 @@ const eslintConfig = [
       'react/display-name': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
       'func-style': ['error', 'expression', { allowArrowFunctions: true }],
+      'react-hooks/exhaustive-deps': 'off',
+      '@next/next/no-img-element': 'off',
     },
   }),
 ]

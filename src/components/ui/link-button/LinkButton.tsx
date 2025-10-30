@@ -34,15 +34,17 @@ interface Props extends VariantProps<typeof linkStyle> {
   className?: string
   title?: string
   children: React.ReactNode
+  target?: React.HTMLAttributeAnchorTarget | undefined
 }
 
 const LinkButton: React.FC<Props> = (props) => {
-  const { icon, href, intent, size, className, title, children } = props
+  const { icon, href, intent, size, className, title, target, children } = props
 
   return (
     <Link
       href={href}
       title={title}
+      target={target}
       className={cn(
         linkStyle({
           intent,

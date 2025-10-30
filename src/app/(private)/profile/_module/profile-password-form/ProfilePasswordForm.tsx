@@ -2,13 +2,15 @@
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 
+import { changePassword } from '@/actions/account'
+import { ChangePasswordType } from '@/types/account.types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoaderCircle } from 'lucide-react'
+import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
 import { profilePassSchema } from '@/schemas/account.schema'
-import { sleep } from '@/utils/system'
 
 const initialValue = {
   password: '',
@@ -27,9 +29,37 @@ const ProfilePasswordForm: React.FC = () => {
   })
 
   const onSubmit: SubmitHandler<typeof profilePassSchema> = async (data) => {
-    await sleep(3000)
-    console.log(data)
-    reset(initialValue)
+    const typedData = data as unknown as ChangePasswordType
+
+    const changePasswordPromise = new Promise(async (resolve, reject) => {
+      try {
+        const res = await changePassword(typedData)
+
+        if (res.type === 'ok') {
+          resolve(res)
+        } else {
+          reject(res)
+        }
+      } catch (err) {
+        reject(err)
+      }
+    })
+
+    toast.promise(changePasswordPromise, {
+      loading: 'Смена пароля...',
+      success: () => {
+        reset(initialValue)
+        return `Пароль успешно изменён`
+      },
+      error: (data) => {
+        reset(initialValue)
+        return data.message || 'Что-то пошло не так'
+      },
+    })
+
+    try {
+      await changePasswordPromise
+    } catch {}
   }
   return (
     <form
@@ -45,6 +75,7 @@ const ProfilePasswordForm: React.FC = () => {
         <Input
           size='large'
           placeholder='Текущий пароль'
+          type='password'
           disabled={isSubmitting}
           {...register('password')}
         />
@@ -56,6 +87,7 @@ const ProfilePasswordForm: React.FC = () => {
         <Input
           size='large'
           placeholder='Новый пароль'
+          type='password'
           disabled={isSubmitting}
           {...register('newPassword')}
         />

@@ -1,7 +1,7 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
-import Image from 'next/image'
 import { useState } from 'react'
 
 import {
@@ -10,9 +10,21 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/react'
-import { ArrowLeft, Menu as MenuIcon, Settings, SunMoon } from 'lucide-react'
+import {
+  ArrowLeft,
+  LogIn,
+  Menu as MenuIcon,
+  Settings,
+  SunMoon,
+} from 'lucide-react'
 
-import { Button, LinkButton } from '@/components/ui'
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+  Button,
+  LinkButton,
+} from '@/components/ui'
 
 const menuList: {
   title: string
@@ -29,14 +41,19 @@ const menuList: {
     href: '/catalog',
     alt: 'Страница с каталогом аниме',
   },
+  // {
+  //   title: 'Расписание озвучки',
+  //   href: '/schedule',
+  //   alt: 'Страница с расписанием озвучек аниме',
+  // },
   {
-    title: 'Расписание озвучки',
-    href: '/schedule',
-    alt: 'Страница с расписанием озвучек аниме',
+    title: 'Посты',
+    href: '/posts',
+    alt: 'Страница с новостями',
   },
   {
     title: 'Поддержать проект',
-    href: '/donate',
+    href: 'https://boosty.to/ldateam',
     alt: 'Страница с донатом',
   },
   // {
@@ -49,6 +66,7 @@ const menuList: {
 const Menu: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { theme, setTheme } = useTheme()
+  const { data: session, status } = useSession()
 
   return (
     <>
@@ -73,7 +91,7 @@ const Menu: React.FC = () => {
         <div className='fixed inset-0 z-[60] flex h-screen items-center justify-center p-4'>
           <DialogPanel
             transition
-            className='bg-secondary text-foreground absolute top-0 right-0 z-50 flex h-full max-h-dvh w-[70%] min-w-[320px] translate-x-[0%] flex-col overflow-y-auto px-4 pt-2 pb-4.5 transition duration-300 ease-out data-[closed]:translate-x-[50%] data-[closed]:opacity-0'
+            className='dark:bg-secondary text-foreground absolute top-0 right-0 z-50 flex h-full max-h-dvh w-[70%] min-w-[320px] translate-x-[0%] flex-col overflow-y-auto bg-white px-4 pt-2 pb-4.5 transition duration-300 ease-out data-[closed]:translate-x-[50%] data-[closed]:opacity-0'
           >
             <Button
               intent='secondary'
@@ -92,6 +110,11 @@ const Menu: React.FC = () => {
                   className='text-md gap-2 px-0'
                   title={link.alt}
                   href={link.href}
+                  target={
+                    link.title == 'https://boosty.to/ldateam'
+                      ? '_blank'
+                      : undefined
+                  }
                 >
                   {link.title}
                 </LinkButton>
@@ -111,22 +134,37 @@ const Menu: React.FC = () => {
               <LinkButton
                 intent='primary'
                 icon={<Settings width={24} height={24} />}
-                className='text-md gap-2 px-0'
-                href='/profile/settings'
+                className='text-md gap-2 bg-transparent px-0'
+                href='/profile'
               >
                 Настройки
               </LinkButton>
               <hr className='mt-2 mb-4 opacity-30' />
-              <div className='flex items-center gap-2'>
-                <Image
-                  width={40}
-                  height={40}
-                  src='/images/placeholder-image.jpg'
-                  className='rounded-full'
-                  alt='Profile image'
-                />
-                <span>Пользователь</span>
-              </div>
+              {status == 'authenticated' ? (
+                <div className='flex w-full items-center gap-3'>
+                  <Avatar className='AvatarRoot h-[36px] w-[36px]'>
+                    <AvatarImage
+                      className='AvatarImage'
+                      src={session?.user.avatar}
+                      alt='Аватар пользователя'
+                    />
+                    <AvatarFallback className='AvatarFallback' delayMs={600}>
+                      АВ
+                    </AvatarFallback>
+                  </Avatar>
+                  <span>{session.user.username ?? session.user.email}</span>
+                </div>
+              ) : (
+                <LinkButton
+                  href='/signin'
+                  title='Войти в аккаунт'
+                  intent='default'
+                  size='small'
+                  className='dark:md:hover:bg-secondary md:hover:border-accent group md:hover:bg-accent hidden border border-[rgba(0,0,0,0.2)] text-inherit hover:bg-transparent md:flex md:bg-[rgba(255,255,255,10%)] md:hover:border-solid dark:border-transparent dark:md:hover:border-transparent'
+                >
+                  <LogIn width={18} height={18} />
+                </LinkButton>
+              )}
             </div>
           </DialogPanel>
         </div>

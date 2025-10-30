@@ -161,6 +161,11 @@ export const Mute: React.FC<MediaButtonProps> = ({ tooltipPlacement }) => {
 export const Caption: React.FC<MediaButtonProps> = ({ tooltipPlacement }) => {
   const track = useMediaState('textTrack'),
     isOn = track && isTrackCaptionKind(track)
+
+  if (!track) {
+    return null
+  }
+
   return (
     <Tooltip.Root>
       <Tooltip.Trigger asChild>

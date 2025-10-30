@@ -18,10 +18,40 @@ const robotoFlex = Roboto_Flex({
 })
 
 export const metadata: Metadata = {
-  title: 'LDA Voice | Смотри аниме онлайн с озвучкой',
+  metadataBase: new URL(`${process.env.NEXTAUTH_URL}`),
+  title: {
+    default: 'LDA Team | Смотри аниме онлайн с озвучкой',
+    template: '%s | LDA Team',
+  },
   description:
     'Смотри любимые аниме-сериалы онлайн в высоком качестве с профессиональной озвучкой. Удобный выбор серий, сезонов и интерфейс!',
   icons: '/favicon.ico',
+  openGraph: {
+    type: 'website',
+    title: 'LDA Team | Смотри аниме онлайн с озвучкой',
+    description:
+      'Смотри любимые аниме-сериалы онлайн в высоком качестве с профессиональной озвучкой. Удобный выбор серий, сезонов и интерфейс!',
+    url: `${process.env.NEXTAUTH_URL}`,
+    siteName: 'LDA Team',
+    images: {
+      url: '/opengraph-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Баннер с маскотом LDA Team',
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LDA Team | Смотри аниме онлайн с озвучкой',
+    description:
+      'Смотри любимые аниме-сериалы онлайн в высоком качестве с профессиональной озвучкой. Удобный выбор серий, сезонов и интерфейс!',
+    images: {
+      url: '/opengraph-image.png',
+      width: 1200,
+      height: 630,
+      alt: 'Баннер с маскотом LDA Team',
+    },
+  },
 }
 
 export default function RootLayout({

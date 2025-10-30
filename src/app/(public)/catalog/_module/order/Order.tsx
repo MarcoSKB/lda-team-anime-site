@@ -1,8 +1,5 @@
 'use client'
 
-import { ReadonlyURLSearchParams, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
-
 import {
   Listbox,
   ListboxButton,
@@ -14,12 +11,14 @@ import {
   ArrowDownAZ,
   ArrowDownWideNarrow,
   ArrowDownZA,
+  ArrowUp10,
   ArrowUpDown,
+  ArrowUpWideNarrow,
 } from 'lucide-react'
 
 import { Button } from '@/components/ui'
 
-import { updateQuery } from '@/utils/query'
+import { useFilters } from '../filter-menu/hooks/useFilters'
 
 const orderByList: { query: string; title: string; icon: React.ReactNode }[] = [
   {
@@ -33,54 +32,57 @@ const orderByList: { query: string; title: string; icon: React.ReactNode }[] = [
     icon: <ArrowDownZA width={20} height={20} />,
   },
   {
-    query: 'episodes',
-    title: 'По кол-во эпизодов',
+    query: 'episodes-asc',
+    title: 'По эпизодам',
+    icon: <ArrowUp10 width={20} height={20} />,
+  },
+  {
+    query: 'episodes-desc',
+    title: 'По эпизодам',
     icon: <ArrowDown10 width={20} height={20} />,
   },
   {
-    query: 'popular',
+    query: 'popular-asc',
+    title: 'По популярности',
+    icon: <ArrowUpWideNarrow width={20} height={20} />,
+  },
+  {
+    query: 'popular-desc',
     title: 'По популярности',
     icon: <ArrowDownWideNarrow width={20} height={20} />,
   },
 ]
 
 const Order: React.FC = () => {
-  const [selectedOrderBy, setSelectedOrderBy] = useState(orderByList[3])
-  const searchParams = useSearchParams()
-
-  const onSelectHandler = (
-    data: typeof selectedOrderBy,
-    searchParams: ReadonlyURLSearchParams,
-  ) => {
-    setSelectedOrderBy(data)
-    updateQuery('order', selectedOrderBy.query, searchParams)
-  }
+  const { filtersValue, setFiltersValue } = useFilters()
 
   return (
     <Listbox
-      value={selectedOrderBy}
-      onChange={(data) => onSelectHandler(data, searchParams)}
+      value={filtersValue.order ?? 'a-z'}
+      defaultValue={filtersValue.order}
+      onChange={(value) => setFiltersValue({ ...filtersValue, order: value })}
     >
       <ListboxButton
         as={Button}
         intent='secondary'
         icon={<ArrowUpDown height={19} width={19} />}
       >
-        {selectedOrderBy.title}
+        {orderByList.find((order) => order.query == filtersValue.order)
+          ?.title ?? 'Сортировка'}
       </ListboxButton>
       <ListboxOptions
         as='ul'
         transition
-        anchor='bottom'
+        anchor='bottom end'
         className='bg-secondary z-[55] mt-2 flex w-[152px] min-w-[185px] origin-top flex-col rounded-md px-1 py-2 transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
       >
         {orderByList.map((item) => (
           <ListboxOption
             as='li'
             key={item.query}
-            value={item}
-            disabled={selectedOrderBy.query == item.query}
-            className='hover:text-accent group data-[disabled]:hover:text-foreground data-[focus]:text-accent flex cursor-pointer items-center gap-2 px-2 py-1.5 text-[13px] text-nowrap transition ease-in-out data-[disabled]:cursor-default data-[disabled]:select-none'
+            value={item.query}
+            disabled={filtersValue.order == item.query}
+            className='hover:text-accent group data-[disabled]:hover:text-foreground data-[focus]:text-accent line-clamp-1 flex cursor-pointer items-center gap-2 px-2 py-1 text-[12px] transition ease-in-out data-[disabled]:cursor-default data-[disabled]:select-none'
           >
             {item.icon}
             {item.title}

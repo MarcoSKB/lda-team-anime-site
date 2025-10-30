@@ -7,9 +7,11 @@ import { LayoutDashboard } from 'lucide-react'
 
 import { LinkButton } from '@/components/ui'
 
+import { requireAuth } from '@/utils/system'
+
 const Dashboard: React.FC = () => {
   const { data: session } = useSession()
-  if (!session || !session.user || session.user.permission !== 'admin') {
+  if (!requireAuth(session, ['Admin'])) {
     return null
   }
 
@@ -20,6 +22,7 @@ const Dashboard: React.FC = () => {
       intent='secondary'
       size='small'
       title='Админ панель'
+      className='hover:bg-secondary'
       icon={<LayoutDashboard width={18} height={18} />}
     >
       Админ панель

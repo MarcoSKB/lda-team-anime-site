@@ -2,14 +2,22 @@
 
 import Link from 'next/link'
 
-import { Bookmark, Play } from 'lucide-react'
+import { useFavorites } from '@/providers/FavoriteProvider'
+import { Bookmark, BookmarkCheck, LoaderCircle, Play } from 'lucide-react'
+
+import { Button } from '@/components/ui'
+
+import { cn } from '@/utils/cn'
 
 interface Props {
-  id: number
+  id: string
   slug: string
 }
 
-const PosterCardAction: React.FC<Props> = ({ slug }) => {
+const PosterCardAction: React.FC<Props> = ({ id, slug }) => {
+  const { favorites, toggleFavorite, isLoading } = useFavorites()
+  const isFavorite = favorites.includes(id)
+
   return (
     <div className='absolute bottom-4 flex w-full max-w-[256px] justify-between gap-1.5'>
       <Link
@@ -18,13 +26,28 @@ const PosterCardAction: React.FC<Props> = ({ slug }) => {
       >
         <Play width={24} height={24} /> Смотреть
       </Link>
-      <button
-        type='button'
-        className='hover:text-accent flex cursor-pointer scroll-mt-10 items-center gap-1.5 leading-[20px] text-white transition ease-in-out'
+      <Button
+        intent='default'
+        onClick={() => toggleFavorite(id)}
+        className={cn(
+          'hover:text-accent flex cursor-pointer scroll-mt-10 items-center gap-1.5 leading-[20px] text-white transition ease-in-out',
+          isFavorite
+            ? 'bg-accent'
+            : 'dark:bg-secondary dark:hover:bg-secondary hover:bg-transparent',
+        )}
+        icon={
+          isLoading ? (
+            <LoaderCircle width={24} height={24} className='animate-spin' />
+          ) : isFavorite ? (
+            <BookmarkCheck width={24} height={24} />
+          ) : (
+            <Bookmark width={24} height={24} />
+          )
+        }
+        disabled={isLoading}
       >
-        <Bookmark width={24} height={24} />
-        Сохранить
-      </button>
+        {isFavorite ? 'Сохранено' : 'Сохранить'}
+      </Button>
     </div>
   )
 }

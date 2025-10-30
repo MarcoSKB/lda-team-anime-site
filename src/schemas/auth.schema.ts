@@ -13,7 +13,13 @@ export const signInSchema = yup.object({
     .required(ERROR_MESSAGES.required),
 })
 
+export type SignInFormType = yup.InferType<typeof signInSchema>
+
 export const registerSchema = yup.object({
+  nickname: yup
+    .string()
+    .min(4, ERROR_MESSAGES.min(4))
+    .required(ERROR_MESSAGES.required),
   email: yup
     .string()
     .email(ERROR_MESSAGES.email)
@@ -29,3 +35,5 @@ export const registerSchema = yup.object({
     .string()
     .oneOf([yup.ref('password')], ERROR_MESSAGES.oneOf),
 })
+
+export type RegisterFormType = yup.InferType<typeof registerSchema>

@@ -1,11 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 
-import { SignInForm, SignInWith } from './_module'
+import { auth } from '@/utils/auth'
 
-const page: React.FC = () => {
+import { Notification, SignInForm } from './_module'
+
+const page: React.FC = async () => {
+  const session = await auth()
+  if (session) redirect('/')
+
   return (
     <div className='flex min-h-screen'>
+      <Notification />
       <div className='flex w-full flex-col justify-between gap-10 px-4 py-6 md:w-1/2 md:gap-4 md:px-12 lg:px-16'>
         <Link
           href='/'
@@ -31,8 +38,8 @@ const page: React.FC = () => {
             Войдите в свою учётную запись
           </span>
           <SignInForm />
-          <hr className='bg-background mx-auto my-4 w-full max-w-[480px] opacity-20' />
-          <SignInWith />
+          {/* <hr className='bg-background mx-auto my-4 w-full max-w-[480px] opacity-20' />
+          <SignInWith /> */}
           <span className='inline-flex justify-center gap-1.5 text-base leading-[150%]'>
             У вас нету учетной записи?
             <Link

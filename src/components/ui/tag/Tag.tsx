@@ -5,13 +5,14 @@ import { cn } from '@/utils/cn'
 const tagStyle = cva('flex cursor-default', {
   variants: {
     intent: {
-      default: 'border-[#6F7787] text-[#9095A1] border-solid border-1',
+      default:
+        'border-[#6F7787] text-foreground/80 dark:text-[#9095A1] border-solid border-1',
       primary: 'bg-white text-[#323743]',
       secondary:
-        'dark:bg-[#1E2128] border-1 border-solid border-[#b2b9c8] dark:border-none dark:text-[#9095A1]',
+        'dark:bg-[#201B20] border-1 border-solid border-[#b2b9c8] dark:border-none text-foreground/90 dark:text-[#9095A1]',
     },
     size: {
-      default: 'text-[12px] py-[3px] px-2 rounded-md',
+      default: 'text-[12px] py-[3px] px-2 rounded-md leading-3.5',
       large: 'text-[12px] rounded-sm',
     },
   },

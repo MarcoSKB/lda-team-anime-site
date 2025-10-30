@@ -19,14 +19,14 @@ const SliderActions: React.FC<Props> = memo((props) => {
       <Button
         intent='primary'
         onClick={() => scrollPrev()}
-        className='hover:border-accent border-1 border-solid border-[rgba(0,0,0,0.3)] p-2.5 hover:text-white dark:border-none'
+        className='hover:border-accent text-foreground/60 dark:text-foreground border-secondary border-1 border-solid p-2.5 hover:text-white dark:border-none'
       >
         <ArrowLeft />
       </Button>
       <Button
         intent='primary'
         onClick={() => scrollNext()}
-        className='hover:border-accent border-1 border-solid border-[rgba(0,0,0,0.3)] p-2.5 hover:text-white dark:border-none'
+        className='hover:border-accent text-foreground/60 dark:text-foreground border-secondary border-1 border-solid p-2.5 hover:text-white dark:border-none'
       >
         <ArrowRight />
       </Button>

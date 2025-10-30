@@ -24,7 +24,8 @@ const page: React.FC<Props> = ({ children }) => {
         />
       </div>
       <Container className='flex min-h-screen flex-col'>
-        <div className='grid min-h-screen grid-cols-1 grid-rows-[auto_60px_1fr] md:mt-[-40px] md:grid-cols-[256px_1fr] md:grid-rows-[184px_1fr]'>
+        <div className='grid min-h-screen grid-cols-1 grid-rows-[auto_60px_1fr] md:mt-[-40px] md:grid-rows-[184px_1fr]'>
+          {/* <div className='grid min-h-screen grid-cols-1 grid-rows-[auto_60px_1fr] md:mt-[-40px] md:grid-cols-[256px_1fr] md:grid-rows-[184px_1fr]'> */}
           <ProfileHeader />
           <Navigation />
           <div>{children}</div>

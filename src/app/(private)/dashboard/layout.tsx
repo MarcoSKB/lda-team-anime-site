@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import { SidebarInset, SidebarProvider } from '@/components/ui'
 
 import { auth } from '@/utils/auth'
+import { requireAuth } from '@/utils/system'
 
 import { AppSidebar, SiteHeader } from './_module'
 
@@ -12,7 +13,7 @@ interface Props {
 
 const layout: React.FC<Props> = async ({ children }) => {
   const session = await auth()
-  if (!session || session.user.permission !== 'admin') redirect('/')
+  if (!requireAuth(session, ['Admin'])) redirect('/')
   return (
     <SidebarProvider
       style={

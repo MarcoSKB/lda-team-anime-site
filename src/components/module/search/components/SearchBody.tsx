@@ -1,4 +1,7 @@
-import { Fragment, Suspense, useEffect, useRef } from 'react'
+'use client'
+
+import { useSearchParams } from 'next/navigation'
+import { Fragment, Suspense, useEffect, useRef, useState } from 'react'
 
 import {
   Dialog,
@@ -21,6 +24,9 @@ interface Props {
 
 const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
   const inputRef = useRef<HTMLInputElement>(null)
+  const searchParams = useSearchParams()
+  const initialSearchValue = searchParams.get('search') ?? ''
+  const [searchValue, setSearchValue] = useState(initialSearchValue)
 
   useEffect(() => {
     if (isSearchOpen && inputRef.current) {
@@ -30,8 +36,12 @@ const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
     }
   }, [isSearchOpen])
 
+  const clearSearchValue = () => {
+    setSearchValue('')
+  }
+
   return (
-    <Transition show={isSearchOpen} unmount={false} as={Fragment}>
+    <Transition show={isSearchOpen} as={Fragment}>
       <Dialog
         unmount={false}
         open={isSearchOpen}
@@ -64,7 +74,11 @@ const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
             <DialogPanel className='bg-secondary absolute top-0 left-1/2 flex w-full max-w-[768px] origin-top -translate-x-1/2 flex-col gap-2 px-1.5 py-2 transition duration-150 ease-out data-[closed]:scale-95 data-[closed]:opacity-0 md:top-[68px] md:rounded-md md:px-2'>
               <div className='flex gap-2 md:gap-2.5'>
                 <Suspense>
-                  <SearchInput ref={inputRef} />
+                  <SearchInput
+                    ref={inputRef}
+                    setSearchValue={setSearchValue}
+                    searchValue={searchValue}
+                  />
                 </Suspense>
                 <Button
                   intent='secondary'
@@ -76,7 +90,10 @@ const SearchBody: React.FC<Props> = ({ isSearchOpen, handleSearchState }) => {
                 </Button>
               </div>
               <Suspense>
-                <SearchList />
+                <SearchList
+                  clearSearchValue={clearSearchValue}
+                  handleSearchState={handleSearchState}
+                />
               </Suspense>
             </DialogPanel>
           </TransitionChild>

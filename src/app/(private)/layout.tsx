@@ -13,10 +13,10 @@ export default async function RootLayout({
   if (!session) redirect('/')
 
   return (
-    <>
+    <div className='flex min-h-screen flex-col'>
       <main className='flex-1'>{children}</main>
       <Toaster />
       <div id='headlessui-portal-root' />
-    </>
+    </div>
   )
 }

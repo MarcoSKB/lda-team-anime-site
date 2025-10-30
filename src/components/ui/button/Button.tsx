@@ -39,13 +39,13 @@ const buttonStyle = cva('flex cursor-pointer active:hover:scale-90 ease-out', {
   },
 })
 
-interface Props
+interface ButtonProps
   extends React.ComponentProps<'button'>,
     VariantProps<typeof buttonStyle> {
   icon?: React.ReactNode
 }
 
-const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const {
     intent,
     size,
@@ -76,4 +76,4 @@ const Button = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   )
 })
 
-export { Button, buttonStyle }
+export { Button, buttonStyle, type ButtonProps }

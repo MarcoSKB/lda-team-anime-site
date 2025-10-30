@@ -1,7 +1,14 @@
-type PostTypes = 'Новость' | 'Обновление' | 'Статья' | 'Рекомендация'
+/**
+ * Тип постов:
+ * - '0' → News
+ * - '1' → Update
+ * - '2' → Article
+ * - '3' → Recomendation
+ */
+export type PostTypes = 0 | 1 | 2 | 3
 
 export interface PostPreview {
-  id: number
+  id: string
   slug: string
   type: PostTypes
   title: string
@@ -10,12 +17,13 @@ export interface PostPreview {
 }
 
 export interface Post {
-  id: number
+  id: string
   slug: string
   title: string
-  type: PostTypes
+  postType: PostTypes
   description: string
-  author: string
   createdAt: string
   content: string
+  likesCount: number
+  dislikesCount: number
 }

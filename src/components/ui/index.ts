@@ -1,4 +1,4 @@
-export { Button, buttonStyle } from './button/Button'
+export { Button, buttonStyle, type ButtonProps } from './button/Button'
 export { default as LinkButton } from './link-button/LinkButton'
 export { default as Container } from './container/Container'
 export { default as Portal } from './portal/Portal'
@@ -175,3 +175,41 @@ export {
   FormMessage,
   FormField,
 } from './form/Form'
+export { ScrollArea, ScrollBar } from './scroll-area/scrollArea'
+
+export {
+  Drawer,
+  DrawerPortal,
+  DrawerOverlay,
+  DrawerTrigger,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerTitle,
+  DrawerDescription,
+} from './drawer/Drawer'
+export { default as Spoiler } from './spoiler/Spoiler'
+export {
+  Tags,
+  TagsTrigger,
+  TagsValue,
+  TagsContent,
+  TagsInput,
+  TagsList,
+  TagsEmpty,
+  TagsGroup,
+  TagsItem,
+} from './TagsInput/TagInput'
+export {
+  Field,
+  FieldLabel,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldContent,
+  FieldTitle,
+} from './field/Field'
