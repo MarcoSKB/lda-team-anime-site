@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-import { auth } from './utils/auth-light'
+import { auth, signOut } from './utils/auth-light'
 import { API_BASE } from './utils/global-vars'
 
 const publicPaths = ['/signin', '/signup', '/banned', '/check-email', '/verify']
@@ -22,12 +22,16 @@ export const middleware = async (req: NextRequest) => {
     cache: 'no-store',
   })
   if (!res.ok) {
-    const data = await res.json()
-    if (data.error === 'access_denied') {
-      const url = req.nextUrl.clone()
-      url.pathname = '/banned'
-      url.search = `?reason=${encodeURIComponent(data.message || 'Доступ закрыт')}`
-      return NextResponse.redirect(url)
+    try {
+      const data = await res.json()
+      if (data.error === 'access_denied') {
+        const url = req.nextUrl.clone()
+        url.pathname = '/banned'
+        url.search = `?reason=${encodeURIComponent(data.message || 'Доступ закрыт')}`
+        return NextResponse.redirect(url)
+      }
+    } catch {
+      signOut()
     }
     return NextResponse.next()
   }
