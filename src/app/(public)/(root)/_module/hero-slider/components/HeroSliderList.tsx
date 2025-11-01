@@ -4,14 +4,14 @@ import Link from 'next/link'
 import { Container } from '@/components/ui'
 
 import { getPopularAnime } from '@/actions/anime'
+import { BannerAnime } from '@/types/anime.types'
 import { cn } from '@/utils/cn'
 import { ANIME_VOICEOVER_TYPE } from '@/utils/global-vars'
 
 const HeroSliderList: React.FC = async () => {
   const res = await getPopularAnime()
-
-  if (res.type == 'error') return null
-  const popularAnimeList = res.data.results
+  let popularAnimeList: BannerAnime[] = []
+  if (res.type == 'ok') popularAnimeList = res.data.results
 
   return (
     <ul className='flex h-[45vh] min-h-[720px] md:h-screen'>
