@@ -1,7 +1,6 @@
 import { getPostPreviewList } from '@/actions/post'
 
 import { CreatePost, Post } from './_module'
-import { ImageMapProvider } from './_module/create-post/providers/ImageUploadContext'
 
 const page: React.FC = async () => {
   const res = await getPostPreviewList(0, 100, false)
@@ -22,9 +21,7 @@ const page: React.FC = async () => {
         <h1 className='mb-2 font-[Roboto_Flex] text-[24px] leading-[28px] font-extrabold text-balance md:text-[24px] md:leading-[41px]'>
           Список постов
         </h1>
-        <ImageMapProvider>
-          <CreatePost />
-        </ImageMapProvider>
+        <CreatePost />
       </div>
       <ul className='grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-2 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))]'>
         {postList.length == 0 ? (

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { useImageMap } from '@/app/(private)/dashboard/posts/_module/create-post/providers/ImageUploadContext'
+import { usePostImageStore } from '@/stores/usePostImageStore'
 
 interface UseImageUploadProps {
   onUpload?: (url: string) => void
@@ -9,7 +9,7 @@ interface UseImageUploadProps {
 export const useImageUpload = ({ onUpload }: UseImageUploadProps = {}) => {
   const previewRef = useRef<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const imageMapRef = useImageMap()
+  const { imageMap, setImage, removeImage } = usePostImageStore()
   const [previewUrl, setPreviewUrl] = useState<string | null>(null)
   const [fileName, setFileName] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
@@ -42,7 +42,7 @@ export const useImageUpload = ({ onUpload }: UseImageUploadProps = {}) => {
         setPreviewUrl(localUrl)
         previewRef.current = localUrl
 
-        imageMapRef.current.set(localUrl, file)
+        setImage(localUrl, file)
         try {
           const uploadedUrl = await dummyUpload(file, localUrl)
           onUpload?.(uploadedUrl)
@@ -61,7 +61,7 @@ export const useImageUpload = ({ onUpload }: UseImageUploadProps = {}) => {
     const currentUrl = previewRef.current
     if (currentUrl) {
       URL.revokeObjectURL(currentUrl)
-      imageMapRef.current.delete(currentUrl)
+      removeImage(currentUrl)
     }
     setPreviewUrl(null)
     setFileName(null)
@@ -70,15 +70,14 @@ export const useImageUpload = ({ onUpload }: UseImageUploadProps = {}) => {
       fileInputRef.current.value = ''
     }
     setError(null)
-  }, [previewUrl, imageMapRef])
+  }, [previewUrl, imageMap])
 
   useEffect(() => {
+    if (!previewUrl) return
     return () => {
-      if (previewRef.current) {
-        URL.revokeObjectURL(previewRef.current)
-      }
+      URL.revokeObjectURL(previewUrl)
     }
-  }, [])
+  }, [previewUrl])
 
   return {
     previewUrl,

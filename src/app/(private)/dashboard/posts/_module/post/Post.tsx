@@ -12,7 +12,6 @@ import { Button, Tag } from '@/components/ui'
 import { deletePost } from '@/actions/post'
 import { PostPreview } from '@/types/post.types'
 import { POST_TYPES } from '@/utils/global-vars'
-import { truncateText } from '@/utils/string'
 
 const Post: React.FC<PostPreview> = (props) => {
   const router = useRouter()
@@ -40,12 +39,12 @@ const Post: React.FC<PostPreview> = (props) => {
       </div>
       <Link
         href={`/posts/${slug}`}
-        className='text-md hover:text-accent mb-1 line-clamp-2 w-full scroll-mt-10 leading-[140%] text-balance opacity-85 transition-colors ease-in-out'
+        className='text-md hover:text-accent mb-1 line-clamp-2 w-full scroll-mt-10 leading-[140%] text-balance break-all opacity-85 transition-colors ease-in-out'
       >
-        {truncateText(title, 56, false)}
+        {title}
       </Link>
-      <span className='mb-auto text-sm font-light text-pretty opacity-70'>
-        {truncateText(description, 120)}
+      <span className='mb-auto text-sm font-light text-pretty break-all opacity-70'>
+        {description}
       </span>
       <div className='flex w-full gap-2 pt-2'>
         <Button intent='secondary' size='small'>

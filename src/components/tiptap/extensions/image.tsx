@@ -103,7 +103,7 @@ function TiptapImage(props: NodeViewProps) {
         src: imageUrl,
         alt: altText || fileInputRef.current?.files?.[0]?.name,
       })
-      handleRemove()
+      console.log('IS THIS ONLOAD???')
       setOpenedMore(false)
     },
   })

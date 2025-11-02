@@ -103,7 +103,6 @@ function ImagePlaceholderComponent(props: NodeViewProps) {
           alt: altText || fileInputRef.current?.files?.[0]?.name,
         })
         .run()
-      handleRemove()
       setIsExpanded(false)
     },
   })

@@ -10,6 +10,7 @@ import {
   useForm,
 } from 'react-hook-form'
 
+import { usePostImageStore } from '@/stores/usePostImageStore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'sonner'
 
@@ -32,7 +33,6 @@ import { Post, PostTypes } from '@/types/post.types'
 import { POST_TYPES } from '@/utils/global-vars'
 
 import PostEditor from '../../../_module/create-post/post-editor'
-import { useImageMap } from '../../../_module/create-post/providers/ImageUploadContext'
 import { editPostWithImage } from './utils/editPostWithImage'
 
 interface Props {
@@ -41,7 +41,7 @@ interface Props {
 
 const PostForm: React.FC<Props> = ({ initialValue }) => {
   const [isPending, startTransition] = useTransition()
-  const imageMapRef = useImageMap()
+  const { imageMap } = usePostImageStore()
   const {
     reset,
     control,
@@ -63,7 +63,7 @@ const PostForm: React.FC<Props> = ({ initialValue }) => {
   const onSubmit: SubmitHandler<CreatePostType> = async (data) => {
     const promise = new Promise(async (resolve, reject) => {
       try {
-        await editPostWithImage(imageMapRef, {
+        await editPostWithImage(imageMap, {
           ...data,
           id: initialValue.id,
           postType: data.type as PostTypes,

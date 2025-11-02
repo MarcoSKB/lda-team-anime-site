@@ -1,6 +1,5 @@
 import { getPost } from '@/actions/post'
 
-import { ImageMapProvider } from '../_module/create-post/providers/ImageUploadContext'
 import { PostForm } from './_module'
 
 interface Props {
@@ -20,9 +19,7 @@ const page: React.FC<Props> = async ({ params }) => {
   const postData = res.data
   return (
     <div>
-      <ImageMapProvider>
-        <PostForm initialValue={postData} />
-      </ImageMapProvider>
+      <PostForm initialValue={postData} />
     </div>
   )
 }

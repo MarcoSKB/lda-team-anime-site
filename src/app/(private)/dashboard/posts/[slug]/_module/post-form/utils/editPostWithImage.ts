@@ -4,7 +4,7 @@ import { PostTypes } from '@/types/post.types'
 import { ASSET_BASE } from '@/utils/global-vars'
 
 export const editPostWithImage = async (
-  imageMapRef: React.MutableRefObject<Map<string, File>>,
+  imageMapRef: Map<string, File>,
   {
     id,
     title,
@@ -20,7 +20,7 @@ export const editPostWithImage = async (
   },
 ) => {
   const mapping: Record<string, string> = {}
-  for (const [localUrl, file] of imageMapRef.current.entries()) {
+  for (const [localUrl, file] of imageMapRef.entries()) {
     const result = await uploadImage(file, file.name, '6', id)
     if (result.type === 'ok') {
       mapping[localUrl] =
@@ -42,5 +42,5 @@ export const editPostWithImage = async (
   })
   if (postRes.type == 'error')
     throw new Error(postRes.message || 'Не удалось обновить пост')
-  imageMapRef.current.clear()
+  imageMapRef.clear()
 }

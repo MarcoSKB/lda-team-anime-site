@@ -10,6 +10,7 @@ import {
   useForm,
 } from 'react-hook-form'
 
+import { usePostImageStore } from '@/stores/usePostImageStore'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'sonner'
 
@@ -40,7 +41,6 @@ import { PostTypes } from '@/types/post.types'
 import { POST_TYPES } from '@/utils/global-vars'
 
 import PostEditor from './post-editor'
-import { useImageMap } from './providers/ImageUploadContext'
 import { publishPost } from './utils/publishPost'
 
 const initialValue = {
@@ -54,7 +54,7 @@ const CreatePost: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
   const [, startTransition] = useTransition()
-  const imageMapRef = useImageMap()
+  const { imageMap } = usePostImageStore()
   const {
     reset,
     control,
@@ -72,7 +72,7 @@ const CreatePost: React.FC = () => {
   const onSubmit: SubmitHandler<CreatePostType> = async (data) => {
     const promise = new Promise(async (resolve, reject) => {
       try {
-        await publishPost(imageMapRef, {
+        await publishPost(imageMap, {
           ...data,
           postType: data.type as PostTypes,
           content: JSON.stringify(data.content),
