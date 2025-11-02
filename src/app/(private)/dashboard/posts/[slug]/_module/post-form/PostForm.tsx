@@ -118,7 +118,7 @@ const PostForm: React.FC<Props> = ({ initialValue }) => {
       className='flex max-w-full flex-col gap-3 pt-4 pr-4'
     >
       <div className='grid gap-3'>
-        <Label htmlFor='post-title'>Названия тайтла*</Label>
+        <Label htmlFor='post-title'>Названия поста*</Label>
         {errors.title && (
           <span className='text-accent text-sm'>{errors.title.message}</span>
         )}

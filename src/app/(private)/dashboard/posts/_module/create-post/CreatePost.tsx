@@ -142,7 +142,7 @@ const CreatePost: React.FC = () => {
           </DialogHeader>
           <div className='flex flex-col gap-3 py-4'>
             <div className='grid gap-3'>
-              <Label htmlFor='post-title'>Названия тайтла*</Label>
+              <Label htmlFor='post-title'>Названия поста*</Label>
               {errors.title && (
                 <span className='text-accent text-sm'>
                   {errors.title.message}
