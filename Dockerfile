@@ -1,0 +1,26 @@
+# ---- Builder ----
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+# 👇 добавляем .env.local только на этапе сборки
+COPY . .
+COPY .env.local .env.local
+
+RUN npm run build
+
+# ---- Runner ----
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+
+EXPOSE 3000
+CMD ["npm", "start"]
