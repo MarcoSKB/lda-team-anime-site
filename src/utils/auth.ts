@@ -106,7 +106,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!res.ok)
             throw new Error('Произошла какая-то ошибка во время регистрации')
           const { email, token } = await res.json()
-          const verificationUrl = `${process.env.NEXTAUTH_URL}/verify?email=${email}&token=${encodeURIComponent(token)}`
+          const verificationUrl = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/verify?email=${email}&token=${encodeURIComponent(token)}`
           await sendVerificationEmail(email, verificationUrl)
           throw new Error('RedirectToCheckEmail')
         } catch (err) {

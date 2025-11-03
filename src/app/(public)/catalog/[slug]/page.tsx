@@ -38,7 +38,7 @@ export const generateMetadata = async ({
       type: 'video.movie',
       title,
       description,
-      url: `${process.env.NEXTAUTH_URL}/catalog/${res.data.slug}`,
+      url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/catalog/${res.data.slug}`,
       siteName: 'LDA Team',
       images: image
         ? {

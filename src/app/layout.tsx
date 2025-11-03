@@ -18,7 +18,7 @@ const robotoFlex = Roboto_Flex({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`${process.env.NEXTAUTH_URL}`),
+  metadataBase: new URL(`${process.env.NEXT_PUBLIC_FRONTEND_URL}`),
   title: {
     default: 'LDA Team | Смотри аниме онлайн с озвучкой',
     template: '%s | LDA Team',
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: 'LDA Team | Смотри аниме онлайн с озвучкой',
     description:
       'Смотри любимые аниме-сериалы онлайн в высоком качестве с профессиональной озвучкой. Удобный выбор серий, сезонов и интерфейс!',
-    url: `${process.env.NEXTAUTH_URL}`,
+    url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}`,
     siteName: 'LDA Team',
     images: {
       url: '/opengraph-image.png',

@@ -6,7 +6,8 @@ import { ShortAnimeTitle } from '@/types/anime.types'
 import { Post } from '@/types/post.types'
 
 const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
-  const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000'
+  const baseUrl =
+    process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'
 
   const anime = await getCatalogList({
     take: '1000',

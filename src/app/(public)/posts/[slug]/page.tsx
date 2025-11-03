@@ -81,7 +81,7 @@ export const generateMetadata = async ({
       type: 'article',
       title,
       description,
-      url: `${process.env.NEXTAUTH_URL}/posts/${res.data.slug}`,
+      url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/posts/${res.data.slug}`,
       siteName: 'LDA Team',
     },
     twitter: {
