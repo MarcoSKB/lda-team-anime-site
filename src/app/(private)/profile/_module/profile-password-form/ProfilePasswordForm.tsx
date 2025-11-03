@@ -1,16 +1,19 @@
 'use client'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
 
-import { changePassword } from '@/actions/account'
-import { ChangePasswordType } from '@/types/account.types'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 
 import { Button, Input } from '@/components/ui'
 
-import { profilePassSchema } from '@/schemas/account.schema'
+import { changePassword } from '@/actions/account'
+import {
+  ProfilePassFormData,
+  profilePassSchema,
+} from '@/schemas/account.schema'
+import { ChangePasswordType } from '@/types/account.types'
 
 const initialValue = {
   password: '',
@@ -23,12 +26,14 @@ const ProfilePasswordForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { isSubmitting, errors, isDirty },
-  } = useForm({
+  } = useForm<ProfilePassFormData>({
     defaultValues: initialValue,
-    resolver: yupResolver(profilePassSchema),
+    resolver: yupResolver(
+      profilePassSchema,
+    ) as unknown as Resolver<ProfilePassFormData>,
   })
 
-  const onSubmit: SubmitHandler<typeof profilePassSchema> = async (data) => {
+  const onSubmit: SubmitHandler<ProfilePassFormData> = async (data) => {
     const typedData = data as unknown as ChangePasswordType
 
     const changePasswordPromise = new Promise(async (resolve, reject) => {

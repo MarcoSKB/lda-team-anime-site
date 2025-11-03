@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { StatusSection } from './_module'
 
@@ -23,7 +24,9 @@ const page: React.FC = () => {
             LDA Team
           </span>
         </Link>
-        <StatusSection />
+        <Suspense fallback={null}>
+          <StatusSection />
+        </Suspense>
         <span className='text-sm leading-[150%]'>© 2025 LDA Voice Team</span>
       </div>
       <div className='relative z-0 hidden h-full min-h-screen w-full max-w-1/2 flex-1 object-cover md:flex'>

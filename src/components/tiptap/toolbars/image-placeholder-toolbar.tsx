@@ -35,7 +35,7 @@ const ImagePlaceholderToolbar = React.forwardRef<
           ref={ref}
           {...props}
         >
-          {children ?? <Image className='h-4 w-4' />}
+          {children ?? <Image height='16px' width='16px' className='h-4 w-4' />}
         </Button>
       </TooltipTrigger>
       <TooltipContent>

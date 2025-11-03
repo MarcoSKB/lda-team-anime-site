@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { Suspense } from 'react'
 
 import { LinkButton } from '@/components/ui'
 
@@ -8,7 +9,9 @@ import { Notification } from './_module'
 const page: React.FC = () => {
   return (
     <div className='flex min-h-screen'>
-      <Notification />
+      <Suspense fallback={null}>
+        <Notification />
+      </Suspense>
       <div className='flex w-full flex-col justify-between gap-10 px-4 py-6 md:w-1/2 md:gap-4 md:px-12 lg:px-16'>
         <Link
           href='/'
