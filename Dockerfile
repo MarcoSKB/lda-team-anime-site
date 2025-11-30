@@ -9,7 +9,6 @@ RUN npm install
 COPY . .
 COPY .env.local .env.local
 
-ENV NODE_OPTIONS="--max-old-space-size=3072"
 RUN npm run build
 
 # ---- Runner ----
