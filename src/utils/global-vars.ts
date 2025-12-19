@@ -32,7 +32,7 @@ export const BREADCRUMB_LABELS: Record<string, string> = {
 
 // Anime constants
 export const ANIME_STATUS_TITLE = ['Онгоинг', 'Завершено', 'Анонс'] as const
-export const ANIME_VOICEOVER_TYPE = ['Дубляж', 'Закадровая'] as const
+export const ANIME_VOICEOVER_TYPE = ['Дубляж', 'Закадр'] as const
 
 // Post constants
 export const POST_TYPES = ['Новость', 'Обновление', 'Статья', 'Рекомендация']

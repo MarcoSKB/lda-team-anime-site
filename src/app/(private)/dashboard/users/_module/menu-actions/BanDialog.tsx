@@ -108,7 +108,7 @@ const BanDialog: React.FC<Props> = (props) => {
                   control={form.control}
                   render={({ field }) => (
                     <Switch
-                      enabled={field.value}
+                      enabled={field.value ?? false}
                       setEnabled={field.onChange}
                       disabled={false}
                     />

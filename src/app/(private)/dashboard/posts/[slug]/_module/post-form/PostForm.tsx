@@ -137,7 +137,7 @@ const PostForm: React.FC<Props> = ({ initialValue }) => {
           render={({ field }) => (
             <Select
               onValueChange={field.onChange}
-              value={field.value.toString()}
+              value={(field.value ?? '').toString()}
             >
               <SelectTrigger
                 id='post-type'

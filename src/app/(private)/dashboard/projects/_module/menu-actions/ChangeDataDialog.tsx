@@ -269,7 +269,7 @@ const ChangeDataDialog: React.FC<Props> = (props) => {
                     render={({ field }) => (
                       <Select
                         onValueChange={(value) => field.onChange(+value)}
-                        value={field.value.toString()}
+                        value={(field.value ?? '').toString()}
                       >
                         <SelectTrigger
                           id='anime-voiceover'

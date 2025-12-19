@@ -166,7 +166,7 @@ const CreatePost: React.FC = () => {
                 render={({ field }) => (
                   <Select
                     onValueChange={field.onChange}
-                    value={field.value.toString()}
+                    value={(field.value ?? '').toString()}
                   >
                     <SelectTrigger
                       id='post-type'

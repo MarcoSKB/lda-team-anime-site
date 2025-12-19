@@ -13,7 +13,7 @@ export type AnimeTitleStatus = 0 | 1 | 2
 /**
  * Тип статуса:
  * - 0 → Дубляж
- * - 1 → Закадровая
+ * - 1 → Закадр
  */
 export type AnimeVoiceoverType = 0 | 1
 
