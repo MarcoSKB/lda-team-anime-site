@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import { use, useMemo } from 'react'
-import { Controller, Resolver, SubmitHandler, useForm } from 'react-hook-form'
+import { Resolver, SubmitHandler, useForm } from 'react-hook-form'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { CircleUserRound, LoaderCircle } from 'lucide-react'
@@ -18,7 +18,7 @@ import {
 import { GetUserInfo } from '@/types/account.types'
 import { Result } from '@/types/fetch.types'
 
-import { BirthdayPicker } from '../'
+// import { BirthdayPicker } from '../'
 
 interface Props {
   fetchInitialValue: Promise<Result<GetUserInfo>>
@@ -29,11 +29,15 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
   const { update } = useSession()
   const defaultValues = useMemo(() => {
     if (res.type === 'ok') {
-      const { username = '', email, birthday } = res.data
+      const {
+        username = '',
+        email,
+        // birthday
+      } = res.data
       return {
         username,
         email,
-        birthday,
+        // birthday,
       }
     }
     return {
@@ -44,10 +48,8 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
 
   const {
     reset,
-    control,
     register,
     handleSubmit,
-    watch,
     formState: { isSubmitting, errors, isDirty },
   } = useForm<ProfileInfoFormData>({
     defaultValues,
@@ -56,12 +58,11 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
       profileInfoSchema,
     ) as unknown as Resolver<ProfileInfoFormData>,
   })
-  const birthday = watch('birthday')
+  // const birthday = watch('birthday')
 
   const onSubmit: SubmitHandler<ProfileInfoFormData> = async (data) => {
     const res = await changeProfileInfo({
       username: data.username,
-      birthday,
     })
     if (res.type == 'error') {
       toast.error('Что-то произошло не так')
@@ -70,7 +71,7 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
     if (res.type == 'ok') {
       update({})
       toast.success('Данные обновлены')
-      reset({ ...data, birthday })
+      reset({ ...data })
     }
   }
 
@@ -102,7 +103,7 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
             }
           />
         </label>
-        <label className='flex flex-col gap-1.5'>
+        {/* <label className='flex flex-col gap-1.5'>
           <span className='text-lg leading-[150%]'>День рождение</span>
           {errors.birthday && (
             <span className='text-accent text-sm'>
@@ -124,7 +125,7 @@ const ProfileForm: React.FC<Props> = ({ fetchInitialValue }) => {
               />
             )}
           />
-        </label>
+        </label> */}
       </div>
       <div className='flex justify-end gap-2'>
         {isDirty && (

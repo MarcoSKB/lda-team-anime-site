@@ -37,7 +37,7 @@ const VoiceoverCard: React.FC<RecentVoiceover> = (props) => {
           {episode} Эпизод
         </Tag>
       </Link>
-      <div className='flex w-full flex-col'>
+      <div className='flex w-full flex-col overflow-hidden'>
         <div className='mb-1.5 flex items-start justify-between gap-3'>
           <Link
             href={`/catalog/${slug}`}

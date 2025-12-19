@@ -40,7 +40,7 @@ const ProfileButton: React.FC = () => {
 
   return (
     <Menu>
-      <MenuButton className='hover:bg-foreground dark:hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out md:flex'>
+      <MenuButton className='hover:bg-foreground dark:hover:bg-secondary hidden cursor-pointer items-center gap-2 rounded-lg bg-transparent px-1 py-1 transition-all ease-out focus:outline-none md:flex'>
         <Image
           src={session.user.avatar}
           alt='Аватар пользователя'
@@ -53,7 +53,7 @@ const ProfileButton: React.FC = () => {
         transition
         anchor='bottom end'
         modal={false}
-        className='dark:bg-secondary z-[55] mt-2 flex w-[152px] min-w-[152px] origin-top flex-col rounded-md bg-white px-0.5 py-1.5 shadow-lg transition ease-out data-[closed]:scale-95 data-[closed]:opacity-0'
+        className='dark:bg-secondary z-[55] mt-2 flex w-[152px] min-w-[152px] origin-top flex-col rounded-md bg-white px-0.5 py-1.5 shadow-lg transition ease-out focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0'
       >
         <Username />
         <Dashboard />

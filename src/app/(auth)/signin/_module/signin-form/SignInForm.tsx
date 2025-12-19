@@ -51,7 +51,7 @@ const SignInForm: React.FC = () => {
         )}
         <Input
           size='large'
-          placeholder='Логин'
+          placeholder='Почта'
           {...register('email', { required: true })}
         />
       </label>

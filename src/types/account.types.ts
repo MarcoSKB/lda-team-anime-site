@@ -21,12 +21,12 @@ export type UserType = {
 export type GetUserInfo = {
   username?: string
   email: string
-  birthday?: string
+  // birthday?: string
 }
 
 export type ChangeProfileInfoType = {
   username: string
-  birthday: string | undefined
+  // birthday: string | undefined
 }
 
 export type ChangePasswordType = {

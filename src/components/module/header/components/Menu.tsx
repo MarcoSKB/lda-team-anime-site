@@ -1,6 +1,6 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useTheme } from 'next-themes'
 import { useState } from 'react'
 
@@ -13,6 +13,7 @@ import {
 import {
   ArrowLeft,
   LogIn,
+  LogOut,
   Menu as MenuIcon,
   Settings,
   SunMoon,
@@ -139,6 +140,16 @@ const Menu: React.FC = () => {
               >
                 Настройки
               </LinkButton>
+              {status == 'authenticated' && (
+                <Button
+                  intent='primary'
+                  className='text-md text-foreground gap-2 bg-transparent px-0'
+                  icon={<LogOut width={24} height={24} />}
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                >
+                  Выйти с аккаунта
+                </Button>
+              )}
               <hr className='mt-2 mb-4 opacity-30' />
               {status == 'authenticated' ? (
                 <div className='flex w-full items-center gap-3'>
@@ -158,11 +169,11 @@ const Menu: React.FC = () => {
                 <LinkButton
                   href='/signin'
                   title='Войти в аккаунт'
-                  intent='default'
+                  intent='primary'
+                  className='text-md gap-2 bg-transparent px-0'
                   size='small'
-                  className='dark:md:hover:bg-secondary md:hover:border-accent group md:hover:bg-accent hidden border border-[rgba(0,0,0,0.2)] text-inherit hover:bg-transparent md:flex md:bg-[rgba(255,255,255,10%)] md:hover:border-solid dark:border-transparent dark:md:hover:border-transparent'
                 >
-                  <LogIn width={18} height={18} />
+                  <LogIn width={24} height={24} /> Войти в аккаунт
                 </LinkButton>
               )}
             </div>

@@ -31,7 +31,7 @@ const Post: React.FC<PostPreview> = (props) => {
       >
         {title}
       </Link>
-      <span className='text-sm font-light text-pretty opacity-70'>
+      <span className='overflow-hidden text-sm font-light text-pretty opacity-70'>
         {description}
       </span>
       <LinkButton

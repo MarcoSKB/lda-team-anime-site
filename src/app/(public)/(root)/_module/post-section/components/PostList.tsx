@@ -12,7 +12,7 @@ const PostList: React.FC = async () => {
   return (
     <ul className='flex flex-col gap-2'>
       {postPreviewData.length == 0 ? (
-        <span>Нету постов</span>
+        <span className='px-3 md:px-0'>Нету постов</span>
       ) : (
         postPreviewData.map((post) => (
           <Post
