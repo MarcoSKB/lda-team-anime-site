@@ -11,8 +11,18 @@ const nextConfig: NextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '5146',
-        pathname: '/api/files/image/**',
+        port: '5001',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'lda.team',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.lda.team',
+        pathname: '/**',
       },
       {
         protocol: 'https',
