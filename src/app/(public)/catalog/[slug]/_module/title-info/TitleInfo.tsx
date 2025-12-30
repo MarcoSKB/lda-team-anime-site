@@ -27,7 +27,7 @@ const TitleInfo: React.FC<Props> = ({ data: animeData }) => {
             src={imageUrl}
             width={190}
             height={263}
-            className='aspect-[190/263] h-auto w-auto min-w-[190px] rounded-md object-cover'
+            className='aspect-190/263 h-auto w-auto min-w-[190px] rounded-md object-cover'
             alt={`Постер аниме ${animeData.name}`}
           />
           <div className='flex items-start gap-2'>
@@ -36,7 +36,7 @@ const TitleInfo: React.FC<Props> = ({ data: animeData }) => {
           </div>
         </div>
         <div className='flex w-full flex-col gap-3'>
-          <h2 className='text-foreground max-w-[70%] font-[Roboto_Flex] text-[32px] leading-[36px] font-extrabold text-balance'>
+          <h2 className='text-foreground max-w-[70%] font-[Roboto_Flex] text-[32px] leading-9 font-extrabold text-balance'>
             {animeData.name}
           </h2>
           <div className='before:from-background relative w-fit before:pointer-events-none before:absolute before:top-0 before:left-0 before:h-full before:w-full before:bg-gradient-to-l before:to-[rgba(255,255,255,0)] before:to-10% before:content-[""]'>
@@ -50,7 +50,7 @@ const TitleInfo: React.FC<Props> = ({ data: animeData }) => {
           </div>
           <ReadMore
             maxLength={300}
-            className='text-foreground max-w-[700px] scroll-mt-10 text-sm leading-[22px] font-light text-balance md:text-base md:leading-[26px] dark:opacity-90'
+            className='text-foreground max-w-[700px] scroll-mt-10 overflow-x-hidden text-sm leading-[22px] font-light text-balance md:text-base md:leading-[26px] dark:opacity-90'
           >
             {animeData.description}
           </ReadMore>

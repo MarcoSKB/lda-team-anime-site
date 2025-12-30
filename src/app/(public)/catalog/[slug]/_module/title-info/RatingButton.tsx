@@ -66,7 +66,7 @@ const RatingButton: React.FC<Props> = ({ titleId, rating }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <div className='flex h-full w-full flex-nowrap'>
-        <div className='bg-secondary flex h-full w-full items-center justify-center gap-1 rounded-l-md py-2 pr-2 pl-3 text-center text-[14px] leading-[18px]'>
+        <div className='bg-secondary flex min-h-full w-full items-center justify-center gap-1 rounded-l-md py-2 pr-2 pl-3 text-center text-[14px] leading-[18px]'>
           Рейтинг: {rating}
         </div>
         <DialogTrigger asChild>
