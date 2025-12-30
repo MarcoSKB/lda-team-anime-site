@@ -11,7 +11,7 @@ const Settings: React.FC = () => {
       intent='secondary'
       size='small'
       title='Настройки аккаунта'
-      className='hover:bg-secondary'
+      className='hover:bg-secondary py-1.5'
       icon={<SettingsIcon width={18} height={18} />}
     >
       Настройки

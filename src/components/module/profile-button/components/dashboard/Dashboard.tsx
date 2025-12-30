@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
       intent='secondary'
       size='small'
       title='Админ панель'
-      className='hover:bg-secondary'
+      className='hover:bg-secondary py-1.5'
       icon={<LayoutDashboard width={18} height={18} />}
     >
       Админ панель

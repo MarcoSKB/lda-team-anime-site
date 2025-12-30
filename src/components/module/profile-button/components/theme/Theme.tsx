@@ -16,7 +16,7 @@ const Theme: React.FC = () => {
       intent='default'
       size='default'
       title='Поменять тему на сайте'
-      className='hover:text-accent px-2 active:hover:scale-100'
+      className='hover:text-accent px-2 active:hover:scale-100 py-1.5'
       icon={<SunMoon width={19} height={19} />}
       onClick={(e) => {
         setTheme(theme == 'dark' ? 'light' : 'dark')

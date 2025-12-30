@@ -8,7 +8,7 @@ import { LogIn } from 'lucide-react'
 
 import { Button, LinkButton, Skeleton } from '@/components/ui'
 
-import { Dashboard, Logout, Settings, Theme, Username } from './components'
+import { Dashboard, Logout, MyList, Settings, Theme, Username } from './components'
 
 const ProfileButton: React.FC = () => {
   const { data: session, status } = useSession()
@@ -57,6 +57,7 @@ const ProfileButton: React.FC = () => {
       >
         <Username />
         <Dashboard />
+        <MyList />
         <Settings />
         <Theme />
         <Logout />

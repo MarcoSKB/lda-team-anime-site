@@ -14,7 +14,7 @@ const Logout: React.FC = () => {
       title='Выйти с аккаунта'
       intent='default'
       size='default'
-      className='hover:text-accent px-2 active:hover:scale-100'
+      className='hover:text-accent px-2 active:hover:scale-100 py-1.5'
       icon={<LogOut width={18} height={18} />}
       onClick={() => signOut({ callbackUrl: '/' })}
     >
