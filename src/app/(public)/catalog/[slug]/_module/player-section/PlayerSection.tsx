@@ -10,6 +10,7 @@ import { ASSET_BASE } from '@/utils/global-vars'
 
 import EpisodeList from './EpisodeList'
 import EpisodeNotExist from './EpisodeNotExist'
+import WatchedButton from './WatchedButton'
 import { usePlayerNavigation } from './hooks/usePlayerNavigation'
 
 interface Props {
@@ -38,8 +39,11 @@ const PlayerSection: React.FC<Props> = ({ data: animeData }) => {
   return (
     <section>
       <Container className='flex flex-col'>
-        <div className='bg-secondary mb-1.5 flex w-full justify-between rounded-md border-1 border-solid border-[#b2b9c8] px-3 py-2 text-[#000000] dark:border-none dark:text-[rgba(255,255,255,0.5)]'>
-          Смотреть онлайн
+        <div className='bg-secondary mb-1.5 flex w-full justify-between rounded-md border border-solid border-[#b2b9c8] dark:border-none'>
+          <span className='px-3 py-2 text-[#000000] dark:text-[rgba(255,255,255,0.5)]'>
+            Смотреть онлайн
+          </span>
+          <WatchedButton titleId={animeData.id} />
         </div>
         {animeData.episodes[0].id == 'placeholder' ? (
           <EpisodeNotExist />
