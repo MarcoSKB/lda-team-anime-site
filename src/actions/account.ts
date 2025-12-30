@@ -239,6 +239,7 @@ export const getUserFavoriteTitles = async (): Promise<
       headers: {
         Authorization: `Bearer ${session.accessToken}`,
       },
+      next: { tags: ['favorite-anime-list'], revalidate: 60 * 60 },
     })
     if (!res.ok) {
       const data = await res.json()
@@ -318,6 +319,7 @@ export const changeFavoriteTitle = async (
       added: boolean
     }
 
+    revalidateTag('favorite-anime-list')
     return {
       type: 'ok',
       data: data.added,
@@ -403,6 +405,87 @@ export const verifyAccount = async (
     return {
       type: 'error',
       message: 'Что то пошло не так',
+    }
+  }
+}
+
+export const getUserWatchedTitles = async (): Promise<
+  Result<ApiBaseModel<ShortAnimeTitle[]>>
+> => {
+  try {
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+
+    const res = await fetch(`${API_BASE}/me/titles/watched`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+      next: { tags: ['watched-anime-list'], revalidate: 60 * 60 },
+    })
+    if (!res.ok) {
+      const data = await res.json()
+      if (data.error === 'access_denied') {
+        throw new Error('access_denied')
+      }
+      throw new Error('Не удалось получить просмотренное')
+    }
+    const userWatchedLists = (await res.json()) as ApiBaseModel<
+      ShortAnimeTitle[]
+    >
+    return {
+      type: 'ok',
+      data: userWatchedLists,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что-то пошло не так',
+    }
+  }
+}
+
+export const changeWatchedTitle = async (
+  titleId: string,
+): Promise<Result<boolean>> => {
+  try {
+    const session = await auth()
+    if (!session) throw new Error('Не авторизован')
+
+    const res = await fetch(`${API_BASE}/me/titles/watched/${titleId}/toggle`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${session.accessToken}`,
+      },
+    })
+    if (!res.ok) {
+      throw new Error('Не удалось изменить просмотренное у пользователя')
+    }
+    const data = (await res.json()) as {
+      added: boolean
+    }
+
+    revalidateTag('watched-anime-list')
+    return {
+      type: 'ok',
+      data: data.added,
+    }
+  } catch (err) {
+    if (err instanceof Error) {
+      return {
+        type: 'error',
+        message: err.message,
+      }
+    }
+    return {
+      type: 'error',
+      message: 'Что-то пошло не так',
     }
   }
 }
