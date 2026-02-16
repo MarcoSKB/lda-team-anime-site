@@ -1,17 +1,6 @@
 'use server'
 
-import { google } from 'googleapis'
 import nodemailer from 'nodemailer'
-
-const oAuth2Client = new google.auth.OAuth2(
-  process.env.GMAIL_CLIENT_ID,
-  process.env.GMAIL_CLIENT_SECRET,
-  'https://developers.google.com/oauthplayground',
-)
-
-oAuth2Client.setCredentials({
-  refresh_token: process.env.GMAIL_REFRESH_TOKEN,
-})
 
 export const sendEmail = async ({
   to,
@@ -24,16 +13,11 @@ export const sendEmail = async ({
   html?: string
   text?: string
 }) => {
-  const accessToken = await oAuth2Client.getAccessToken()
   const transport = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      type: 'OAuth2',
       user: process.env.GMAIL_EMAIL,
-      clientId: process.env.GMAIL_CLIENT_ID,
-      clientSecret: process.env.GMAIL_CLIENT_SECRET,
-      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
-      accessToken: accessToken.token || '',
+      pass: process.env.GMAIL_API,
     },
   })
 
