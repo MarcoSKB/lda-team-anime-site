@@ -14,7 +14,7 @@ interface Props {
 
 const TitleList: React.FC<Props> = async ({ data }) => {
   if (data.type == 'error') {
-    return 'Что то пошло не так'
+    return <div className='flex w-full'>Что то пошло не так</div>
   }
   const catalogList = data.data.results
 
